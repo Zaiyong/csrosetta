@@ -1,0 +1,162 @@
+#!/Usr/bin/env python
+##-*- mode:python;tab-width:3;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:3 -*-'
+#================================================================
+from Tkinter import *
+import os,math,re
+import Tkinter
+import Pmw
+import string
+from FileDialogButtonClassFactory import FileDialogButtonClassFactory
+from step1_pick_frag import step1_pick_frag
+from step2_setup_target import step2_setup_target
+from step3_setup_run import step3_setup_run
+from file_convert import file_convert
+from install_csrosetta import install_csrosetta
+from FolderBrowser import FolderBrowser
+class main_gui:
+	def __init__(self):
+ 		self.root = Pmw.initialise(fontScheme = 'maingui')
+		self.root.title('CS-Rosetta')
+		self.csrosettadir_value=''
+		self.balloon = Pmw.Balloon(self.root)
+		self.MenuBar=Pmw.MenuBar(self.root,balloon=self.balloon)
+        # Add some buttons to the MainMenuBar.
+		self.MenuBar.pack(fill=X)
+		self.main_label = Tkinter.Label(
+			text = 'CSrosetta\nOliver Lange & Zaiyong Zhang\n<http://langelab.ch.tum.de>',
+			background = 'navy',
+			foreground = 'white',
+			#pady = 20,
+		)
+		self.main_label.pack(expand = 0, fill = 'both', padx = 4, pady = 4)
+# 		self.csrosettadir = Pmw.EntryField(self.root,
+# 														labelpos='w',
+# 														label_pyclass=FolderBrowser.get(self.set_csrosettadir),
+# 														value = "",
+# 														label_text='csrosettadir')
+# 		self.csrosettadir.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.MenuBar.addmenu('CS-Rosetta', 'Close this window or exit')
+		self.MenuBar.addmenuitem('CS-Rosetta', 'command', 'install cs-rosetta',
+								  command = self.install,
+								  label = 'install')
+		self.MenuBar.addmenuitem('CS-Rosetta', 'separator')
+		self.MenuBar.addmenuitem('CS-Rosetta', 'command', 'Exit the application',
+								  command = self.exit,
+								  label = 'Exit')
+
+		self.MenuBar.addmenu('Setup', 'setup the csrosetta running')
+		self.MenuBar.addmenuitem('Setup', 'command', 'pick fragments',
+										 command = self.pick_fragment,
+										 label = 'pick fragments')
+# 		self.MenuBar.addmenuitem('Setup', 'command', 'setup target',
+# 										 command = self.setup_target,
+# 										 label = 'setup target')
+		self.MenuBar.addcascademenu('Setup','setup target','setup target different methods',traverseSpec = 'z', tearoff = 1)
+		self.MenuBar.addcascademenu('Setup','setup run','setup run different methods',traverseSpec = 'z', tearoff = 1)
+		for method in ('abrelax', 'rasrec', 'autoNOE'):
+            self.MenuBar.addmenuitem('setup target', 'command', 'Setup target with method of ' +method,
+                    command =setup_target(method),
+                    label = method)
+            self.MenuBar.addmenuitem('setup run', 'command', 'Setup target with method of ' +method,
+                    command =setup_run(method),
+                    label = method)
+		self.MenuBar.addmenu('File Convert', 'convert files')
+		self.MenuBar.addmenuitem('File Convert', 'command', '',
+										 command = self.bmrb2fasta,
+										 label = 'bmrb2fasta')
+
+
+		self.MenuBar.addmenu('Help', 'User manuals', name = 'help')
+		self.MenuBar.addmenuitem('Help', 'command', 'About this application',
+										 command = PrintOne('Action: about'),
+										 label = 'About...')
+
+# 		self.buttonBox=Pmw.ButtonBox(labelpos='nw',
+# 											  label_text='options',
+# 											  frame_borderwidth=2,
+# 											  frame_relief='groove')
+# 		self.buttonBox.pack(fill = 'both', expand = 1, padx = 10, pady = 10)
+
+#         # Add some buttons to the ButtonBox.
+# 		self.buttonBox.add('pick fragment', command = self.pick_fragment)
+# 		self.buttonBox.add('setup target', command = self.setup_target)
+# 		self.buttonBox.add('setup run', command = self.setup_run)
+# 		self.buttonBox.setdefault('pick fragment')
+# 		self.main_notebook=Pmw.NoteBook()
+# 		self.main_notebook.pack(fill='both',expand=1,padx=3,pady=3)
+# 		#self.convert_notebook=Pmw.NoteBook()
+# 		#self.convert_notebook.pack(fill='both',expand=1,padx=3,pady=3)
+# 		#self.convert_page=self.main_notebook.add('file convert')
+# 		step1_pick_frag(self.main_notebook.interior(),'top')
+# 		step2_setup_target(self.main_notebook.interior(),'left')
+# 		step3_setup_run(self.main_notebook.interior(),'right')
+		#file_convert(self.convert_notebook.interior())
+		#self.file_convert()
+		self.root.mainloop()
+# 	def set_csrosettadir(self,filename):
+# 		self.csrosettadir.setvalue(filename)
+# 		self.csrosettadir_value=self.csrosettadir.getvalue()
+	def pick_fragment(self):
+ 		self.root_frag = Pmw.initialise(fontScheme = 'pickfragment')
+		self.root_frag.title('pick fragment')
+		self.dialog_frag=Pmw.Dialog(self.root_frag,buttons=('Close',),title='pick fragment')
+		self.dialog_frag.withdraw()
+		Pmw.setbusycursorattributes(self.dialog_frag.component('hull'))
+		#self.notebook_frag=Pmw.NoteBook(self.dialog_frag.interior())
+		#self.notebook_frag.pack(fill='both',expand=1,padx=3,pady=3)
+		step1_pick_frag(self.dialog_frag.interior(),'top')
+		self.dialog_frag.show()
+
+
+	def exit(self):
+		exit()
+	def install(self):
+		self.root_install = Pmw.initialise(fontScheme = 'install')
+		self.root_install.title('install CS-Rosetta')
+		self.dialog_install=Pmw.Dialog(self.root_install,buttons=('Close',),title='install CS-Rosetta')
+		self.dialog_install.withdraw()
+		Pmw.setbusycursorattributes(self.dialog_install.component('hull'))
+		#self.notebook_install=Pmw.NoteBook(self.dialog_install.interior())
+		#self.notebook_install.pack(fill='both',expand=1,padx=3,pady=3)
+		install_csrosetta(self.dialog_install.interior(),'top')
+		self.dialog_install.show()
+	def bmrb2fasta(self):
+		pass
+
+class PrintOne:
+    def __init__(self, text):
+        self.text = text
+    def __call__(self):
+        print self.text
+
+class setup_target:
+	def __init__(self,method):
+		self.method=method
+	def __call__(self):
+ 		self.root_setuptarget = Pmw.initialise(fontScheme = 'setuptarget '+self.method)
+		self.root_setuptarget.title('setup target '+self.method)
+		self.dialog_setuptarget=Pmw.Dialog(self.root_setuptarget,buttons=('Close',),title='setup target '+self.method)
+		self.dialog_setuptarget.withdraw()
+		Pmw.setbusycursorattributes(self.dialog_setuptarget.component('hull'))
+		#self.main_notebook=Pmw.NoteBook()
+		#self.main_notebook.pack(fill='both',expand=1,padx=3,pady=3)
+		step2_setup_target(self.dialog_setuptarget.interior(),'top',self.method)
+		self.dialog_setuptarget.show()
+
+class setup_run:
+	def __init__(self,method):
+		self.method=method
+	def __call__(self):
+ 		self.root_setuprun = Pmw.initialise(fontScheme = 'setuprun '+self.method)
+		self.root_setuprun.title('setup run '+self.method)
+		self.dialog_setuprun=Pmw.Dialog(self.root_setuprun,buttons=('Close',),title='setup run '+self.method)
+		self.dialog_setuprun.withdraw()
+		Pmw.setbusycursorattributes(self.dialog_setuprun.component('hull'))
+		#self.main_notebook=Pmw.NoteBook()
+		#self.main_notebook.pack(fill='both',expand=1,padx=3,pady=3)
+		step3_setup_run(self.dialog_setuprun.interior(),'top',self.method)
+		self.dialog_setuprun.show()
+
+
+#	elif value
+main_gui()

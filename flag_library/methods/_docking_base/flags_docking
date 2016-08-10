@@ -1,0 +1,7 @@
+-docking:randomize1
+-docking:randomize2
+-ex1 
+-ex2
+-ex2aro
+-out:file:silent decoys.out
+-out:file:scorefile scores.fsc

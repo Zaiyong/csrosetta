@@ -1,0 +1,32 @@
+## input from @@init.cya
+## use @@rescore.sh to compute RMSD of final models
+## use @@prepare.sh to scramble
+## automatic NOE assignment and structure calculation
+
+
+nproc=48
+
+peaks       := $CM_CYANA_PEAKS    # names of peak lists
+prot        := $CM_CYANA_PROT   # names of chemical shift lists
+constraints := talos.aco,ssa.cya     # additional (non-NOE) constraints
+#tolerance   := 0.01,0.01    # chemical shift tolerances
+calibration :=                               # NOE calibration parameters
+structures  := 96,20                        # number of initial, final structures
+steps       := 20000                         # number of torsion angle dynamics steps
+#rmsdrange   := 100..210                    # residue range for RMSD calculation
+seed        := 210003                   # randum number generator seed
+
+#subroutine KEEP
+#peaks select "*, * list=3"
+#end
+
+weight_rdc   = 0.02               # weight for RDC restraints
+cut_rdc      = 0.2                # cutoff for RDC violation output
+
+
+#system "heightfilter.sh 0.10"
+noeassign peaks=$peaks prot=$prot autoaco #keep=KEEP
+
+if (master) then
+ system "$libdir/cyanatable -l > Table; cat Table"
+end if

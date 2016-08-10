@@ -1,0 +1,43 @@
+# Number of dimensions 3
+#FILENAME resort_c-ali
+#FORMAT xeasy3D
+#INAME 1 c
+#INAME 2 H
+#INAME 3 h
+#CYANAFORMAT cHh
+#TOLERANCE      0.3    0.04    0.03
+     4   37.849    1.448    0.557  1 U 3.366E+05  0.000E+00  e 0
+     5   45.226    6.787    2.695  1 U 1.161E+05  0.000E+00  e 0  CB  110    HD2   22    HB2  110   #VC 0.000 #W 0.249 1.000 1.000 0.167 0.000 0.000 23.165  #d 5.89447 #eliminated: Network
+                                                                  CB  110   HE22   84    HB2  110   #VC 0.000 #W 0.477 1.000 1.000 0.167 0.000 0.000 16.346  #d 5.89447 #eliminated: Network
+                                                                  CB  110    HE3   85    HB2  110   #VC 0.101 #W 0.087 1.000 1.000 0.167 0.057 0.057 9.344  #d 5.89447 #eliminated: Network
+                                                                  CB  110    HZ2   85    HB2  110   #VC 0.000 #W 0.477 1.000 1.000 0.167 0.000 0.057 13.228  #d 5.89447 #eliminated: Network
+     6   40.719    1.831    1.764  1 U 1.355E+06  0.000E+00  e 0
+# Number of dimensions 3
+#FILENAME resort_c-aro
+#FORMAT xeasy3D
+#INAME 1 c
+#INAME 2 H
+#INAME 3 h
+#CYANAFORMAT cHh
+#TOLERANCE      0.3    0.04    0.03
+     3   46.214    6.125    3.724  1 U 1.350E+05  0.000E+00  e 0
+     4   37.849    1.448    0.557  1 U 3.366E+05  0.000E+00  e 0
+     5   45.226    6.787    2.695  1 U 1.161E+05  0.000E+00  e 0  CB  110    HD2   22    HB2  110   #VC 0.000 #W 0.249 1.000 1.000 0.167 0.000 0.000 23.165  #d 5.89447 #eliminated: Network
+                                                                  CB  110    HE3   36    HB2  110   #VC 0.899 #W 0.087 1.000 1.000 0.167 0.506 0.506 14.898  #d 5.89447 #eliminated: Network
+                                                                  CB  110    HE3   85    HB2  110   #VC 0.101 #W 0.087 1.000 1.000 0.167 0.057 0.057 9.344  #d 5.89447 #eliminated: Network
+                                                                  CB  110    HZ2   85    HB2  110   #VC 0.000 #W 0.477 1.000 1.000 0.167 0.000 0.057 13.228  #d 5.89447 #eliminated: Network
+     6   40.719    1.831    1.764  1 U 1.355E+06  0.000E+00  e 0
+# Number of dimensions 3
+#FILENAME resort_c-n
+#FORMAT xeasy3D
+#INAME 1 c
+#INAME 2 H
+#INAME 3 h
+#CYANAFORMAT cHh
+#TOLERANCE      0.3    0.04    0.03
+     5   45.226    6.787    2.695  1 U 1.161E+05  0.000E+00  e 0  CB  110    HD2   22    HB2  110   #VC 0.000 #W 0.249 1.000 1.000 0.167 0.000 0.000 23.165  #d 5.89447 #eliminated: Network
+                                                                  CB  110   HE22   84    HB2  110   #VC 0.000 #W 0.477 1.000 1.000 0.167 0.000 0.000 16.346  #d 5.89447 #eliminated: Network
+                                                                  CB  110    HE3   85    HB2  110   #VC 0.101 #W 0.087 1.000 1.000 0.167 0.057 0.057 9.344  #d 5.89447 #eliminated: Network
+                                                                  CB  110    HZ2   85    HB2  110   #VC 0.000 #W 0.477 1.000 1.000 0.167 0.000 0.057 13.228  #d 5.89447 #eliminated: Network
+     6   40.719    1.831    1.764  1 U 1.355E+06  0.000E+00  e 0
+     7   40.719    1.831    1.764  1 U 1.355E+06  0.000E+00  e 0

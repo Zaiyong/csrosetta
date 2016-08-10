@@ -1,0 +1,10 @@
+#!/usr/bin/env python2.7
+##-*- mode:python;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:2 -*-'
+from sys import argv
+
+assert( len(argv)>2)
+noe_assign = argv[1]
+score_assign = argv[2]
+
+noe_line = open(noe_assign,'r').readlines()
+score_line = open(score_assign,'r').readlines()

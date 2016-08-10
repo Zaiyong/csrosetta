@@ -1,0 +1,18 @@
+#!/bin/bash -x
+#SBATCH -J csrosetta
+#SBATCH -n 1 -c 48
+### start of jobscript
+
+NSLOTS=$SLURM_CPUS_PER_TASK
+
+module load cyana
+
+LOGS=cyana_logs_`echo $SLURM_JOB_ID | awk -v FS="." '{print $1}'`
+
+source prepare.sh
+
+cyana -c "srun $exefile" CALC.cya  > $LOGS
+
+source rescore.sh > rescore_log_`echo $SLURM_JOB_ID | awk -v FS="." '{print $1}'`
+
+

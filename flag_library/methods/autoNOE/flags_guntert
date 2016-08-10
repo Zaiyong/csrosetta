@@ -1,0 +1,9 @@
+-noesy_weights:dcalibrate -1
+
+-noesy:calibration:stop_nudging 0.1
+-noesy:calibration:start_nudging 0.1
+-noesy:calibration:max_nudging 1.25
+-noesy:calibration:eliminate
+-noesy:no_network
+-noesy:use_local_distviol
+

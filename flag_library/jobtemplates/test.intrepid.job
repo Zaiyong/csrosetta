@@ -1,0 +1,1 @@
+qsub  -t 1:00 -q prod-devel -n 64 --env HOME=$HOME -A ProteinStruct  --mode vn $CM_EXECUTEABLE.static.linuxxlcrelease -out:level 300 -mute all_high_mpi_rank_filebuf  -out:path:mpi_rank_dir -out:file:silent dummy.out $CM_COMMANDLINE -database $CM_ROSETTA_DATABASE -run:test_cycles -out:nstruct 256

@@ -1,0 +1,8 @@
+compile: scons mode=release bin/fragment_picker.default.linuxgccrelease
+
+IMPORTANT NOTE: currently, -nohoms is default this will probably be reverted for final release. 
+DBL-CHECK in generated <your_target>.pick_flags 
+if you find this file in flags: <your_target>.fasta.homologs - homologuous are EXCLUDED ( -nohoms ) 
+if you don't find this file in flags nothing is excluded ( -homs ) 
+
+

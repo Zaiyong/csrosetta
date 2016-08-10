@@ -1,0 +1,5 @@
+-evaluation:rmsd IRMS _input FULL
+-docking_local_refine
+-ex1
+-ex2aro
+-detect_disulf true

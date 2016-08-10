@@ -1,0 +1,6 @@
+install_external_dependencies.csh
+pick_fragments
+pick_fragments.pl
+README
+update_blastdb.pl
+setup_paths.pl

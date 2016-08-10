@@ -1,0 +1,29 @@
+The method autoNOE runs RASREC with iterative automatic NOESY assignment
+it can be run in two modes: phaseI and phaseII
+mode phaseI is used to find an initial fold
+mode phaseII is used to refine a fold
+
+mode phaseII is selected by providing setup_target.py an ensemble of decoys with the option -silent
+
+SPECIAL:
+	 in contrast to other methods (rasrec, denovo, etc)
+	 before the structure calculation can start you have to run a script to obtain initial assignments.
+
+Procedure:
+
+setup:
+	  run setup_target.py [...] -run_dir RUNDIR
+
+initialize:
+	  cd RUNDIR
+	  . initialize_assignments_phaseI.sh
+or
+          . initialize_assignments_phaseII.sh
+( in doubt run both initialize scripts )
+
+run:
+	  cd test
+	   # start test-run with source test.<platform>.job
+	  cd ..
+	  # start production-run with source production.<platform>.job
+

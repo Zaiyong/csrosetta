@@ -1,0 +1,16 @@
+PeakAssignment
+
+assign_atom( i, atom) #assigns atom to position i of assignment
+
+set_weights( weights ) #sets a vector of weights
+
+set_volume_contribution #sets the volume contribution
+
+atom( i ) #returns the assigned atom at position i
+
+has_atom( atom ) #returns whether atom is assigned to this (i.e., contained as one of the atoms)
+
+read_from_str( str )   #read the whole thing from string
+
+
+

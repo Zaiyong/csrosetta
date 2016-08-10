@@ -1,0 +1,7 @@
+-noesy_weights:cycle 7
+-noesy:calibration:max_noe_dist 5.5
+#-noesy:out:padding 1
+
+-noesy:network:reswise_high 4
+-noesy:network:reswise_min 0.5
+-noesy:network:atomwise_min 0.4

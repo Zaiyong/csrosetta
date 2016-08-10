@@ -1,0 +1,59 @@
+#!/bin/bash -x
+###
+###
+### This file is part of the CS-Rosetta Toolbox and is made available under
+### GNU General Public License
+### Copyright (C) 2011-2013 Oliver Lange
+### email: oliver.lange@tum.de
+### web: www.csrosetta.org
+### version: 2.0
+### 
+### This program is free software: you can redistribute it and/or modify
+### it under the terms of the GNU General Public License as published by
+### the Free Software Foundation, either version 3 of the License, or
+### (at your option) any later version.
+###
+### This program is distributed in the hope that it will be useful,
+### but WITHOUT ANY WARRANTY; without even the implied warranty of
+### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+### GNU General Public License for more details.
+###
+### You should have received a copy of the GNU General Public License
+### along with this program.  If not, see <http://www.gnu.org/licenses/>.
+###
+###
+#you can also specify number of nodes directly in this script: using PBS-directive (below) and -l nodes=1:ppn=100 (in this specific example for a SGI -UV1000 single-node cluster)
+
+#PBS -l nodes=1:ppn=100
+#PBS -N test_csrosetta
+#PBS -l walltime=10:00:00
+
+cd $PBS_O_WORKDIR
+perl -e 'for $i(1..100){print "localhost\n"}' >temp_pbs_nodefile
+export PBS_NODEFILE=$PBS_O_WORKDIR/temp_pbs_nodefile # PBS_NODEFILE must be specified explicitly due to local cluster setup
+. ${MODULESHOME}/init/bash
+module load mpt
+
+export PBS_MPI_DEBUG=1
+#export OMP_NUM_THREADS=4
+#export MPI_OMP_NUM_THREADS=4
+#export MPI_OPENMP_INTEROP=1
+#export MPI_DSM_DISTRIBUTE=1
+#export MPI_DSM_VERBOSE=1
+#echo "MPI_DSM_DISTRIBUTE: $MPI_DSM_DISTRIBUTE"
+
+NSLOTS=${NSLOTS:=`cat "$PBS_NODEFILE" | wc -l`}
+NSTRUCT=$( echo $NSLOTS | awk '{print $1-3}' )
+
+echo "workdir: $PBS_O_WORKDIR"
+echo "PBS_NODEFILE $PBS_NODEFILE"
+LOGS=logs_`echo $PBS_JOBID | awk -v FS="." '{print $1}'`
+mkdir -p $LOGS
+
+echo "running on $NSLOTS cpus ..."
+EXE=/u/sgourn/Rosetta_alto/main/source/bin/minirosetta.mpi.linuxgccrelease  # change to current Rosetta binaries
+CMDLINE="-out:level 300 -mute all_high_mpi_rank_filebuf -out:mpi_tracer_to_file $LOGS/log -database /u/sgourn/Rosetta/main/database $CM_COMMANDLINE" 
+CYCLES="-out:nstruct $NSTRUCT "" -run:test_cycles -jd2::mpi_timeout_factor -1"
+mpiexec -n $NSLOTS $EXE $CMDLINE $CYCLES
+
+exit

@@ -1,0 +1,144 @@
+#!/usr/bin/env python
+##-*- mode:python;tab-width:3;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:3 -*-'
+#================================================================
+
+from Tkinter import *
+from os import system
+import Tkinter
+import Pmw
+import string
+from FileDialogButtonClassFactory import FileDialogButtonClassFactory
+from HelpDialog import HelpDialog
+
+#=====================step 1: pick up fragments===start=====================================
+class step1_pick_frag:
+	def __init__(self,parent,pos):
+		self.parent=parent
+		self.pos=pos
+		self.main_label = Tkinter.Label(self.parent,
+			text = 'CSrosetta\nOliver Lange & Zaiyong Zhang\n<http://langelab.ch.tum.de>\n\nPlease read help firstly',
+			background = 'navy',
+			foreground = 'white',
+			#pady = 20,
+		)
+		self.main_label.pack(expand = 0, fill = 'both', padx = 4, pady = 4)
+		self.group = Pmw.Group( self.parent,tag_text='step1: pick up fragments')
+		self.group.pack(fill = 'both', expand = 0, padx = 10, pady = 5)
+		self.cs = Pmw.EntryField(self.group.interior(),
+														 labelpos='w',
+														 label_pyclass = FileDialogButtonClassFactory.get(self.set_cs,filter="*.tab"),
+														 #validate = {'validator':quickFileValidation()},
+														 value = "",
+														 label_text = 'cs')
+		self.cs.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.sizes = Pmw.EntryField(self.group.interior(),
+															labelpos='w',
+															value = "[3,9]",
+															label_text = 'sizes')
+		self.sizes.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.nfrags = Pmw.EntryField(self.group.interior(),
+															labelpos='w',
+															value = "200",
+															label_text = 'nfrags')
+		self.nfrags.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.hom = Pmw.OptionMenu(self.group.interior(),
+														  labelpos='w',
+														  items=('yes','no'),
+														  label_text = 'hom')
+		self.hom.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.outlier = Pmw.EntryField(self.group.interior(),
+															labelpos='w',
+															value = "1.5",
+															label_text = 'outlier')
+		self.outlier.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.trim = Pmw.OptionMenu(self.group.interior(),
+														  labelpos='w',
+														  items=('yes','no'),
+														  label_text = 'trim')
+		self.trim.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.fasta = Pmw.EntryField(self.group.interior(),
+														 labelpos='w',
+														 label_pyclass = FileDialogButtonClassFactory.get(self.set_fasta,filter="*.fasta"),
+														 value = "",
+														 label_text = 'fasta')
+		self.fasta.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.check = Pmw.OptionMenu(self.group.interior(),
+														  labelpos='w',
+														  items=('yes','no'),
+														  label_text = 'check')
+		self.check.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.buttonbox = Pmw.ButtonBox(self.group.interior(), padx=3)
+		self.buttonbox.pack(side=LEFT,expand = 1, padx = 3, pady = 3)
+		#self.buttonbox.add('analyse flexible',command=self.pick_frag)
+		self.buttonbox.add('pick up fragment',command=self.pick_frag)
+		self.buttonbox.add('help',command=self.help)
+#=====================step 1: pick up fragments===end=====================================
+
+	def set_cs(self,filename):
+		self.cs.setvalue(filename)
+	def set_fasta(self,filename):
+		self.fasta.setvalue(filename)
+	def pick_frag(self):
+		cs=self.cs.getvalue()
+		sizes=self.sizes.getvalue()
+		nfrags=self.nfrags.getvalue()
+		hom=self.hom.getvalue()
+		outlier=self.outlier.getvalue()
+		trim=self.trim.getvalue()
+		fasta=self.fasta.getvalue()
+		check=self.check.getvalue()
+		input=""
+		if not cs:
+			print "please select one cs file"
+		else:
+			input+=' -cs '+cs
+			if sizes:
+				input+=' -sizes '+sizes
+			if nfrags:
+				input+=' -nfrags '+nfrags
+			if hom=='no':
+				input+=' -nohom '
+			else:
+				input+=' -hom '
+			if outlier:
+				input+=' -outlier '+outlier
+			if trim=='yes':
+				input+=' -trim'
+			if fasta:
+				input+=' -fasta '+fasta
+			if check=='no':
+				input+=' -nocheck'
+		print 'pick_fragments'+input
+		system(os.environ['csrosettaDir']+'/com/pick_fragments.py'+input)
+	def help(self):
+		txt='''
+Pick fragments based on chemical shifts and sequence information. This
+application is a wrapper that integrates several steps required to obtain
+fragments. First, BLAST is used to obtain a sequence profile from multiple
+sequence alignment. This step also provides the names of homologous proteins
+that can be excluded from fragment picking in benchmark mode using the -nohom
+flag. Second, TALOS+ is executed to obtain secondary structure predictions
+based on the chemical shift data. Finally, the ROSETTA application
+fragment_picker is started to assemble the fragment libraries using the VALL.
+Obviously, this wrapper has a great many dependencies. These dependencies are
+configured in csrosetta3/frag_picker/setup_paths.pl. Run install.py if
+dependencies have changed or to update the BLAST sequence database.
+
+optional arguments:
+  cs cs.tab            chemical shifts in TALOS format
+
+  sizes [SIZES [SIZES ...]]          which sizes of fragments shall be build
+
+  nfrags NFRAGS        how many frags per size-class and sequence position to collect
+
+  hom                  pick fragments also from homologous proteins [default]
+
+  outlier OUTLIER      report chemical shift outliers that are x*limit (no effect on fragments)
+
+  trim                 trim the sequence according to TALOS+ output and pred2rigid
+
+  fasta FASTA          a target sequence
+
+  check              run TALOS to check for chemical shift offsets or trimmin
+'''
+		HelpDialog(txt,'pick fragments')

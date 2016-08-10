@@ -1,0 +1,14 @@
+CLAIMER ConstraintClaimer
+CST_FILE ../inputs/contactmap_restraints.cst
+CENTROID
+SKIP_REDUNDANT 0
+COMBINE_RATIO 2
+END_CLAIMER
+
+#CLAIMER ConstraintClaimer
+#CST_FILE conatct_restraints.fa.cst
+#NO_CENTROID
+#FULLATOM
+#SKIP_REDUNDANT 0
+#COMBINE_RATIO 2
+#END_CLAIMER

@@ -1,0 +1,7 @@
+#due to the fullatom-relax chainbreak scores are not in scorefunction automatically... put them in with patch
+-iterative:chemicalshift_column chem_shifts
+-evaluation:chemical_shifts $CM_CHEM_SHIFTS chem_shifts
+-iterative:cenpool_chemicalshift_weight 5
+-iterative:fapool_chemicalshift_weight 5
+-iterative:centroid_before_quickrelax_weight 1.0
+-iterative:fullatom_after_quickrelax_weight 0.0

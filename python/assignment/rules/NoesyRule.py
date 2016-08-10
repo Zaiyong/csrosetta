@@ -1,0 +1,293 @@
+#!/usr/bin/env python2.7
+##-*- mode:python;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:2 -*-'
+
+#author: Oliver Lange
+
+#as part of general assignment module
+
+#NoesyRule is used to match any of 2D,3D, pseudo4D or 4D Noesy experiments
+#generally we assume A-B~C-D where .-. denotes directly bonded atoms and .~. denotes
+#a distance. Atoms might be invisible and not all need to be present, as long as there is one distance
+
+from BasicRules import *
+from assignment import random_items
+from basic import Tracer
+
+tr=Tracer('assignment.noesy')
+
+class NoesyRule(ExistingAssignmentRule):
+	class NoesySubGraph(ExistingAssignmentRule):
+		def __init__(self, distance_node, label_node=None ):
+			if label_node:
+				ExistingAssignmentRule.__init__(self, (distance_node,label_node) )
+			else:
+				ExistingAssignmentRule.__init__(self, (distance_node,) )
+			self.proton=distance_node #for convient and named access, proton doesn't need to be proton but its the distance-atom
+			self.label=label_node
+
+		def _iterate_raw(self, peak, atom_tree, random_samples, sub_match=None ):
+			tr.Trace('_iterate_raw...')
+			if sub_match:
+#				print 'sm: ',sub_match
+				free=self._get_free_elements_in_match( sub_match )
+				full_match=[None]*self.rule_dimension
+				#using in the following the explicte knowledge of NoesySubGraph that it is of dimension 1 or 2.
+				#if rule_dimension == 1 and len(free)==1 --> then everything is free and sub_match would have been None to start with
+				#so the only interesting case that remains is rule_dimension == 2 and len(free)==1
+				#however, could this code be generalized and live in super-class ?
+				if len(free)<self.rule_dimension and len(free)>0:
+					non_free=1-free[0]
+					fixed=sub_match[non_free]
+					if not check_element_and_type( fixed, self.nodes[non_free] ):
+						msg=''
+						if peak: msg= 'for peak: %10s %5s\n'%(peak.peak_list_name,peak.id)
+						msg+='wrong atom-type in pre-assignment: %s\n'%sub_match
+						msg+='inconsistent with atom-type of NoesyRule: %s'%str(self.nodes[non_free].types)
+						raise KeyError(msg)
+					full_match[non_free]=fixed
+					search_node=self.nodes[free[0]]
+					for new_atom in atom_tree.partners( fixed ):
+						if check_element_and_type( new_atom, search_node ):
+							full_match[free[0]]=new_atom
+							yield tuple(full_match)
+				elif len(free)==0:
+					#check pre-assignment for consistency with our rule
+					#correct element ?
+					for index, atom in enumerate(sub_match):
+						if not check_element_and_type( atom, self.nodes[index] ):
+							raise KeyError('wrong atom-type in pre-assignment at pos %d'%index+str(sub_match)+
+														 'required is %s %s'%(self.nodes[index].element,str(self.nodes[index].types)))
+					#label atom bound to main-atom ?
+					if self.rule_dimension==2 and not sub_match[0] in atom_tree.partners( sub_match[1] ):
+						raise KeyError('inconsistent pre-assignment')
+					#all checks worked out... good to go
+					yield tuple(sub_match)#
+			else:			#no sub_match present
+				atom_list=atom_tree
+				if random_samples:
+					ct_random=random_samples
+					outer_trials=2
+					while ct_random>0 and outer_trials>0:
+						outer_trials-=1
+						atom_list=[]
+						test_range=random_items( range(atom_tree.first_residue, atom_tree.last_residue+1), random_samples)
+						for resid in test_range:
+							if self.label:
+								proton=None
+								trial=3
+								while not proton and trial>0:
+									trial-=1
+									if trial==0:
+										import random
+										resid = random.randint(atom_tree.first_residue, atom_tree.last_residue)
+										trial=3
+									label_atom = random_items( [ atom for atom in atom_tree.iter_residue( resid )
+																							 if check_element_and_type(atom,self.label) ], 1 ).next()
+									if not label_atom: continue
+									proton = random_items([ bound_atom for bound_atom in atom_tree.partners( label_atom )
+																					if check_element_and_type( bound_atom, self.proton ) ], 1 ).next()
+
+								ct_random-=1
+								yield (proton, label_atom )
+							else:
+								proton = random_items( [ atom for atom in atom_tree.iter_residue( resid )
+																				 if check_element_and_type( atom, self.proton ) ], 1 ).next()
+								ct_random-=1
+								yield (proton, )
+					if outer_trials<=0:
+						tr.Warning( 'no matches found for peak X' )
+				else:
+					for atom in atom_tree:
+							if check_element_and_type( atom, self.proton ):
+								if self.label:
+									for bound_atom in atom_tree.partners( atom ):
+										if check_element_and_type( bound_atom, self.label ):
+											yield (atom,bound_atom)
+								else: yield (atom,)
+
+		def _iterate( self,peak, atom_tree, random_samples, frequency_matcher, distance_matcher, sub_match, mask ):
+			freq=self.unpack_frequencies(peak)
+#			if random_samples:
+#				ct_random=random_samples
+#			else:
+#				ct_random=1
+#			while ct_random>0:
+			if mask and False in mask:
+				yield (None,)*self.rule_dimension
+				return
+			for match in self._iterate_raw(peak, atom_tree, random_samples, sub_match ):
+				if not self._match( freq, frequency_matcher, match, 0, sub_match ): continue
+#					ct_random-=1
+				yield match
+	#END class NoesyRule::NoesySubGraph
+	def _update_dims(self):
+		self._spin1._update_dims()
+		self._spin2._update_dims()
+		super(NoesyRule,self)._update_dims()
+
+	#init of NoesyRule
+	def __init__(self,nodes,cutoff=5):
+		self._spin1=self.NoesySubGraph(nodes[0][0],nodes[0][1])
+		self._spin2=self.NoesySubGraph(nodes[1][0],nodes[1][1])
+		ExistingAssignmentRule.__init__(self,self._spin1.nodes+self._spin2.nodes)
+		self.distance_cutoff = cutoff
+		self._cached_masks=None
+
+	def __str__(self):
+		str=super(NoesyRule, self).__str__()
+		str+='\nNoesySubRule1: %s'%self._spin1
+		str+='\nNoesySubRule2: %s'%self._spin2
+		if self.distance_cutoff: str+='\ndistance cutoff: %8.3f'%self.distance_cutoff
+		return str
+
+	def spinsystem_match_masks(self):
+		if not self._cached_masks:
+			masks=[]
+			if self._spin1.rule_dimension==2:
+				if self.nodes[0].dim and self.nodes[1].dim:
+					masks.append( (True,True)+(False,)*self._spin2.rule_dimension )
+			if self._spin2.rule_dimension==2:
+				if self.nodes[self._spin1.rule_dimension].dim and self.nodes[self._spin1.rule_dimension+1].dim:
+					masks.append( (False,)*self._spin1.rule_dimension+(True,True) )
+			self._cached_masks=[ self.translate_full_match_to_peak_match( mask ) for mask in masks ]
+		return self._cached_masks
+	#this one is rather simple as the work is delegated to the Subrules
+	#from their matches we make an all2all combination
+	def _iterate(self, peak, atom_tree, random_samples, freq_matcher, dist_matcher, sub_match, match_mask ):
+		splitted_match=self._split_submatch( sub_match, (self._spin1.rule_dimension,self._spin2.rule_dimension) )
+		splitted_mask=self._split_submatch( match_mask, (self._spin1.rule_dimension,self._spin2.rule_dimension) )
+#		print splitted_mask
+		#go through possible tuple of atoms and see if they match according to frequency and distance matcher
+		try:
+			if random_samples:
+				trials=random_samples*100
+				ct_random=random_samples #we need to yield at least random_samples many matches, repeat random search if necessary
+				while ct_random>0 and trials>0:
+					trials-=1
+					for match1 in self._spin1._iterate( peak,
+																							atom_tree,
+																							random_samples,
+																							freq_matcher,
+																							dist_matcher,
+																							splitted_match[0],
+																							splitted_mask[0] ):
+						for match2 in self._spin2._iterate( peak,
+																								atom_tree,
+																								random_samples,
+																								freq_matcher,
+																								dist_matcher,
+																								splitted_match[1],
+																								splitted_mask[1] ):
+							# for match1, for match2 :
+							if dist_matcher:
+								if not dist_matcher(match1[0],match2[0],self.distance_cutoff): continue
+							ct_random-=1
+							yield match1+match2
+				#end while ct_random>0 and trials>0
+				if trials>0: return #not all trials have been used, we are done
+			#
+			#random is None or random search was fruitless, try systematic
+			if random_samples: tr.Debug('systematic search...')
+			for match1 in self._spin1._iterate( peak, atom_tree, None, freq_matcher, dist_matcher, splitted_match[0], splitted_mask[0] ):
+				for match2 in self._spin2._iterate( peak, atom_tree, None, freq_matcher, dist_matcher, splitted_match[1], splitted_mask[1] ):
+					if dist_matcher:
+						if not dist_matcher(match1[0],match2[0],self.distance_cutoff): continue
+					yield match1+match2
+
+		except Exception as exc:
+			import sys, traceback
+			import library
+			from library import ProgramError, InconsistentInput
+			msg=library.extract_exception_msg()
+			msg+='Failure occurred '
+			if sub_match: 'when matching with sub_match %s'%str(sub_match)
+			msg+='in rule %s'%(self)
+			raise InconsistentInput,InconsistentInput(msg),sys.exc_info()[2]
+
+	def distance( self, peak_match, dist_matcher ):
+		atom1=peak_match.rule_match[0]
+		atom2=peak_match.rule_match[self._spin1.rule_dimension]
+		return (dist_matcher.dist(atom1,atom2),)
+
+	def distance_atoms( self, peak_match ):
+		atom1=peak_match.rule_match[0]
+		atom2=peak_match.rule_match[self._spin1.rule_dimension]
+		return ((atom1,atom2),)
+
+	#given tuples of distance-match atoms
+	#how many and which peak-matches would I expect from this rule ?
+	def _expected_symmetric_peaks( self, peak, atom_tree, atoms ):
+		try:
+			rule_sub_match=[None]*self.rule_dimension
+			rule_sub_match[0]=atoms[0]
+			rule_sub_match[self._spin1.rule_dimension]=atoms[1]
+			for match in self._iterate( peak, atom_tree, None, None, None, rule_sub_match, None ):
+				yield self.translate_full_match_to_peak_match( match )
+		except Exception as exc:
+			import sys
+			from library import ProgramError, InconsistentInput
+			msg='%s\n'%exc.message
+			msg+='\nwhen trying to find symmetric peaks for atoms %s'%str(atoms)
+			raise InconsistentInput,InconsistentInput(msg),sys.exc_info()[2]
+
+
+	def expected_symmetric_peaks( self, atom_tree, atoms ):
+		from assignment import Peak
+		peak=Peak((None,)*4,self)
+		for match in self._expected_symmetric_peaks( peak, atom_tree, atoms ):
+			yield match
+		for match in self._expected_symmetric_peaks( peak, atom_tree, (atoms[1],atoms[0]) ):
+			yield match
+
+	@classmethod
+	def from_old_cross_peak_info(obj,info):
+		spin1=info._spin1
+		spin2=info._spin2
+		RN=PeakRule.RuleNode
+#		print info
+		nodes1=[]
+		nodes2=[]
+
+		node11=None
+		dim11=spin1.atom_col
+		tol11=spin1.proton_tolerance
+		if dim11<=0: dim11=None
+		node11=RN(dim11,'H',tol11,None,spin1.proton_folder)
+		nodes1.append(node11)
+
+		node12=None
+		dim12=spin1.label_col
+		if dim12>0:
+			tol12=spin1.label_tolerance
+			node12=RN(dim12,spin1.label,tol12,None,spin1.label_folder)
+		nodes1.append(node12)
+
+		node21=None
+		dim21=spin2.atom_col
+		tol21=spin2.proton_tolerance
+		if dim21<=0: dim21=None
+		node21=RN(dim21,'H',tol21,None,spin2.proton_folder)
+		nodes2.append(node21)
+
+		node22=None
+		dim22=spin2.label_col
+		if dim22>0:
+			tol22=spin2.label_tolerance
+			node22=RN(dim22,spin2.label,tol22,None,spin2.label_folder)
+		nodes2.append(node22)
+
+		high_tol_column=None
+		if tol11>10 or tol21>10:
+			print
+			print '*'*80
+			print 'WARNING: high tolerance for invisible dimensions in NOESY is deprecated'
+			print 'just define it as proper 3D such as Chn Nhn Chc ....'
+			print '*'*80
+			print
+			if tol11>10: high_tol_column = (0,spin1.atom_col)
+			if tol21>10: high_tol_column = (2,spin2.atom_col)
+
+		ss=nodes1+nodes2
+		obj=NoesyRule( (nodes1,nodes2) )
+
+		return obj, high_tol_column

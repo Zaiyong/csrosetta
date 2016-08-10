@@ -1,0 +1,11 @@
+nmr_data/peg.rdc                                             cod:/Users/zak/csrosetta3/tests/integration/new/setup_target/input/nmr_data/peg.rdc
+nmr_data/gmr137.tab                                          cod:/Users/zak/csrosetta3/tests/integration/new/setup_target/input/nmr_data/gmr137.tab
+fragments/gmr137.fasta                                       cod:/Users/zak/csrosetta3/tests/integration/new/setup_target/input/fragments/gmr137.fasta
+fragments/frags.score.3mers.new                              cod:/Users/zak/csrosetta3/tests/integration/new/setup_target/input/fragments/frags.score.3mers.new
+fragments/frags.score.9mers.new.gz                           cod:/Users/zak/csrosetta3/tests/integration/new/setup_target/input/fragments/frags.score.9mers.new.gz
+native/native.pdb                                            cod:/Users/zak/csrosetta3/tests/integration/new/setup_target/input/native/native.pdb
+nmr_data/resort_c-ali.peaks                                  cod:/Users/zak/csrosetta3/tests/integration/new/setup_target/input/nmr_data/resort_c-ali.peaks
+nmr_data/resort_c-aro.peaks                                  cod:/Users/zak/csrosetta3/tests/integration/new/setup_target/input/nmr_data/resort_c-aro.peaks
+nmr_data/resort_n.peaks                                      cod:/Users/zak/csrosetta3/tests/integration/new/setup_target/input/nmr_data/resort_n.peaks
+nmr_data/gmr137.prot                                         cod:/Users/zak/csrosetta3/tests/integration/new/setup_target/input/nmr_data/gmr137.prot
+nmr_data/noe_auto_assign.cst                                 cod:/Users/zak/csrosetta3/tests/integration/new/setup_target/input/nmr_data/noe_auto_assign.cst

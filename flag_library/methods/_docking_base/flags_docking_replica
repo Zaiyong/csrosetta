@@ -1,0 +1,8 @@
+-run:intermediate_structures
+-out:file:silent decoys.out 
+-out:file:scorefile scores.fsc
+
+-unmute protocols.moves.TrajectoryRecorder
+-unmute protocols.moves.SimulatedTempering 
+-unmute protocols.moves.ParallelTempering
+

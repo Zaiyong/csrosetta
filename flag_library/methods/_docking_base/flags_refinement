@@ -1,0 +1,6 @@
+-ex1 
+-ex2aro
+-out:file:silent refine.out
+-out:file:scorefile refine.fsc
+-evaluation:rmsd IRMS _input FULL
+-docking_local_refine

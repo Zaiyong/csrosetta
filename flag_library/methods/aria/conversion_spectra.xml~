@@ -1,0 +1,34 @@
+  <spectrum
+
+    spectrum_name="aria_spectra"
+    spectrum_type=""
+    spectrum_ambiguity=""
+    segids="">
+
+    <chemical_shifts>
+      <input
+        filename="ppm.prot"
+        format="xeasy"/>
+      <output
+        filename="xml/ppm.xml"/>
+    </chemical_shifts>
+
+    <cross_peaks>
+      <input
+        filename="noe.peaks"
+        format="xeasy"
+        proton1="3"
+        hetero1="1"
+        proton2="2"
+        hetero2=""/>
+
+      <output
+        filename="xml/noe.xml"/>
+
+      <assignments
+        filename=""/>
+
+      <peaks_ambiguity
+        filename=""/>
+    </cross_peaks>
+  </spectrum>

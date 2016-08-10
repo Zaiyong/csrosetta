@@ -1,0 +1,12 @@
+total_accepts accepts_since_last_batch total_proposed proposed_since_last_batch
+          1541                        0           5124                             0
+acceptance_history: 1
+AH: 
+END_AH
+IterationStage: 7   first_batch_this_stage: 82   first_fullatom_batch: 79
+SCORED_CORE:
+END_SCORED_CORE
+NOESY_CYCLE: 6
+NOESY_FIRST_CST: n/a
+NOESY_FIRST_FA_CST: n/a
+NOESY_CURRENT_CST: 

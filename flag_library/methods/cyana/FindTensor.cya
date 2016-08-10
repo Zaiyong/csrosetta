@@ -1,0 +1,9 @@
+read rdc cyana.rdc
+print "    Input alignment tensor:"
+do i 1 orientations
+  print "    Orientation $i: magnitude = $magnitude(i) Hz, rhombicity = $rhombicity(i)."
+end do
+
+rdc fittensor method=simplex       # (can take several minutes)
+#rdc fittensor method=gridsearch   # systematic search (very slow)
+

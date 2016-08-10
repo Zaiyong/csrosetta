@@ -1,0 +1,20 @@
+var info echo
+
+syntax
+
+info:=none; echo:=off
+rdc distance "N  H"    distance=1.041
+rdc distance "CA HA"   distance=1.117
+rdc distance "C  CA"   distance=1.525
+rdc distance "C  N"    distance=2.461
+rdc distance "C  N -1" distance=1.329
+rdc distance "CA N"    distance=1.458
+rdc distance "CA N -1" distance=2.425
+rdc distance "CA H"    distance=2.117
+rdc distance "CA H -1" distance=2.533
+rdc distance "C  H -1" distance=2.000
+rdc distance "C  HA"   distance=2.144
+rdc distance "CB HB"   distance=1.080
+rdc distance "CA CB"   distance=1.532
+unset info
+print "    Standard RDC distances defined."

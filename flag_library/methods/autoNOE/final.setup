@@ -1,0 +1,11 @@
+
+cat *.flags | grep -v iterative | grep -v @ > flags_autoNOE_init 
+for i in $( cat *.flags | grep @ | awk -v FS="/" '{print $2}'); do cat $i | grep -v iterative >> flags_autoNOE_test; done 
+
+
+cp -Rf $CM_METHODPATH/*_patch .
+
+mkdir run_archive
+cp $CM_FLAGFILE run_archive
+mkdir test_archive
+cp $CM_FLAGFILE test_archive

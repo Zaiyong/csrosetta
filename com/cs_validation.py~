@@ -1,0 +1,436 @@
+#!/usr/bin/env python2.7
+##-*- mode:python;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:2 -*-'
+
+from os.path import basename
+import os
+import string
+import argparse
+import sys
+import library
+import StringIO
+import math
+from assignment.noesy import SpinSystem, get_strips,resid_cs_valid, Atom,ResonanceList,read_peak_files
+from assignment.noesy.systems_filtering import systems_filtering
+from assignment.noesy.util import average
+from assignment.noesy.create_dist_map import create_dist_map
+import fasta
+from PDB.Polypeptide import one_to_three,three_to_one
+from chemical import SingleAminoAcidLib
+#from assignment.noesy.symmetry_peaks import symmetry_peaks,crosspeak_validation
+#from assignment.noesy.network_peaks import network_peaks
+import pdb
+import copy
+import random
+# def CombinationEnumerator(items, n=None):
+#     if n is None:
+#         n = len(items)
+#     for i in range(len(items)):
+#         v = items[i:i+1]
+#         if n == 1:
+#             yield v
+#         else:
+#             rest = items[i+1:]
+#             for c in CombinationEnumerator(rest, n-1):
+#                 yield v + c
+
+
+# def aa_strip_couple(aa):
+# 	if aa in 'RQEKMPLT':
+# 		couple=3
+# 	elif aa in 'IV':
+# 		couple=4
+# 	elif aa=='G':
+# 		couple=1
+# 	else:
+# 		couple=2
+# 	return couple
+
+parser =argparse.ArgumentParser(description="assign noesy peaks",
+                                add_help=True)
+parser.add_argument("-prot", help="chemical shift file",default=None);
+parser.add_argument("-target", help="protein name",default=None);
+parser.add_argument("-peaks",nargs='*', help='files with peak-lists in xeasy format',default=None);
+#parser.add_argument("-resids",help='which residues are validated',nargs='*',type=int, default=1);
+parser.add_argument("-valid_end", help='the end of heavy atoms which are validated, for example G means N-CA-CB-CG*', default='D' )
+parser.add_argument("-lib", help="library of CS distribution bounds",default=None )
+parser.add_argument("-AATree", help="amino acid atom trees",default=None )
+parser.add_argument("-AABond", help="amino acid heavy atom bond tree",default=None )
+parser.add_argument("-fasta", help="fasta file",default=None )
+parser.add_argument("-score", help="score",type=float,default=0.5 )
+#parser.add_argument("-pdb", help="pdb file",default='native.pdb')
+parser.add_argument("-correct", help="correct chemical shift file",default=None )
+
+library.add_standard_args( parser )
+args = parser.parse_args()
+
+#librarylist=open(args.library,'r').readlines()
+if 'csrosettaDir' in os.environ:
+	library_file=os.environ['csrosettaDir']+"/database/cs_distribution.txt"
+	AATree_file=os.environ['csrosettaDir']+"/database/AminoAcidProton.txt"
+	AABond_file=os.environ['csrosettaDir']+"/database/AminoAcidBond.txt"
+else:
+	library_file=args.lib
+	AATree_file=args.AATree
+resonance_list=ResonanceList.read_from_stream( open(args.prot,'r') )
+correct_resonance_list=ResonanceList.read_from_stream( open(args.correct,'r') )
+resonance_list.correct_res_name()
+correct_resonance_list.correct_res_name()
+seq=resonance_list.sequence()
+crosspeaks=read_peak_files(args.peaks)
+#atom_dist_map=create_dist_map(args.pdb)
+#for cp in origin_crosspeaks.iter_peaks():
+# 	crosspeak_validation(cp,resonance_list,atom_dist_map)
+#pdb.set_trace()
+#symmetry_crosspeaks=symmetry_peaks(origin_crosspeaks,resonance_list,atom_dist_map)
+#pdb.set_trace()
+#H_HA_peaks=[]
+#H_HA_volumes=[]
+# for i in range(2,len(seq)):
+# 	try:
+# 		H_res=resonance_list.by_atom(Atom('H',i))
+# 		HA_res=resonance_list.by_atom(Atom('HA',i))
+# 		N_res=resonance_list.by_atom(Atom('N',i))
+# 		CA_res=resonance_list.by_atom(Atom('CA',i))
+# 		H_HA_peaks.extend(origin_crosspeaks.pickup_peaks(1,H_res,N_res,HA_res))
+# 		H_HA_peaks.extend(origin_crosspeaks.pickup_peaks(1,HA_res,CA_res,H_res))
+# 	except:
+# 		continue
+
+
+def _evaluate_spinsystem(aa_lib,system):
+	score=1
+	for proton1 in aa_lib.protons():
+		for proton2 in aa_lib.protons():
+			if proton1==proton2: continue
+			try:
+				if aa_lib.nbonds(proton1,proton2)==3:
+					score=score*system.score_couple([system.strip(proton1),system.strip(proton2)])
+			except KeyError:
+				pass
+	return score
+def _recursion_combination(resid,strips_all,systems,strips_all_keys,n):
+# use recursion theory to create all kinds of strip combinations
+# n is the index of key of strips_all
+	print '%d number of strip all keys\n'%n
+	if len(systems)==0:
+		systems.append(SpinSystem(resid))
+	if len(systems[0].strips())==len(strips_all):
+		return systems
+	else:
+		new_systems=[]
+		for r in strips_all[strips_all_keys[n]]:
+			tmp_systems=systems
+			for sp in tmp_systems:
+				sp.add_strip(r)
+			new_systems.extend(tmp_systems)
+		return _recursion_combination(resid,strips_all,new_systems,strips_all_keys,n+1)
+
+
+def _random_generate_spinsystem(resid,strip_all):
+	keys=strips_all.keys()
+	sp=SpinSystem(resid)
+	for key in keys:
+		sp.add_strip(random.sample(strips_all[key],1)[0])
+	return sp
+
+def _check_strips_have_correct_values(name,strips,aa_lib,true_protons,true_heavies):
+	#this function is to detect whether the generated strips include the correct one or not.
+	try:
+		for strip in strips:
+			if strip.label().match(true_heavies[aa_lib.heavy_partners(name)[0]].freq(),0.5):
+				for proton in true_protons[aa_lib.heavy_partners(name)[0]]:
+					if strip.proton().match(proton.freq(),0.05):
+						return '1'
+	except AttributeError:
+		return 'None'
+	return '0'
+cs_distribution=open(library_file,'r').readlines()
+if args.fasta:
+	seq=fasta.read_fasta(args.fasta)
+
+for resid in range(2,len(seq)+1):
+	aa=seq[resid-1]
+	aa_three=one_to_three(aa)
+	aa_lib=SingleAminoAcidLib(aa_three)
+	residue_validation=resid_cs_valid(resid)
+	residue_validation.add_true_freqs(aa_lib,correct_resonance_list)
+	true_protons=residue_validation.true_protons()
+	true_heavies=residue_validation.true_heavies()
+	print true_protons
+	print 'lalala'
+	print true_heavies
+	strips_all=get_strips.get_strips(resid,seq,cs_distribution,resonance_list,crosspeaks,aa_lib)
+	  #step1: estimate HB
+	B_protons=[]
+	G_protons=[]
+	D_protons=[]
+	E_protons=[]
+# 	for name,strips in strips_all.iteritems():
+# 		if name in ['H','HA','HA2','HA3']: continue
+# 		else:
+# 			print resid,aa,name,_check_strips_have_correct_values(name,strips,aa_lib,true_protons,true_heavies)
+# 	print 'finish detect'
+
+	#try:
+	for i in range(0,10000):
+		system=_random_generate_spinsystem(resid,strips_all)
+		score=_evaluate_spinsystem(aa_lib,system)
+		valid=system.valid_ss(true_protons,true_heavies,aa)
+	print resid, score,valid
+	#except:
+	#	print resid, 'lost key chemical shifts'
+
+
+
+
+# 		  if len(name)>1 and 'B'==name[1]:
+# 			  B_protons.append(name)
+# 			  systems[name]=[]
+# 			  for r in strips:
+# 				  sp=SpinSystem(resid)
+# 				  sp.add_strip(strips_all['H'][0])
+# 				  sp.add_strip(strips_all['HA'][0])
+# 				  sp.add_strip(r)
+# 				  if sp.score_couple([r,strips_all['HA'][0]])>args.score:
+# 					  systems[name].append(sp)
+# 			  final_system[name]=systems_filtering(resid,seq,resonance_list,crosspeaks,cs_distribution,systems[name])
+# 	#step2: estimate HG
+# 	  for name,strips in strips_all.iteritems():
+# 		  if len(name)>1 and 'G'==name[1]:
+# 			  G_protons.append(name)
+# 			  systems[name]=[]
+# 			  for b_proton in B_protons:
+# 				  for r in strips:
+# 					  sp=SpinSystem(resid)
+# 					  for strip in final_system[b_proton].strips().itervalues():
+# 						  sp.add_strip(strip)
+# 					  sp.add_strip(r)
+# 					  if sp.score_couple([r,sp.strip(b_proton)])>args.score:
+# 						  systems[name].append(sp)
+# 			  final_system[name]=systems_filtering(resid,seq,resonance_list,crosspeaks,cs_distribution,systems[name])
+#   #step3: estimate HD
+# 	  for name,strips in strips_all.iteritems():
+# 		  if len(name)>1 and 'D'==name[1]:
+# 			  D_protons.append(name)
+# 			  systems[name]=[]
+# 			  if aa in 'RKL':
+# 				  for g_proton in G_protons:
+# 					  for r in strips:
+# 						  sp=SpinSystem(resid)
+# 						  if final_system[g_proton]==[]: continue
+# 						  for strip in final_system[g_proton].strips().itervalues():
+# 							  sp.add_strip(strip)
+# 						  sp.add_strip(r)
+# 						  if sp.score_couple([r,sp.strip(g_proton)])>args.score:
+# 							  systems[name].append(sp)
+# 				  final_system[name]=systems_filtering(resid,seq,resonance_list,crosspeaks,cs_distribution,systems[name])
+# 			  elif aa in 'FYWH':
+# 				  for b_proton in B_protons:
+# 					  for r in strips:
+# 						  sp=SpinSystem(resid)
+# 						  if final_system[b_proton]==[]: continue
+# 						  for strip in final_system[b_proton].strips().itervalues():
+# 							  sp.add_strip(strip)
+# 						  sp.add_strip(r)
+# 						  if sp.score_couple([r,sp.strip(b_proton)])>args.score:
+# 							  systems[name].append(sp)
+# 				  final_system[name]=systems_filtering(resid,seq,resonance_list,crosspeaks,cs_distribution,systems[name])
+# 			  elif aa=='I':
+# 				  for g_proton in ['HG12','HG13']:
+# 					  for r in strips:
+# 						  sp=SpinSystem(resid)
+# 						  if final_system[g_proton]==[]: continue
+# 						  for strip in final_system[g_proton].strips().itervalues():
+# 							  sp.add_strip(strip)
+# 						  sp.add_strip(r)
+# 						  if sp.score_couple([r,sp.strip(g_proton)])>args.score:
+# 							  systems[name].append(sp)
+# 				  final_system[name]=systems_filtering(resid,seq,resonance_list,crosspeaks,cs_distribution,systems[name])
+
+# 	  for name,ss in final_system.iteritems():
+# 		  try:
+# 			  print resid,aa,name,ss.valid_ss(true_protons,true_heavies,aa)
+# 		  except:
+# 			  print resid,aa,name
+
+
+
+	#step4: estimat HE
+# 	for name,strips in strips_all.iteritems():
+# 		if len(name)>1 and 'E'==name[1]:
+# 			E_protons.append(name)
+# 			systems[name]=[]
+# 			if aa =='H':
+# 				for r in strips:
+# 					sp=SpinSystem(resid)
+# 					if final_system['HD1']==[]: continue
+# 					for strip in final_system['HD1'].strips().itervalues():
+# 						sp.add_strip(strip)
+# 					sp.add_strip(r)
+# 					if sp.score_couple([r,sp.strip('HD1')])>=0:
+# 						systems[name].append(sp)
+# 					#print 'length of systems',len(systems[name])
+# 				final_system[name]=systems_filtering(resid,seq,resonance_list,crosspeaks,lib,systems[name])
+# 			elif aa in 'WK':
+# 				for d_proton in D_protons:
+# 					for r in strips:
+# 						sp=SpinSystem(resid)
+# 						if final_system[d_proton]==[]: continue
+# 						for strip in final_system[d_proton].strips().itervalues():
+# 							sp.add_strip(strip)
+# 						sp.add_strip(r)
+# 						if sp.score_couple([r,sp.strip(d_proton)])>=0:
+# 							systems[name].append(sp)
+# 					#print 'length of systems',len(systems[name])
+# 				final_system[name]=systems_filtering(resid,seq,resonance_list,crosspeaks,lib,systems[name])
+# 			elif aa in 'YF':
+# 				for r in strips:
+# 					sp=SpinSystem(resid)
+# 					d_proton=name[0]+'D'+name[2]
+# 					if final_system[d_proton]==[]: continue
+# 					for strip in final_system[d_proton].strips().itervalues():
+# 						sp.add_strip(strip)
+# 					sp.add_strip(r)
+# 					if sp.score_couple([r,sp.strip(d_proton)])>=0:
+# 						systems[name].append(sp)
+# 					#print 'length of systems',len(systems[name])
+# 				final_system[name]=systems_filtering(resid,seq,resonance_list,crosspeaks,lib,systems[name])
+# 			elif aa =='M':
+# 				for g_proton in G_protons:
+# 					for r in strips:
+# 						sp=SpinSystem(resid)
+# 						if final_system[g_proton]==[]: continue
+# 						for strip in final_system[g_proton].strips().itervalues():
+# 							sp.add_strip(strip)
+# 						sp.add_strip(r)
+# 						if sp.score_couple([r,sp.strip(g_proton)])>=0:
+# 							systems[name].append(sp)
+# 					#print 'length of systems',len(systems[name])
+# 				final_system[name]=systems_filtering(resid,seq,resonance_list,crosspeaks,lib,systems[name])
+
+#if final_system[b_proton,g_proton,name]==[]:
+						#print resid,aa,'no systems'
+				#	continue
+				#else:
+				#	pass
+						#print resid,aa,b_proton,g_proton,name,final_system[b_proton].valid_ss(true_protons,true_heavies,aa),final_system[b_proton,g_proton].valid_ss(true_protons,true_heavies,aa),final_system[b_proton,g_proton,name].valid_ss(true_protons,true_heavies,aa)
+	#print seq[resid-1],proton_names,all_num
+# for id,res in resonance_list.iteritems():
+# 	if res.name() in ['H','C','CA','CB','N','HA']:
+# 		print res.freq(),res.error(),res.name(),res.resid(),one_to_three(seq[res.resid()-1]),seq[res.resid()-1],'this is resonance'
+# final_systems=systems_filtering(args.resids,seq,resonance_list,crosspeaks,lib,args.valid_end,args.score)
+
+# for resid,system in final_systems.iteritems():
+# 	for proton,strip in system.strips().iteritems():
+# 		if 'HB' in proton:
+# 			print strip.proton().freq(),'0.05',strip.proton().name(),resid,one_to_three(seq[resid-1]),seq[resid-1],'this is resonance'
+# 		elif 'HG' in proton:
+# 			print strip.label().freq(),'0.5',strip.label().name(),resid,one_to_three(seq[resid-1]),seq[resid-1],'this is resonance'
+# 			print strip.proton().freq(),'0.05',strip.proton().name(),resid,one_to_three(seq[resid-1]),seq[resid-1],'this is resonance'
+	#residue_validation=resid_cs_valid(resid)
+	#for r in systems[resid]:
+	#	residue_validation.add_ss(r)
+	#for r in ss_proton_name_list:
+	#	residue_validation.add_true_protons(r,resonance_list)
+	#print "round 2",resid,len(systems[resid]),residue_validation.true_proton('H'),residue_validation.true_proton('HA'),residue_validation.true_proton('QB')
+
+
+
+# 	pd_ss=1.0
+# 	for name,strips_list in strips.iteritems():
+# 		pd_st=0.0
+# 		for st in strips_list:
+# 			try:
+# 				error=math.fabs(true_heavies[name].freq()-st.label().freq())
+# 			except:
+# 				error=0.0
+# 				print name,resid,aa,' heavy is missed'
+# 			if error>0.5:
+# 				continue
+# 			for true in true_protons[name]:
+# 				try:
+# 					error=math.fabs(true.freq()-st.proton().freq())
+# 				except:
+# 					error=0.0
+# 					print name,resid,aa, 'proton is missed'
+# 				if error<0.05:
+# 					pd_st=1.0
+# 					break
+# 			if pd_st==1.0:
+# 				break
+# 		if pd_st==1.0:
+# 			valid_list[name]='1'
+# 	for r in tested_heavy:
+# 		out=out+'%5s'%valid_list[r]
+# print out
+# 		pd_ss=pd_st*pd_ss
+# 	if pd_ss==1:
+# 		print "residue %(resid)-5d, amino acid %(aa)-5s, all strips are successfully found"%{'resid':resid,'aa':aa}
+# 	else:
+# 		print "residue %(resid)-5d, amino acid %(aa)-5s, some strips are missed"%{'resid':resid,'aa':aa}
+# 	residue_validation=[]
+# 	systems[resid]=[]
+# 	ss_proton_name_list=[]
+# 	for r in strips[0]:
+# 		ss_proton_name_list.append(r.proton_name())
+# 	for r in strips:
+# 		sp=SpinSystem(resid)
+# 		for g in r:
+# 			sp.add_strip(g)
+# 		if sp.score(1)>args.score:
+# 			#print sp.third_party_crosspeaks()
+# 			#print resid
+# 			#print sp.score3(),sp.score(),sp
+# 			systems[resid].append(sp)
+# 		#print sp
+# 	residue_validation=resid_cs_valid(resid)
+# 	aa=seq[resid-1]
+
+# 	residue_validation.add_true_protons(aa,resonance_list)
+# 	for r in systems[resid]:
+# 		residue_validation.add_ss(r)
+# 	outprint.outprint(residue_validation,ss_proton_name_list,args.target,resid,seq,systems[resid])
+
+# 	if len(systems[resid])==1:
+# 		uniq_resids.append(resid)
+# 		#print "round 1",resid,len(systems[resid]),residue_validation.true_proton('H'),residue_validation.true_proton('HA'),residue_validation.true_proton('QB')
+# 	elif len(systems[resid])>1:
+# 		#print "round 1",resid,len(systems[resid]),residue_validation.true_proton('H'),residue_validation.true_proton('HA'),residue_validation.true_proton('QB')
+# 		ambi_resids.append(resid)
+# 		systems[resid]=[]
+
+# print "original length of crosspeaks",crosspeaks.npeaks()
+# for resid in uniq_resids:
+# 	for name in ss_proton_name_list:
+# 		for cp in systems[resid][0].strip(name).matches():
+# 			crosspeaks.del_crosspeak(cp)
+# print "deleted length of crosspeaks",crosspeaks.npeaks()
+
+#second round
+# for resid in ambi_resids:
+# 	systems[resid]=[]
+# 	strips=get_strips.get_strips(resid,seq,lib,resonance_list,crosspeaks,args.valid_end)
+# 	for r in strips:
+# 		sp=SpinSystem(resid)
+# 		for g in r:
+# 			sp.add_strip(g)
+# 		if sp.score()>args.score:
+# 			systems[resid].append(sp)
+# 	residue_validation=resid_cs_valid(resid)
+# 	for r in systems[resid]:
+# 		residue_validation.add_ss(r)
+# 	for r in ss_proton_name_list:
+# 		residue_validation.add_true_protons(r,resonance_list)
+	#print "round 2",resid,len(systems[resid]),residue_validation.true_proton('H'),residue_validation.true_proton('HA'),residue_validation.true_proton('QB')
+# for resid1,sp1 in systems.iteritems():
+# 	for resid2,sp2 in systems.iteritems():
+# 		if resid1==resid2: continue
+# 		try:
+# 			#print sp2[0]
+# 			for r1 in sp1:
+# 				for r2 in sp2:
+# 					r1.spinsystem_connection(r2)
+# 		except:
+# 			continue
+
+

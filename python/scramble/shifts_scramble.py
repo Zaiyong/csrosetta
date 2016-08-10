@@ -1,0 +1,331 @@
+#!/usr/bin/env python2.7
+##-*- mode:python;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:2 -*-'
+
+from os.path import basename, splitext
+import string
+import argparse
+import sys
+import StringIO
+import math
+from arrange_methyls import arrange_methyls
+from assignment.noesy import Atom, ResonanceList
+import random
+from copy import deepcopy
+import unittest
+
+
+## search methyls:
+# return a list of tupels (as dictionaries with keys 'H' and 'L')
+# of resonances
+# each tupel corresponds to a (methyl, label) resonances
+# empty list if no methyls are found
+# INPUT:
+# resid - the residue number
+# aa - aminoacid type (one-letter code)
+# resonancelist - the bag of resonances
+#
+def search_methyls(resid,aa,resonancelist):
+	methyls=[]
+#	seq=resonancelist.sequence()
+#	for i,aa in enumerate(seq):
+#		resid=i+1
+	if aa=='A':
+		proton_atom=Atom('QB',resid)
+		methyls.append(resonancelist.coupled_atoms_resonances(proton_atom,'C'))
+	elif aa=='I':
+		proton_atom1=Atom('QG2',resid)
+		methyls.append(resonancelist.coupled_atoms_resonances(proton_atom1,'C'))
+		proton_atom2=Atom('QD1',resid)
+		methyls.append(resonancelist.coupled_atoms_resonances(proton_atom2,'C'))
+	elif aa=='L':
+		proton_atom1=Atom('QD1',resid)
+		methyls.append(resonancelist.coupled_atoms_resonances(proton_atom1,'C'))
+		proton_atom2=Atom('QD2',resid)
+		methyls.append(resonancelist.coupled_atoms_resonances(proton_atom2,'C'))
+	elif aa=='V':
+		proton_atom1=Atom('QG1',resid)
+		methyls.append(resonancelist.coupled_atoms_resonances(proton_atom1,'C'))
+		proton_atom2=Atom('QG2',resid)
+		methyls.append(resonancelist.coupled_atoms_resonances(proton_atom2,'C'))
+	elif aa=='M':
+		proton_atom=Atom('QB',resid)
+		methyls.append(resonancelist.coupled_atoms_resonances(proton_atom,'C'))
+	elif aa=='T':
+		proton_atom=Atom('QG2',resid)
+		methyls.append(resonancelist.coupled_atoms_resonances(proton_atom,'C'))
+	return methyls
+
+def combine_methyls( res_list, resid, aa ):
+	if aa not in 'ILV':
+		return
+
+	try:
+		methyls={'I':['QG2','QD1'], 'L':['QD1','QD2'], 'V':['QG1','QG2'] }
+		coupled=[None,None]
+		coupled[0]=res_list.coupled_atoms_resonances(Atom(methyls[aa][0],resid),'C')
+		coupled[1]=res_list.coupled_atoms_resonances(Atom(methyls[aa][1],resid),'C')
+		random.shuffle(coupled)
+		print " ".join([ '%s'%c['H'].atom() for c in coupled])
+		coupled[0]['H'].set_freq( coupled[1]['H'].freq() )
+		coupled[0]['L'].set_freq( coupled[1]['L'].freq() )
+		print 'combined methyls for residue %d %s'%(resid,aa)
+	except KeyError as exc:
+		print exc
+		print 'failed to combine methyls in %d %s'%(resid,aa)
+
+
+# swaps the frequency of two resonances
+def swap_frequencies( res1, res2 ):
+	freq1=res1.freq()
+	res1.set_freq( res2.freq() )
+	res2.set_freq( freq1 )
+
+def switch_coupled_res(coupled_res1,coupled_res2):
+	swap_frequencies( coupled_res1['H'], coupled_res2['H'] )
+	swap_frequencies( coupled_res1['L'], coupled_res2['L'] )
+
+
+def miss_methyl(res_list,resid,aa):
+	try:
+		methyls=search_methyls(resid,aa,res_list)
+	except KeyError:
+		return
+	if len(methyls)==1:
+		coupled_res=methyls[0]
+	elif len(methyls)==2:
+		coupled_res=methyls[random.randint(0,1)]
+	else:
+#		print 'no methyl on %d %s'%(resid,aa)
+		return
+	res_list.delete_by_atom(coupled_res['H'].atom())
+	res_list.delete_by_atom(coupled_res['L'].atom())
+	print 'delete methyl %s'%coupled_res['H'].atom()
+
+
+#swap frequencies of all corresponding atoms between resid1 and resid2 (sequence numbers).
+# atoms not present in both residues are removed ( set to 999 )
+def swap_sidechains(resid1,resid2,res_list):
+#	res2=res_list.by_residue(resid2)
+	for r1 in res_list.by_residue(resid1):
+		if r1.name() in ['O','H','HN','N','CA','HA','C']: continue
+		corresponding_atom = Atom( r1.name(), resid2 )
+		try:
+			r2 = res_list.by_atom( corresponding_atom )
+			swap_frequencies( r1, r2 )
+		except KeyError:
+			r1.set_freq(99999.00)
+
+	#also remove frequencies/atoms in resid2 that has no corresponding atom in resid1
+	for r2 in res_list.by_residue(resid2):
+		corresponding_atom = Atom( r1.name(), resid2 )
+		try:
+			r2 = res_list.by_atom( corresponding_atom )
+		except KeyError:
+			r2.set_freq(99999.00)
+
+
+def miss_sidechains(res_list,resid):
+	try:
+		for r in res_list.by_residue(resid):
+			if r.name() in ['O','H','HN','N','CA','HA','HA2','HA3','C']: continue
+			try:
+				res_list.delete_by_atom(r.atom())
+				print 'delete  resonances of atom %d %s '%(r.resid(),r.name())
+			except KeyError:
+				pass
+	except KeyError:
+		pass
+
+#	return resonancelist
+
+def read_res_list(res_list):
+	res_dic={}
+	for i,r in res_list.iter_residues():
+		for res in r:
+			res_dic[i,res.name()]=res.freq()
+	return res_dic
+
+class shifts_scramble_TestCase(unittest.TestCase):
+	def setUp(self):
+		self._prot='''
+       1    4.3440    0.020    HA        1   MET  M
+       2    2.2730    0.020   HB2        1   MET  M
+       3    2.0740    0.020   HB3        1   MET  M
+       4    2.2030    0.020   HG2        1   MET  M
+       5    2.3470    0.020   HG3        1   MET  M
+       6   55.1900    0.200    CA        1   MET  M
+       7   33.8400    0.200    CB        1   MET  M
+       8   30.1500    0.200    CG        1   MET  M
+       9    9.6450    0.020     H        2   ASN  N
+      10    5.4300    0.020    HA        2   ASN  N
+      11    2.8630    0.020   HB2        2   ASN  N
+      12    2.8630    0.020   HB3        2   ASN  N
+      13    6.9360    0.020  HD21        2   ASN  N
+      14    7.9450    0.020  HD22        2   ASN  N
+      15   52.7610    0.200    CA        2   ASN  N
+      16   40.1400    0.200    CB        2   ASN  N
+      17  125.3000    0.200     N        2   ASN  N
+      18  115.6000    0.200   ND2        2   ASN  N
+      19    8.7690    0.020     H        3   LEU  L
+      20    4.9490    0.020    HA        3   LEU  L
+      21    1.6110    0.020   HB2        3   LEU  L
+      22    1.4090    0.020   HB3        3   LEU  L
+      23    0.7550    0.020   HD1        3   LEU  L
+      24    0.6090    0.020   HD2        3   LEU  L
+      25    1.2790    0.020    HG        3   LEU  L
+      26  176.3200    0.200     C        3   LEU  L
+      27   54.2230    0.200    CA        3   LEU  L
+      28   45.9410    0.200    CB        3   LEU  L
+      29   25.0260    0.200   CD1        3   LEU  L
+      30   27.5230    0.200   CD2        3   LEU  L
+      31   27.5300    0.200    CG        3   LEU  L
+      32  121.8000    0.200     N        3   LEU  L
+      33    8.3290    0.020     H        4   THR  T
+      34    4.7440    0.020    HA        4   THR  T
+      35    3.7910    0.020    HB        4   THR  T
+      36    0.9750    0.020   HG2        4   THR  T
+      37  173.6500    0.200     C        4   THR  T
+      38   62.1500    0.200    CA        4   THR  T
+      39   69.4300    0.200    CB        4   THR  T
+      40   21.4700    0.200   CG2        4   THR  T
+      41  116.2000    0.200     N        4   THR  T
+      42    8.9550    0.020     H        5   VAL  V
+      43    4.6830    0.020    HA        5   VAL  V
+      44    1.9520    0.020    HB        5   VAL  V
+      45    0.7190    0.020   HG1        5   VAL  V
+      46    0.7190    0.020   HG2        5   VAL  V
+      47  176.4700    0.200     C        5   VAL  V
+      48   60.7240    0.200    CA        5   VAL  V
+      49   33.5900    0.200    CB        5   VAL  V
+      50   21.1800    0.200   CG1        5   VAL  V
+      51   21.1800    0.200   CG2        5   VAL  V
+      52  126.0000    0.200     N        5   VAL  V
+'''
+		from StringIO import StringIO
+		self._file=StringIO(self._prot)
+		self._res_list=ResonanceList.read_from_stream(self._file)
+
+# 	def test_swap_residues(self):
+# 		res_list=deepcopy(self._res_list)
+# 		atom_pair1=[1,5]
+# 		atom_pair2=[2,3]
+# 		res_list=swap_residues(atom_pair1[0],atom_pair1[1],res_list)
+# 		res_list=swap_residues(atom_pair2[0],atom_pair2[1],res_list)
+# 		swap_res_dic=read_res_list(res_list)
+# 		origin_res_dic=read_res_list(self._res_list)
+# 		for i,v in swap_res_dic.iteritems():
+# 			if i[0]==1:
+# 				self.assertEqual(v,origin_res_dic[5,i[1]],'the swapped freq in residue %3d atom %5s should be %8.3f, but we get %8.3f'%(i[0],i[1],origin_res_dic[5,i[1]],v))
+# 			elif i[0]==5:
+# 				self.assertEqual(v,origin_res_dic[1,i[1]],'the swapped freq in residue %3d atom %5s should be %8.3f, but we get %8.3f'%(i[0],i[1],origin_res_dic[1,i[1]],v))
+# 			elif i[0]==2:
+# 				self.assertEqual(v,origin_res_dic[3,i[1]],'the swapped freq in residue %3d atom %5s should be %8.3f, but we get %8.3f'%(i[0],i[1],origin_res_dic[3,i[1]],v))
+# 			elif i[0]==3:
+# 				self.assertEqual(v,origin_res_dic[2,i[1]],'the swapped freq in residue %3d atom %5s should be %8.3f, but we get %8.3f'%(i[0],i[1],origin_res_dic[2,i[1]],v))
+
+# 	def test_swap_protons(self):
+# 		res_list=deepcopy(self._res_list)
+# 		proton_list1=[Atom('HA',1),Atom('HB3',1),Atom('HB3',2),Atom('HG',3),Atom('HG2',4)]
+# 		proton_list2=[Atom('HB2',1),Atom('HD21',2),Atom('HB',4),Atom('HG3',1),Atom('HG2',5)]
+# 		for i in range(0,5):
+# 			res_list=swap_protons(proton_list1[i],proton_list2[i],res_list)
+# 		for i in range(0,5):
+# 			freq1=res_list.by_atom(proton_list1[i]).freq()
+# 			freq2=self._res_list.by_atom(proton_list2[i]).freq()
+# 			self.assertEqual(freq1,freq2,'the swapped freq in residue %3d atom %5s should be %8.3f, but we get %8.3f'%(proton_list1[i].resid(),proton_list1[i].name(),freq2,freq1))
+# 		for i in range(0,5):
+# 			freq1=res_list.by_atom(proton_list2[i]).freq()
+# 			freq2=self._res_list.by_atom(proton_list1[i]).freq()
+# 			self.assertEqual(freq1,freq2,'the swapped freq in residue %3d atom %5s should be %8.3f, but we get %8.3f'%(proton_list2[i].resid(),proton_list2[i].name(),freq2,freq1))
+
+# 	def test_miss_residue(self):
+# 		res_list=deepcopy(self._res_list)
+# 		miss_resid=[1,4]
+# 		res_list=miss_residue(miss_resid[0],res_list)
+# 		res_list=miss_residue(miss_resid[1],res_list)
+# 		for i,r in res_list.iter_residues():
+# 			self.assertNotIn(i,[1,4],'the residue %d should be missed, but we still get it '%i)
+
+# 	def test_miss_proton(self):
+# 		res_list=deepcopy(self._res_list)
+# 		proton_list=[Atom('HA',1),Atom('HB3',1),Atom('HB3',2),Atom('HG',3),Atom('HG2',4)]
+#  		for atom in proton_list:
+#  			res_list=miss_proton(atom,res_list)
+# 		for res in res_list.itervalues():
+# 			for proton in proton_list:
+# 				self.assertNotEqual([proton.resid(),proton.name()],[res.atom().resid(),res.atom().name()],'the atom %s should be missed but we still get it'%proton)
+
+def shifts_scramble_TestSuite():
+	suite = unittest.TestLoader().loadTestsFromTestCase(shifts_scramble_TestCase)
+	return suite
+
+if __name__ == '__main__':
+	unittest.main()
+
+
+# def swap_protons(atom1,atom2,resonancelist):
+# 	atom_res1=deepcopy(resonancelist.by_atom(atom1))
+# 	atom_res2=deepcopy(resonancelist.by_atom(atom2))
+# 	resonancelist.set_by_atom(atom1,atom_res2)
+# 	resonancelist.set_by_atom(atom2,atom_res1)
+# 	return resonancelist
+
+# def miss_proton(res_list,resid):
+# 	protons=[]
+# 	for r in res_list.by_residue(resid):
+# 		if r.atom().elem()=='H': protons.append(r.atom())
+# 	try:
+# 		choice=random.choice(protons)
+# 		res_list.delete_by_atom(choice)
+# 		print 'delete  resonance of  proton %s'%choice
+# 	except IndexError:
+# 		#didn't find any protons in this residue
+# 		pass
+
+# def get_methyl(resonance_list,index,seq):
+# 	resid=resonance_list[index].resid()
+# 	aa=seq[resid-1]
+# 	atom_name=resonance_list[index].name()
+# 	if (aa not in 'AILVMT'):
+# 		return None
+# 	else:
+# 		if aa=='A':
+# 			if atom_name=='QB':
+# 				proton_atom=Atom('QB',resid)
+# 				methyl=resonance_list.coupled_atoms_resonances(proton_atom,'C')
+# 			else:	return None
+# 		elif aa=='I':
+# 			if atom_name=='QG2':
+# 				proton_atom1=Atom('QG2',resid)
+# 				methyl=resonance_list.coupled_atoms_resonances(proton_atom1,'C')
+# 			elif atom_name=='QD1':
+# 				proton_atom2=Atom('QD1',resid)
+# 				methyl=resonance_list.coupled_atoms_resonances(proton_atom2,'C')
+# 			else:	return None
+# 		elif aa=='L':
+# 			if atom_name=='QD1':
+# 				proton_atom1=Atom('QD1',resid)
+# 				methyl=resonance_list.coupled_atoms_resonances(proton_atom1,'C')
+# 			elif atom_name=='Qd2':
+# 				proton_atom2=Atom('QD2',resid)
+# 				methyl=resonance_list.coupled_atoms_resonances(proton_atom2,'C')
+# 			else: return None
+# 		elif aa=='V':
+# 			if atom_name=='QG1':
+# 				proton_atom1=Atom('QG1',resid)
+# 				methyl=resonance_list.coupled_atoms_resonances(proton_atom1,'C')
+# 			elif atom_name=='QG2':
+# 				proton_atom2=Atom('QG2',resid)
+# 				methyl=resonance_list.coupled_atoms_resonances(proton_atom2,'C')
+# 			else: return None
+# 		elif aa=='M':
+# 			if atom_name=='QE':
+# 				proton_atom=Atom('QE',resid)
+# 				methyl=resonance_list.coupled_atoms_resonances(proton_atom,'C')
+# 			else: return None
+# 		elif aa=='T':
+# 			if atom_name=='QG2':
+# 				proton_atom=Atom('QG2',resid)
+# 				methyl=resonance_list.coupled_atoms_resonances(proton_atom,'C')
+# 			else: return None
+# 	return methyl

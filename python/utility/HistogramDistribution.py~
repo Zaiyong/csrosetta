@@ -1,0 +1,142 @@
+#!/usr/bin/env python2.7
+##-*- mode:python;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:2 -*-'
+from assignment.noesy import Atom
+from Distribution import Distribution
+#from os import environ
+#from PDB.Polypeptide import one_to_three,three_to_one
+#from math import pi
+from numpy import histogram
+import unittest
+from math import log,fabs
+class HistogramDistribution(Distribution):
+	def __init__(self, hist,bin_edges, low, high):
+		self._hist=hist
+		self._bin_edges=bin_edges
+		self._low=low
+		self._high=high
+		self._nbins=len(self._hist)
+
+	def probability(self,x):
+		if x>self._high: return 0.0
+		elif x<self._low: return 0.0
+		else:
+			step = self.step()
+ 			bin = int( (x-self._low)/step  )
+			if bin< self._nbins:
+				return self._hist[bin]
+			elif bin==self._nbins:
+				return self._hist[bin-1]
+	def step(self):
+		return 1.0*( self._high - self._low ) / self._nbins
+
+	def max(self,threshold=0.95):
+		mean=self.mean()
+		max=self.mean()
+		while self.integral(mean,max)+self.integral(2*mean-max,mean)<threshold:
+			max+=self.step()*0.1
+		return max
+
+	def min(self,threshold=0.95):
+		mean=self.mean()
+		min=self.mean()
+		while self.integral(min,mean)+self.integral(mean,2*mean-min)<threshold:
+			min-=self.step*0.1
+		return min
+
+	def high(self):
+		return self._high
+
+	def low(self):
+		return self._low
+
+	def hist(self):
+		return self._hist
+
+	def bin_edges(self):
+		return self._bin_edges
+
+	def bin_edge_pair(self,x):
+		for i,r in enumerate(self._bin_edges[:-1]):
+			if x >= r and x < self._bin_edges[i+1]:
+				return [r, self._bin_edges[i+1]]
+			elif x == self._bin_edges[-1]:
+				return [self._bin_edges[-2],self._bin_edges[-1]]
+		return None
+	def mean(self):
+		mean=0
+		for i,r in enumerate(self._hist):
+			mean+=r*1.0*(self._bin_edges[i]+self._bin_edges[i+1])/2
+		return mean
+
+	def integral(self,low,high):
+		if low>=high:
+			return 0
+		if low<self.low():
+			low=self.low()
+		if high > self.high():
+			high=self.high()
+		integration_value=0
+		step = self.step()
+		bin_low = int( 1.0*(low-self._low)/step  )
+		bin_high= int( 1.0*(high-self._low)/step  )
+		for i in range(0,self._nbins):
+			if i< bin_high and i > bin_low:
+				integration_value+=self._hist[i]
+		bin_edge_pair_low=self.bin_edge_pair(low)
+		bin_edge_pair_high=self.bin_edge_pair(high)
+		integration_value+=self.probability(low)*(bin_edge_pair_low[1] - low)/step+self.probability(high)*( high-bin_edge_pair_high[0] - high)/step
+		return integration_value
+
+# virtual quality function of the histogram distrubtion, sum all prob ( > self.probaility(value) ) as the erf
+	def virtual_quality_function(self,value):
+		virtual_erf=0
+		ERF_CUTOFF=1e-200
+		prob=self.probability(value)
+		for r in self._hist:
+			if r>= prob:
+				virtual_erf+=r
+		return log(max(1-virtual_erf,ERF_CUTOFF))
+
+	@classmethod
+	def read_from_samples(obj,samples,nbins=None):
+									 #samples: list of samples []
+		if not nbins:
+			nbins=int(len(samples)/10)
+		hist_out=histogram(samples,nbins)
+		low=min(hist_out[1])
+		high=max(hist_out[1])
+		length=len(samples)
+		hist_normal=[ 1.0*r/length for r in hist_out[0] ]
+		obj=HistogramDistribution(hist_normal,hist_out[1],low,high)
+		return obj
+
+class HistogramDistributionTestCase(unittest.TestCase):
+	def setUp(self):
+		self._samples=[ 5.3435, 10.7890,  1.7011, 15.6566, 10.0755,  5.2701,  6.2684, 27.1546, 20.2617, 14.0540, 27.3640,  3.1203, 22.3664, 22.0880, 16.8558,  5.5258, 17.9163,  8.9981,  4.0237,  6.3780, 26.8483,  2.1436,  7.2746,  1.6126, 13.2517,  0.3985, 26.9157,  5.8997,  2.8011,  9.2210, 13.6817,  3.0501, 29.8617,  9.9628,  8.9204,  1.8614,  8.9473,  1.3905, 15.1628, 22.8428, 18.9321,  2.6967,  2.4259, 23.3172, 27.1540, 16.0132,  3.2746, 24.7743, 10.1429,  8.8192, 22.3894,  0.3101,  1.4534, 20.0375, 18.1040, 15.7831, 21.8913, 21.2176, 23.4413,  8.6393, 20.7760, 16.7001, 11.8956,  1.8477, 23.4053, 10.1275, 18.2360, 22.2376,  3.1444,  3.8367, 16.4862, 14.5569, 26.7143, 23.9688, 22.0302,  1.5400,  2.1866,  2.6558, 23.9505, 28.2902, 20.5115,  3.9625, 21.6817,  3.3106,  3.5248, 19.2215,  9.8644, 19.6144, 22.4739, 17.4956, 22.2010,  7.0448, 22.0487, 29.1180, 26.0079,  2.5870, 10.9931, 11.0760, 20.5509, 17.9382]
+		self._histogram_distribution=HistogramDistribution.read_from_samples(self._samples)
+		self._real_bin_edges=[ 0.3101,  3.2653,  6.2204,  9.1756, 12.1308, 15.0859, 18.0411, 20.9962, 23.9514, 26.9066, 29.8617 ]
+		self._real_hist=[0.19,   0.10,    0.09,   0.10,    0.04,   0.10,   0.10,   0.16,    0.05,    0.07]
+
+	def test_read_from_samples(self):
+		for s,r in zip( self._histogram_distribution.hist(), self._real_hist):
+			self.assertAlmostEqual(r,s,2,'the hist of one bin should be %5.3f but we get %5.3f (which is wrong)'%(r,s))
+		for s,r in zip( self._histogram_distribution.bin_edges(), self._real_bin_edges):
+			self.assertAlmostEqual(r,s,2,'the hist of one bin should be %5.3f but we get %5.3f (which is wrong)'%(r,s))
+
+	def test_mean(self):
+		real_mean=13.5788
+		mean=self._histogram_distribution.mean()
+		self.assertAlmostEqual(mean,real_mean,3,'mean value of HistogramDistribution should be %5.3f but we get %5.3f (which is wrong)'%(real_mean,mean))
+
+	def test_probability(self):
+		real_probability=[ 0.10, 0.10, 0.19, 0.10, 0.10, 0.10, 0.09, 0.07, 0.10, 0.04, 0.07, 0.19, 0.16, 0.16, 0.10, 0.10, 0.10, 0.09, 0.10, 0.09, 0.05, 0.19, 0.09, 0.19, 0.04, 0.19, 0.07, 0.10, 0.19, 0.10, 0.04, 0.19, 0.07, 0.10, 0.09, 0.19, 0.09, 0.19, 0.10, 0.16, 0.10, 0.19, 0.19, 0.16, 0.07, 0.10, 0.10, 0.05, 0.10, 0.09, 0.16,0.19, 0.19, 0.10, 0.10, 0.10, 0.16, 0.16, 0.16, 0.09, 0.10, 0.10, 0.10, 0.19, 0.16, 0.10, 0.10, 0.16, 0.19, 0.10, 0.10, 0.04, 0.05, 0.05, 0.16, 0.19, 0.19, 0.19, 0.16, 0.07, 0.10, 0.10, 0.16, 0.10, 0.10, 0.10, 0.10, 0.10, 0.16, 0.10, 0.16, 0.09, 0.16, 0.07, 0.05, 0.19, 0.10, 0.10, 0.10, 0.10]
+		for s,r in zip(self._samples,real_probability):
+			self.assertAlmostEqual(self._histogram_distribution.probability(s),r,2,'probability of histogram_distribution at position x=%5.3f should be %5.3f but we get %5.3f (which is wrong)'%(s,r,self._histogram_distribution.probability(s)))
+
+def HistogramDistributionTestSuite():
+	suite = unittest.TestLoader().loadTestsFromTestCase(HistogramDistributionTestCase)
+	return suite
+
+if __name__ == '__main__':
+	unittest.main()
+

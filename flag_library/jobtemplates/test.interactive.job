@@ -1,0 +1,1 @@
+$CM_EXECUTEABLE.mpi.linuxgccrelease -out:level 300 -out:file:silent decoys.out $CM_COMMANDLINE -database $CM_ROSETTA_DATABASE -out:nstruct 10 -run:test_cycles -mpi_tracer_to_file log -mute_info all

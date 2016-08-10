@@ -1,0 +1,309 @@
+#!/usr/bin/env python
+##-*- mode:python;tab-width:3;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:3 -*-'
+#================================================================
+
+from Tkinter import *
+import os,math,re
+import Tkinter
+import Pmw
+import string
+from FileDialogButtonClassFactory import FileDialogButtonClassFactory
+from FolderBrowser import FolderBrowser
+from HelpDialog import HelpDialog
+#=====================step 2: setup target===start=====================================
+class step2_setup_target:
+	def __init__(self,parent,pos,method):
+		self.input_method=method
+		self.parent=parent
+		self.pos=pos
+		self.param_messages={}
+		self.param_show=''
+		self.main_label = Tkinter.Label(self.parent,
+			text = 'CSrosetta\nOliver Lange & Zaiyong Zhang\n<http://langelab.ch.tum.de>\n\nPlease read help firstly',
+			background = 'navy',
+			foreground = 'white',
+			#pady = 20,
+		)
+		self.main_label.pack(expand = 0, fill = 'both', padx = 4, pady = 4)
+		#self.group_method = Pmw.Group(self.parent,tag_text='method set')
+		#self.group_method.pack(fill = 'both', expand = 0, padx = 3, pady = 3,side='top')
+		self.method = Pmw.MessageBar(self.parent,
+											  entry_width = 40,
+											  entry_relief='groove',
+											  labelpos = 'w',
+											  label_text = 'method:')
+		self.method.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.method.message('state',self.input_method)
+		self.group_param = Pmw.Group(self.parent,tag_text='parameters')
+		self.group_param.pack(fill = 'both', expand = 0, padx = 3, pady = 3)
+		self.group_global_param = Pmw.Group(self.group_param.interior(),tag_text='global parameters')
+		self.group_global_param.pack(fill = 'both', expand = 0, padx = 3, pady = 3,side='left')
+		self.group_method_param = Pmw.Group(self.group_param.interior(),tag_text='method parameters')
+		self.group_method_param.pack(fill = 'both', expand = 0, padx = 3, pady = 3,side='right')
+		self.group_commit_mes = Pmw.Group(self.parent,tag_text='commit messages')
+		self.group_commit_mes.pack(fill = 'both', expand = 0, padx = 3, pady = 3)
+####################################--start--global_param--##############################################################
+		self.target = Pmw.EntryField(self.group_global_param.interior(),
+											  labelpos='w',
+											  value = "",
+											  label_text = 'target')
+		self.target.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.target_dir = Pmw.EntryField(self.group_global_param.interior(),
+													labelpos='w',
+													label_pyclass=FolderBrowser.get(self.set_target_dir),
+													value = "",
+													label_text='target dir')
+		self.target_dir.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.target_prefix = Pmw.EntryField(self.group_global_param.interior(),
+														labelpos='w',
+														label_pyclass=FolderBrowser.get(self.set_target_prefix),
+														value = "",
+														label_text='target prefix')
+		self.target_prefix.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.label = Pmw.EntryField(self.group_global_param.interior(),
+											 labelpos='w',
+											 value = "",
+											 label_text = 'label')
+		self.label.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.remove = Pmw.EntryField(self.group_global_param.interior(),
+											  labelpos='w',
+											  value = "",
+											  label_text = 'remove')
+		self.remove.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.patch = Pmw.EntryField(self.group_global_param.interior(),
+											 labelpos='w',
+											 label_pyclass = FileDialogButtonClassFactory.get(self.set_patch),
+											 value = "",
+											 label_text = 'patch')
+		self.patch.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.transfer_method = Pmw.EntryField(self.group_global_param.interior(),
+														  labelpos='w',
+														  value = "",
+														  label_text='transfer method')
+		self.transfer_method.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.transfer_label = Pmw.EntryField(self.group_global_param.interior(),
+														  labelpos='w',
+														  value = "",
+														  label_text='transfer label')
+		self.transfer_label.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+####################################--end--global_param--##############################################################
+
+####################################--start--method_param--############################################################
+		#method_value=self.method.getvalue()
+		if self.input_method in ['abrelax','rasrec','autoNOE']:
+			self.fasta = Pmw.EntryField(self.group_method_param.interior(),
+												 labelpos='w',
+												 value = "",
+												 label_pyclass = FileDialogButtonClassFactory.get(self.set_fasta,filter="*.fasta"),
+												 label_text = 'fasta')
+			self.fasta.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+			self.native = Pmw.EntryField(self.group_method_param.interior(),
+												  labelpos='w',
+												  value = "",
+												  label_pyclass = FileDialogButtonClassFactory.get(self.set_native,filter="*.pdb"),
+												  label_text = 'native')
+			self.native.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+			self.cs = Pmw.EntryField(self.group_method_param.interior(),
+											 labelpos='w',
+											 value = "",
+											 label_pyclass = FileDialogButtonClassFactory.get(self.set_cs,filter="*.tab"),
+											 label_text = 'cs')
+			self.cs.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+			self.frags = Pmw.EntryField(self.group_method_param.interior(),
+												 labelpos='w',
+												 label_pyclass = FileDialogButtonClassFactory.get(self.add_frags,filter="*mers.*"),
+												 value = "",
+												 label_text = 'add frags')
+			self.frags.pack(fill = 'both', expand = 1, padx = 10, pady = 5)
+			self.native_restrict = Pmw.EntryField(self.group_method_param.interior(),
+															  labelpos='w',
+															  label_pyclass = FileDialogButtonClassFactory.get(self.add_native_restrict,filter="*.rigid"),
+															  value = "",
+															  label_text = 'add native restrict')
+			self.native_restrict.pack(fill = 'both', expand = 1, padx = 10, pady = 5)
+			self.rdc = Pmw.EntryField(self.group_method_param.interior(),
+											  labelpos='w',
+											  label_pyclass = FileDialogButtonClassFactory.get(self.add_rdc,filter="*.rdc"),
+											  value = "",
+											  label_text = 'add rdc')
+			self.rdc.pack(fill = 'both', expand = 1, padx = 10, pady = 5)
+			self.cyana_upl = Pmw.EntryField(self.group_method_param.interior(),
+													  labelpos='w',
+													  label_pyclass = FileDialogButtonClassFactory.get(self.add_cyana_upl),
+													  value = "",
+													  label_text = 'add cyana_upl')
+			self.cyana_upl.pack(fill = 'both', expand = 1, padx = 10, pady = 5)
+			self.restraints = Pmw.EntryField(self.group_method_param.interior(),
+														labelpos='w',
+														label_pyclass = FileDialogButtonClassFactory.get(self.add_restraints),
+														value = "",
+														label_text = 'add restraints')
+			self.restraints.pack(fill = 'both', expand = 1, padx = 10, pady = 5)
+			self.centroid_stage_restraints = Pmw.EntryField(self.group_method_param.interior(),
+																			labelpos='w',
+																			label_pyclass = FileDialogButtonClassFactory.get(self.add_centroid_stage_restraints),
+																			value = "",
+																			label_text = 'add centroid stage restraints')
+			self.centroid_stage_restraints.pack(fill = 'both', expand = 1, padx = 10, pady = 5)
+			self.flexible_residues = Pmw.EntryField(self.group_method_param.interior(),
+																 labelpos='w',
+																 value = "",
+																 label_text = 'flexible residues')
+			self.flexible_residues.pack(fill = 'both', expand = 1, padx = 10, pady = 5)
+			self.fix_topol = Pmw.EntryField(self.group_method_param.interior(),
+													  labelpos='w',
+													  label_pyclass = FileDialogButtonClassFactory.get(self.set_fix_topol,filter="*.tpl"),
+													  value = "",
+													  label_text = 'fix topol')
+			self.fix_topol.pack(fill = 'both', expand = 1, padx = 10, pady = 5)
+		if self.input_method=='autoNOE':
+			self.peaks = Pmw.EntryField(self.group_method_param.interior(),
+											  labelpos='w',
+											  label_pyclass = FileDialogButtonClassFactory.get(self.add_peaks,filter="*.peaks"),
+											  value = "",
+											  label_text = 'add peaks')
+			self.peaks.pack(fill = 'both', expand = 1, padx = 10, pady = 5)
+			self.shifts = Pmw.EntryField(self.group_method_param.interior(),
+											  labelpos='w',
+											  label_pyclass = FileDialogButtonClassFactory.get(self.add_shifts,filter="*.prot"),
+											  value = "",
+											  label_text = 'add shifts')
+			self.shifts.pack(fill = 'both', expand = 1, padx = 10, pady = 5)
+			self.silent = Pmw.EntryField(self.group_method_param.interior(),
+												  labelpos='w',
+												  value = "",
+												  label_pyclass = FileDialogButtonClassFactory.get(self.set_silent,filter="*.out"),
+												  label_text = 'silent')
+			self.silent.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+####################################--start--method_param--############################################################
+# 		self.target_location = Pmw.EntryField(self.group.interior(),
+# 														  labelpos='w',
+# 														  value = "t000_",
+# 														  label_text='target')
+# 		self.target_location.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+# 		Self.frag3_location = Pmw.EntryField(self.group.interior(),
+# 														 labelpos='w',
+# 														 label_pyclass = FileDialogButtonClassFactory.get(self.set_frag3_filename,filter="*.3mers.*"),
+# 														 value = "frags.score.9mers.new.gz",
+# 														 label_text = 'frag3:')
+# 		self.frag3_location.pack(fill = 'both', expand = 1, padx = 10, pady = 5)
+# 		self.frag9_location = Pmw.EntryField(self.group.interior(),
+# 														 labelpos='w',
+# 														 label_pyclass = FileDialogButtonClassFactory.get(self.set_frag9_filename,filter="*.9mers.*"),
+# 														 value = "frags.score.9mers.new.gz",
+# 														 label_text = 'frag9:')
+# 		self.frag9_location.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+# 		self.talos_location = Pmw.EntryField(self.group.interior(),
+# 														 labelpos='w',
+# 														 label_pyclass = FileDialogButtonClassFactory.get(self.set_talos_filename,filter="*.tab"),
+# 														 value = "talos.tab",
+# 														 label_text = 'talos:')
+# 		self.talos_location.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+# 		self.fasta_location = Pmw.EntryField(self.group.interior(),
+# 														 labelpos='w',
+# 														 label_pyclass = FileDialogButtonClassFactory.get(self.set_fasta_filename),
+# 														 value = "t000_.fasta",
+# 														 label_text = 'fasta:')
+# 		self.fasta_location.pack(fill = 'both', expand = 1, padx = 3, pady = 3)
+		self.txt_commit_mes= Tkinter.Label(self.group_commit_mes.interior(),
+			text = '',
+			background = 'white',
+			foreground = 'black',
+			#pady = 20,
+		)
+		self.txt_commit_mes.pack(expand = 0, fill = 'both', padx = 4, pady = 4)
+		self.buttonbox = Pmw.ButtonBox(self.group_commit_mes.interior(), padx=0)
+		self.buttonbox.pack(side=LEFT,expand = 1, padx = 3, pady = 3)
+		self.buttonbox.add('commit',command=self.commit)
+		self.buttonbox.add('setup target',command=self.setup_target)
+		self.buttonbox.add('help',command=self.help)
+#=====================step 2: setup target===end=====================================
+
+	def set_patch(self,filename):
+		self.patch.setvalue(filename)
+	def set_target_dir(self,filename):
+		self.target_dir.setvalue(filename)
+	def set_target_prefix(self,filename):
+		self.target_prefix.setvalue(filename)
+	def set_fasta(self,filename):
+		self.fasta.setvalue(filename)
+	def set_native(self,filename):
+		self.native.setvalue(filename)
+	def set_cs(self,filename):
+		self.cs.setvalue(filename)
+	def add_frags(self,filename):
+		former=self.frags.getvalue()
+		self.frags.setvalue(former+' '+filename)
+	def add_native_restrict(self,filename):
+		former=self.native_restrict.getvalue()
+		self.native_restrict.setvalue(former+' '+filename)
+	def add_rdc(self,filename):
+		former=self.rdc.getvalue()
+		self.rdc.setvalue(former+' '+filename)
+	def add_cyana_upl(self,filename):
+		former=self.cyana_upl.getvalue()
+		self.cyana_upl.setvalue(former+' '+filename)
+	def add_restraints(self,filename):
+		former=self.restraints.getvalue()
+		self.restraints.setvalue(former+' '+filename)
+	def add_centroid_stage_restraints(self,filename):
+		former=self.centroid_stage_restraints.getvalue()
+		self.centroid_stage_restraints.setvalue(former+' '+filename)
+	def set_fix_topol(self,filename):
+		self.fix_topol.setvalue(filename)
+	def add_peaks(self,filename):
+		former=self.peaks.getvalue()
+		self.peaks.setvalue(former+' '+filename)
+	def add_shifts(self,filename):
+		former=self.shifts.getvalue()
+		self.shifts.setvalue(former+' '+filename)
+	def set_silent(self,filename):
+		self.silent.setvalue(filename)
+
+	def setup_target(self):
+		if not self.param_show:
+			txt='please input parameters and commit'
+			self.txt_commit_mes.config(text=self.param_show)
+			self.txt_commit_mes.update_idletasks()
+		else:
+			txt='setup_target '+self.param_show.replace('\n',' ')
+			self.txt_commit_mes.config(text=self.param_show)
+			self.txt_commit_mes.update_idletasks()
+			os.system(os.environ['csrosettaDir']+'/com/setup_target.py '+self.param_show.replace('\n',' '))
+
+	def commit(self):
+		self.param_messages={}
+		self.param_show=''
+		if self.input_method in ['abrelax','rasrec','autoNOE']:
+			self.param_messages['method']=self.input_method
+			self.param_messages['target']=self.target.getvalue()
+			self.param_messages['target_dir']=self.target_dir.getvalue()
+			self.param_messages['target_prefix']=self.target_prefix.getvalue()
+			self.param_messages['label']=self.label.getvalue()
+			self.param_messages['remove']=self.remove.getvalue()
+			self.param_messages['patch']=self.patch.getvalue()
+			self.param_messages['transfer_method']=self.transfer_method.getvalue()
+			self.param_messages['transfer_label']=self.transfer_label.getvalue()
+			self.param_messages['fasta']=self.fasta.getvalue()
+			self.param_messages['native']=self.native.getvalue()
+			self.param_messages['cs']=self.cs.getvalue()
+			self.param_messages['frags']=self.frags.getvalue()
+			self.param_messages['native_restrict']=self.native_restrict.getvalue()
+			self.param_messages['rdc']=self.rdc.getvalue()
+			self.param_messages['cyana_upl']=self.cyana_upl.getvalue()
+			self.param_messages['restraints']=self.restraints.getvalue()
+			self.param_messages['centroid_stage_restraints']=self.centroid_stage_restraints.getvalue()
+			self.param_messages['flexible_residues']=self.flexible_residues.getvalue()
+			self.param_messages['fix_topol']=self.fix_topol.getvalue()
+		if self.input_method=='autoNOE':
+			self.param_messages['peaks']=self.peaks.getvalue()
+			self.param_messages['shifts']=self.shifts.getvalue()
+			self.param_messages['silent']=self.silent.getvalue()
+		for name,param in self.param_messages.iteritems():
+			if param !='':
+				self.param_show+='-'+name+' '+param+'\n'
+		self.txt_commit_mes.config(text=self.param_show)
+		self.txt_commit_mes.update_idletasks()
+		#self.txt_commit_mes.set("blabla !!!")
+	def help(self):
+		pass

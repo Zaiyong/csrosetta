@@ -1,0 +1,298 @@
+#!/usr/bin/env python2.7
+##-*- mode:python;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:2 -*-'
+
+from CrossPeakInfo import CrossPeakInfo
+from Atom import Atom
+from CrossPeak import CrossPeak
+from Resonance import Resonance
+from NoeStrip import NoeStrip, _group_frequencies
+import math
+from util import read_lib_mean,label_atom
+def _freq_match(freq1,freq2,error=0.02,threshold=1):
+	_sigma2=2*error**2
+	_x=freq1-freq2
+	return (_x**2/_sigma2 < threshold)
+
+
+class SpinSystem:
+	def __init__(self,resid):
+		self._resid=resid
+		self._strips={}
+
+	def add_strip(self,strip):
+		assert strip.resid()==self._resid
+		atom=strip.proton_name()
+		self._strips[atom]=strip
+
+	def __str__(self):
+		s='SpinSystem @ residue %d:\n'%self._resid
+		for name, strip in self._strips.iteritems():
+			s+='%(name)4s %(strip)30s\n'%locals()
+		return s
+
+	def resid(self):
+		return self._resid
+
+	def strip(self,name):
+		return self._strips[name]
+
+	def strips(self):
+		return self._strips
+
+# 	def score_couple(self,strips):
+#  		namelist=[]
+# 		pmatch=1
+# 		match={}
+# 		for name1, strip1 in strips.iteritems():
+# 			namelist.append(name1)
+# 			for name2, strip2 in strips.iteritems():
+# 				if name1==name2: continue
+# 				match[name1,name2]=strip1.pmatch(strip2)
+# 		for r in namelist:
+# 			for g in namelist:
+# 				if r==g: continue
+# 				pmatch=pmatch*math.sqrt((match[r,g]*match[r,g]+match[g,r]*match[g,r])/2)
+# 		score=math.sqrt(pmatch)
+# 		return score
+	def intra_connection(self):
+		intra_peaks=0
+		for name1, strip1 in self._strips.iteritems():
+			for name2, strip2 in self._strips.iteritems():
+				if name1==name2: continue
+				if strip1.matched_resonance(strip2): intra_peaks+=1
+		return intra_peaks
+
+	def away_from_bmrb_mean(self,lib,aa):
+		away_dist=0.0
+		for name,strip in self._strips.iteritems():
+			if name=='H' or 'HA' in name:
+				continue
+			else:
+				proton_freq=strip.proton().freq()
+				label_freq=strip.label().freq()
+				proton_mean=read_lib_mean(lib,aa,name)
+				label_name=label_atom('C',name,aa)
+				label_mean=read_lib_mean(lib,aa,label_name)
+				away_dist+=math.sqrt((proton_mean-proton_freq)**2+(label_mean-label_freq)**2)
+		return away_dist
+	def score_couple(self,strips):
+		return math.sqrt((strips[0].pmatch(strips[1])**2+strips[1].pmatch(strips[0])**2)/2)
+
+	def valid_ss(self,true_protons,true_heavies,aa):
+		for name,strip in self._strips.iteritems():
+			try:
+				error=math.fabs(true_heavies[name].freq()-strip.label().freq())
+			except:
+				error=0.0
+			if error>0.5:
+				return 0
+			pd_st_proton=0.0
+			if name=='H':
+				heavy_name=label_atom('N',name,aa)
+			else:
+				heavy_name=label_atom('C',name,aa)
+			for true in true_protons[heavy_name]:
+				try:
+					error=math.fabs(true.freq()-strip.proton().freq())
+				except:
+					error=0.0
+				if error<0.05:
+					pd_st_proton=1.0
+					break
+			if pd_st_proton==1.0:
+				continue
+			else:
+				return 0
+		return 1
+
+# 	def score2_couple(self,V_range,ss_proton_name_list,resonance_list,resid):
+# 		score=0
+# 		score_strip={}
+# 		prob_miss=[]
+# 		prob_off=[]
+# 		prob_noisy=[]
+# 		NO_strips=len(self._strips)
+# 		for name,strip in self._strips.iteritems():
+# 			for r in strip.matches():
+# 				prob_off.append(strip.prob_cp_off(r)**2)
+# 				prob_noisy.append(r.prob_cp_noisy(V_range)**2)
+# 			for g in ss_proton_name_list:
+# 				if g==name: continue
+# 				prob_miss.append(strip.prob_cp_miss(g,resonance_list,resid)**2)
+# 		#return score_strip['H'],score_strip['HA'],score_strip['HB']
+# 		return sum(prob_off)/len(prob_off),sum(prob_noisy)/len(prob_noisy),sum(prob_miss)/len(prob_miss)
+
+	def score3_couple(self,strips):
+		Q1=[]
+		Q2=[]
+		name_list=[]
+		cross_match={}
+		for name,strip in strips.iteritems():
+			name_list.append(name)
+			proton_cs=[]
+			dim=strip.dim()
+			for r in strip.matches():
+				proton_cs.append(float(r.proton_resonance(dim)))
+			if not proton_cs:
+				#print "%(strip1)5s are empty"%{'strip1':name}
+				return 0
+			else:
+				mean_proton_cs=sum(proton_cs)/len(proton_cs)
+			x=math.fabs((mean_proton_cs-strip.proton().freq())/0.03)
+			qx=math.log(1-math.erf(x/2**0.5))
+			qx0=1.5
+			Q1.append(1+qx/qx0)
+		for name1,strip1 in strips.iteritems():
+			for name2,strip2 in strips.iteritems():
+				if name1==name2: continue
+				matched_res=strip2.matched_resonance(strip1)
+				if not matched_res:
+					#print "%(strip2)5s are not found on %(strip1)5s strip"%{'strip2':name2,'strip1':name1}
+					return 0
+				cross_match[name1,name2]=matched_res
+		#print name_list
+		for name1 in name_list:
+			cross_freq=[]
+			for name2 in name_list:
+				if name1==name2: continue
+				cross_freq.append(cross_match[name1,name2])
+			#print cross_freq
+			mean_cross_freq=sum(cross_freq)/len(cross_freq)
+			x=math.fabs((mean_cross_freq-strips[name1].proton().freq())/0.03)
+			qx=math.log(1-math.erf(x/2**0.5))
+			qx0=2
+			Q2.append(1+qx/qx0)
+		score=(4*sum(Q1)+2*sum(Q2))/(len(Q1)*4+len(Q2)*2)
+		return score
+
+	def score(self,num,strip_couple):
+		score=1
+		strips1=[]
+		strips2=[]
+		strips3=[]
+		strips4=[]
+		if strip_couple==1:
+			strips1=[self._strips['H'],self._strips['HA']]
+			if num==3:
+				score=self.score3_couple(strips1)
+			elif num==1:
+				score=self.score_couple(strips1)
+		elif strip_couple==2:
+			strips1=[self._strips['H'],self._strips['HA']]
+			try:
+				strips2=[self._strips['HA'],self._strips['HB']]
+			except:
+				strips2=[self._strips['HA'],self._strips['HB2']]
+			#print len(strips1),len(strips2)
+			if num==3:
+				score=(self.score3_couple(strips1)*self.score3_couple(strips2))**0.5
+			elif num==1:
+				score=(self.score_couple(strips1)*self.score_couple(strips2))**0.5
+		elif strip_couple==3:
+			strip3=[]
+			strips1=[self._strips['H'],self._strips['HA']]
+			try:
+				strips2=[self._strips['HA'],self._strips['HB']]
+				strips3.append(self._strips['HB'])
+			except:
+				strips2=[self._strips['HA'],self._strips['HB2']]
+				strips3.append(self._strips['HB2'])
+			for name,strip in self._strips.iteritems():
+				#print 'name is ',name
+				if 'G' in name:
+					strips3.append(strip)
+			#print len(self._strips)
+			#print len(strips1),len(strips2),len(strips3)
+			if num==3:
+				score=(self.score3_couple(strips1)*self.score3_couple(strips2)*self.score3_couple(strips3))**(1.0/3.0)
+			elif num==1:
+				score=self.score_couple(strips1)*self.score_couple(strips2)*self.score_couple(strips3)**(1.0/3.0)
+		elif strip_couple==4:
+			strips1=[self._strips['H'],self._strips['HA']]
+			try:
+				strips2=[self._strips['HA'],self._strips['HB']]
+				strips3.append(self._strips['HB'])
+				strips4.append(self._strips['HB'])
+			except:
+				strips2=[self._strips['HA'],self._strips['HB2']]
+				strips3.append(self._strips['HB2'])
+				strips4.append(self._strips['HB2'])
+			for name,strip in self._strips.iteritems():
+				if 'G1' in name:
+					strips3.append(strip)
+				elif 'G2' in name:
+					strips4.append(strip)
+			if num==3:
+				score=(self.score3_couple(strips1)*self.score3_couple(strips2)*self.score3_couple(strips3)*self.score3_couple(strips4))**0.25
+			elif num==1:
+				score=(self.score_couple(strips1)*self.score_couple(strips2)*self.score_couple(strips3)*self.score_couple(strips4))**0.25
+# 			if name=='H':
+# 				strips1['H']=self._strips['H']
+# 			elif name=='HA':
+# 				strips1['HA']=self._strips['HA']
+# 				strips2['HA']=self._strips['HA']
+# 			elif name.find('B')>0:
+# 				strips2[name]=self._strips[name]
+# 				strips3[name]=self._strips[name]
+# 			elif name.find('G')>0:
+# 				strips3[name]=self._strips[name]
+# 		if num==3:
+# 			score=self.score3_couple(strips1)*self.score3_couple(strips2)*self.score3_couple(strips3)
+# 		elif num==1:
+# 			score=self.score_couple(strips1)*self.score_couple(strips2)*self.score_couple(strips3)
+		return score
+
+	def strip_protons(self):
+		_strip_protons={}
+		for name,strip in self._strips.iteritems():
+			_strip_protons[name]=strip.proton()
+		return _strip_protons
+
+	def third_party_crosspeaks(self):
+		_all_indirect_freq=[]
+		for name,strip in self._strips.iteritems():
+			_indirect_dim=strip.indirect_dim()
+			for cp in strip.matches():
+				_all_indirect_freq.append(cp.proton_resonance(_indirect_dim))
+		_indirect_freq_cluster=_group_frequencies(_all_indirect_freq,0.02)
+		#print _indirect_freq_cluster
+		#print _intra_res
+		_remove_freq=[]
+		#remove all intra-residue protons frequencies
+		#go backwards to allow removal of items from list
+		for id in xrange( len(_indirect_freq_cluster )-1, -1, -1 ):
+			freq = _indirect_freq_cluster[ id ]
+			for strip in self._strips.itervalues():
+				if _freq_match(freq,strip.proton().freq(),0.03):
+					del _indirect_freq_cluster[id]
+
+		#print _indirect_freq_cluster
+		_third_party_freqs=[]
+		for freq in _indirect_freq_cluster:
+			_match_ss=True
+			for name,strip in self._strips.iteritems():
+				_indirect_dim=strip.indirect_dim()
+				_match_st=False
+				for cp in strip.matches():
+					_cp_freq=cp.proton_resonance(_indirect_dim)
+					_match_st=_freq_match(freq,_cp_freq)
+					if _match_st: break
+				_match_ss=_match_ss and _match_st
+			if _match_ss: _third_party_freqs.append(freq)
+		#print _third_party_freqs
+		return _third_party_freqs
+
+	def spinsystem_connection(self,spinsystem2):
+		_ss_connected_freqs={}
+		_third_party_freqs=self.third_party_crosspeaks()
+		#print _third_party_freqs
+		_strip_protons=self.strip_protons()
+		for name,proton in _strip_protons.iteritems():
+			for freq in _third_party_freqs:
+				if _freq_match(freq,proton.freq(),0.03,1):
+					_ss_connected_freqs[name]=[self._resid,freq,proton]
+		if _ss_connected_freqs:
+			print _ss_connected_freqs
+		return _ss_connected_freqs
+		#print indirect_freq_cluster
+

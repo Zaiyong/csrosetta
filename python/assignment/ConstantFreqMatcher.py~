@@ -1,0 +1,61 @@
+#!/usr/bin/env python2.7
+##-*- mode:python;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:2 -*-'
+
+#author: Oliver Lange
+
+# a special frequency matcher which is optimized for fast matching
+#
+# requirements: small relevant frequency interval for each atom
+#               frequencies do not change
+
+try:
+	import scipy
+	import scipy.spatial
+	import numpy as np
+except:
+	pass
+
+class ConstantFreqMatcher:
+	class RuleMatchCache:
+		def __init__( self, atoms, freqs, freq_tree, scaling ):
+			self.atoms=atoms
+			self.freqs=freqs
+			self.kdtree=freq_tree
+			self.scaling=scaling
+		def find_matches( self, freqs ):
+			x = np.array( freqs ) * self.scaling
+		  return [ self.atoms[i] for i in self.kdtree.query_ball_point( x, 1.0 ) ] #radius 1 because the tolerances are already scaled in
+
+	def __init__( self, resonances ):
+		self.resonances=resonances
+		self.match_cache={}
+
+	def set_raw_matches( self, rule, matches ):
+		atom2reso = {}
+
+		#if two dimensional matches make 2-dim kd-tree
+		#when trying to find matches retrieve those that are within tol1,tol2 radius of peak-freq
+		#this requires a totally different interface than other freq_matchers
+		#need to treat floating resonances --> same resonance (the representating) has multiple frequencies
+		# is added to kd-tree with different freqs...
+		scaling=1.0/np.array( rule.tolerances )
+		for match in matches:
+			try:
+				reso = []
+				for atom in match:
+					reso.append( self.resonances.by_chemical_atom( atom )._freq )
+				atom2reso[match]=reso
+			except KeyError:
+				pass
+
+		atoms=atom2reso.keys()
+		freqs = np.array( atom2reso.values() )
+		freq_tree=scipy.spatial.KDTree( freqs*scaling )
+		self.match_cache[ id(rule) ]=ConstantFreqMatcher.RuleMatchCache( atoms, freqs, freq_tree, scaling )
+
+	def find_matches( self, rule, freq, raw_matches ):
+		try:
+			return self.match_cache[ id(rule) ].find_matches( freq )
+		except KeyError:
+			self.set_raw_matches( rule, raw_matches )
+			return self.match_cache[ id(rule) ].find_matches( freq )

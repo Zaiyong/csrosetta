@@ -1,0 +1,99 @@
+#!/usr/bin/env python2.7
+##-*- mode:python;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:2 -*-'
+
+#standard modules
+import argparse
+
+#csrosetta modules
+#from assignment import noesy
+#from assignment import PeakCollection
+#from assignment.scoring import ScoreFunction
+#from assignment import AssignmentCollection
+#from assignment import random_items
+from assignment.noesy import Resonance, ResonanceList,Atom
+#from chemical import AtomTree, Atom
+
+#import library
+from basic.options import ApplicationArgumentParser
+from basic import Tracer
+
+parser = ApplicationArgumentParser(description="analyse CS assignment ",
+                                add_help=True)
+parser.add_argument("-assigns",nargs='*', help='CS assignment files',default=None);
+parser.add_argument("-output", help="how to call the output files", default="default" )
+#library.add_standard_args( parser )
+args=parser.parse_args()
+#library.init( args )
+
+tr=Tracer('main')
+
+def _group_frequencies(freqs,tolerance):
+	def _compare( f1, f2, tolerance ):
+		return abs(f1-f2)<=tolerance
+
+	freqs=sorted(freqs)
+	groups=[]
+	for f1 in freqs:
+		matched=False
+		for g in groups:
+			for f2 in g:
+				if _compare( f1,f2,tolerance ):
+					g.append(f1)
+					matched=True
+					break
+			if matched: break
+		if not matched:
+			g=[f1]
+			groups.append(g)
+
+	#mid_points=[ sum(g)/len(g) for g in groups ]
+	#return mid_points
+
+def read_CS_assignments( assign_list ):
+	#id=0
+	true_resonance_list=ResonanceList()
+	false_resonance_list=ResonanceList()
+	atom_list=[]
+	for line in assign_list:
+		tags=line.split()
+		atom=Atom(name=tags[0],resid=int(tags[1]))
+		atom_list.append(atom)
+		if 'nan' not in line:
+			if tags[2] == 'H':
+				error=0.04
+			else:
+				error=0.3
+			if tags[4]=='True':
+				true_resonance_list.add_resonance(Resonance(atom=atom,freq=tags[6],error=error))
+			else:
+				false_resonance_list.add_resonance(Resonance(atom=atom,freq=tags[6],error=error))
+	return true_resonance_list,false_resonance_list,atom_list
+
+def assign_consistant(resonance_lists,atom_list,type):
+	if type='True':
+		correct_assign_count={}
+		for atom in atom_list:
+			correct_assign_count[atom]=0
+			for resonance_list in resonance_lists:
+				try:
+					resonance_list.by_atom(atom)
+					correct_assign_count[atom]+=1
+				except KeyError:
+					pass
+		return correct_assign_count
+	elif type='False':
+
+
+true_resonance_lists=[]
+false_resonance_lists=[]
+
+for file in args.assigns:
+	file_list=open(file,'r').readlines()
+	true_resonance_list,false_resonance_list,atom_list = read_CS_assignments(file_list)
+	true_resonance_lists.append(true_resonance_list)
+	false_resonance_lists.append(false_resonance_list)
+
+correct_assign_count=assign_consistant(true_resonance_lists,atom_list)
+
+for i,r in correct_assign_count.iteritems():
+	print i,r

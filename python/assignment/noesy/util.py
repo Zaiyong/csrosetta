@@ -1,0 +1,140 @@
+#!/usr/bin/env python2.7
+##-*- mode:python;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:2 -*-'
+
+#find the label atom connected to a given proton
+		# i.e., for HN --> N
+		# for HE in aa=R --> NE
+from os import environ
+### toolbox library
+import BmrbAtomNames
+from chemical import AllAminoAcidLib
+from assignment.knowledge.IndividualShiftDistributionLibrary import IndividualShiftDistributionLibrary
+from PDB.Polypeptide import one_to_three,three_to_one
+from utility import GaussianDistribution
+from Atom import Atom
+
+def label_atom( label_element, proton, aa ):
+			if 'N' in label_element:
+				if aa=='R':
+					if proton=="HE": return "NE"
+					if proton[0:2]=="HH": return "N"+proton[1:3]
+				if aa=='K' and proton[0:2]=="HZ": return "NZ"
+				if aa=='Q' and proton[0:3]=='HE2': return 'NE2'
+				if aa=='N' and proton[0:3]=='HD2': return 'ND2'
+				if aa=='W' and proton=='HE1': return 'NE1'
+				if proton=='H' or proton=='HN': return 'N'
+			if 'C' in label_element:
+				if proton[0:2]=='QQ': return 'C'+proton[2:]
+				if proton[0]=='Q': return 'C'+proton[1:]
+				if 'HB' in proton: return 'CB'
+				if 'HA' in proton: return 'CA'
+				if aa=='W':
+					if proton=='HH2': return 'CH2'
+					if proton=='HZ2': return 'CZ2'
+					if proton=='HZ3': return 'CZ3'
+					if proton=='HE3': return 'CE3'
+					if proton=='HD1': return 'CD1'
+				if aa in'HFY':
+					if proton=='HZ': return 'CZ'
+					if proton[0:2]=='HD' or proton[0:2]=='HE': return 'C'+proton[1:3]
+				if not aa=='N':
+					s=len(proton)-2
+					if s<1: s=1
+					if proton[0:2]=='HG' or proton[0:2]=='HD' or proton[0:2]=='HE': return 'C'+proton[1:s+1]
+			return None
+		# END SPIN GROUP
+
+def read_lib_bound(lib,aa,name):
+	bound=[]
+	aa_three=one_to_three(aa)
+	for r in lib:
+		tags=r.split()
+		if aa_three==tags[0] and name==tags[1]:
+			bound=[float(tags[8]),float(tags[9])]
+	assert bound, "aa name or atom name is wrong"
+	return bound
+
+def read_lib_mean(lib,aa,name):
+	mean=-1.0
+	aa_three=one_to_three(aa)
+	if aa_three=='PRO' and name=='H':
+		name='H2'
+	for r in lib:
+		tags=r.split()
+		if aa_three==tags[0] and name==tags[1]:
+			mean=float(tags[6])
+	assert mean,  "aa name or atom name is wrong"
+	return mean
+
+def read_lib_std(lib,aa,name):
+	std=-1.0
+	aa_three=one_to_three(aa)
+	if aa_three=='PRO' and name=='H':
+		name='H2'
+	for r in lib:
+		tags=r.split()
+		if aa_three==tags[0] and name==tags[1]:
+			std=float(tags[7])
+	assert std,  "aa name or atom name is wrong"
+	return std
+
+def freqs_match(freq1,freq2,tol1,tol2,threshold=1):
+	sigma2=tol1*tol1+tol2*tol2
+	x=freq1-freq2
+	return (x*x/sigma2) < threshold*threshold
+
+def average(values):
+    """Computes the arithmetic mean of a list of numbers.
+
+    >>> print average([20, 30, 70])
+    40.0
+    """
+    return sum(values, 0.0) / len(values)
+
+def atoms_dist(atom1,atom2,atoms_coord):
+	coord1=atoms_coord[atom1.name(),atom1.resid()]
+	coord2=atoms_coord[atom2.name(),atom2.resid()]
+	return ((coord1[0]-coord2[0])**2+(coord1[1]-coord2[1])**2+(coord1[2]-coord2[2])**2)**0.5
+
+
+def miss_res_atoms(res_list):
+	miss_res_atoms=[]
+	all_aa_lib=AllAminoAcidLib()
+	sequence=res_list.sequence()
+	for i,aa in enumerate(sequence):
+		if aa=='-': continue
+		for atom_name in all_aa_lib.aa_lib(aa).iter_atoms():
+			atom=Atom(atom_name,i+1)
+			if atom.elem() not in 'CNH': continue
+			try:
+				res=res_list.by_atom(atom)
+			except KeyError:
+				try:
+					pn=BmrbAtomNames.get_combine(aa,atom_name)[0]
+					if pn==None:
+						miss_res_atoms.append(atom)
+						continue
+					res=res_list.by_atom(Atom(pn,i+1))
+				except KeyError:
+					miss_res_atoms.append(atom)
+	return miss_res_atoms
+
+def deviant_res_atoms(res_list,threshold=0.1):
+	deviant_res_atoms=[]
+	seq=res_list.sequence()
+	data_library=IndividualShiftDistributionLibrary(seq)
+	if 'csrosettaDir' not in environ:
+		print 'Please setup csrosettaDir to your environment'
+		exit()
+	list=open(environ['csrosettaDir']+"/database/cs_distribution.txt",'r').readlines()
+	for line in list:
+		tags=line.split()
+		if tags[0]=='Res': continue
+		data_library.add_distribution(tags[1],three_to_one(tags[0]),GaussianDistribution(float(tags[6]),float(tags[7])))
+	for res in res_list.itervalues():
+		atom=res.atom()
+		if atom.elem() not in 'CNH': continue
+		distribution=data_library.by_atom(atom)
+		prob=distribution.probability(res.freq())
+		if prob<threshold: deviant_res_atoms.append(atom)
+	return deviant_res_atoms

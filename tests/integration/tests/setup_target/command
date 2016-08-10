@@ -1,0 +1,61 @@
+#
+# This is a command file.
+#
+# To make a new test, all you have to do is:
+#   1.  Make a new directory under tests/
+#   2.  Put a file like this (named "command") into that directory.
+#
+# The contents of this file will be passed to the shell (Bash or SSH),
+# so any legal shell commands can go in this file.
+# Or comments like this one, for that matter.
+#
+# Variable substiution is done using Python's printf format,
+# meaning you need a percent sign, the variable name in parentheses,
+# and the letter 's' (for 'string').
+#
+# Available variables include:
+#   workdir     the directory where test input files have been copied,
+#               and where test output files should end up.
+#   minidir     the base directory where Mini lives
+#   database    where the Mini database lives
+#   bin         where the Mini binaries live
+#   binext      the extension on binary files, like ".linuxgccrelease"
+#
+# The most important thing is that the test execute in the right directory.
+# This is especially true when we're using SSH to execute on other hosts.
+# All command files should start with this line:
+#
+
+cd %(workdir)s
+
+[ -x %(bin)s/setup_target  ] || exit 1
+%(bin)s/setup_target -target gmr137 -method abrelax -target_dir gmr137 -label abrelax1 -fasta %(workdir)s/input/fragments/gmr137.fasta -frags %(workdir)s/input/fragments/frags* -native %(workdir)s/input/native/native.pdb -rdc %(workdir)s/input/nmr_data/peg.rdc -flexible_residues  3 -cs %(workdir)s/input/nmr_data/gmr137.tab 2>&1 \
+    | egrep -vf ../../ignore_list \
+    > log1
+test "${PIPESTATUS[0]}" != '0' && exit 1 || true  # Check if the first executable in pipe line return error and exit with error code if so
+
+%(bin)s/setup_target -target gmr137 -method abrelax -target_dir gmr137 -label abrelax2 -transfer_label abrelax1 -remove cs 2>&1 \
+    | egrep -vf ../../ignore_list \
+    > log2
+test "${PIPESTATUS[0]}" != '0' && exit 1 || true  # Check if the first executable in pipe line return error and exit with error code if so
+
+%(bin)s/setup_target -target gmr137 -method rasrec -target_dir gmr137 -label rasrec1 -transfer_label abrelax1 -transfer_method abrelax >&1 \
+    | egrep -vf ../../ignore_list \
+    > log3
+test "${PIPESTATUS[0]}" != '0' && exit 1 || true  # Check if the first executable in pipe line return error and exit with error code if so
+
+%(bin)s/setup_target -target gmr137 -method rasrec -target_dir gmr137 -label rasrec2 -fasta %(workdir)s/input/fragments/gmr137.fasta -frags %(workdir)s/input/fragments/frags* -native %(workdir)s/input/native/native.pdb -rdc %(workdir)s/input/nmr_data/peg.rdc -flexible_residues  3 -cs %(workdir)s/input/nmr_data/gmr137.tab 2>&1 \
+    | egrep -vf ../../ignore_list \
+    > log4
+test "${PIPESTATUS[0]}" != '0' && exit 1 || true  # Check if the first executable in pipe line return error and exit with error code if so
+
+%(bin)s/setup_target -target gmr137 -method autoNOE -target_dir gmr137 -fasta %(workdir)s/input/fragments/gmr137.fasta -frags %(workdir)s/input/fragments/frags* -native %(workdir)s/input/native/native.pdb -rdc %(workdir)s/input/nmr_data/peg.rdc -flexible_residues  3 -cs %(workdir)s/input/nmr_data/gmr137.tab -shifts %(workdir)s/input/nmr_data/gmr137.prot -peaks %(workdir)s/input/nmr_data/*.peaks -restraints %(workdir)s/input/nmr_data/noe_auto_assign.cst 2>&1 \
+    | egrep -vf ../../ignore_list \
+    > log5
+test "${PIPESTATUS[0]}" != '0' && exit 1 || true  # Check if the first executable in pipe line return error and exit with error code if so
+
+
+
+
+
+

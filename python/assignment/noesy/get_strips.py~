@@ -1,0 +1,69 @@
+#!/usr/bin/env python2.7
+##-*- mode:python;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t;python-indent:2 -*-'
+from assignment.noesy import NoeStrip
+from assignment.noesy import Atom
+from assignment.noesy import RangeResonance
+from assignment.noesy import Resonance
+from PDB.Polypeptide import one_to_three
+from assignment.noesy.util import read_lib_bound,read_lib_mean
+from chemical import SingleAminoAcidLib
+
+
+def reduce_strips(ref_strips,strips,threshold=0.8):
+	keep_strips=[]
+	for strip1 in strips:
+		for strip2 in ref_strips:
+			if (strip1 not in keep_strips) and ( strip1.pmatch(strip2) > threshold ):
+				keep_strips.append(strip1)
+	for r in strips:
+		if r not in keep_strips:
+			strips.remove(r)
+	return strips
+
+def _create_strip(aa,resid,heavy,proton,existing_resonances,crosspeaks,cs_distribution):
+	if existing_resonances.by_atom(Atom(proton,resid)):
+		if existing_resonances.by_atom(Atom(heavy,resid)):
+			return [NoeStrip.generate_strip(crosspeaks,1,existing_resonances.by_atom(Atom(proton,resid)), existing_resonances.by_atom(Atom(heavy,resid)))]
+		else:
+			heavy_bound=read_lib_bound(cs_distribution,aa,heavy)
+			heavy_range=RangeResonance(-1,Atom(heavy,resid),heavy_bound[0],heavy_bound[1],0.3)
+			return NoeStrip.generate_strip_family(crosspeaks,1,existing_resonances.by_atom(Atom(proton,resid)),heavy_range)
+	else:
+		if existing_resonances.by_atom(Atom(heavy,resid)):
+			proton_bound=read_lib_bound(cs_distribution,aa,proton)
+			proton_range=RangeResonance(-1,Atom(proton,resid),proton_bound[0],proton_bound[1],0.03)
+			return NoeStrip.generate_strip_family(crosspeaks,1,proton_range,existing_resonances.by_atom(Atom(heavy,resid)))
+		else:
+			heavy_bound=read_lib_bound(cs_distribution,aa,heavy)
+			heavy_range=RangeResonance(-1,Atom(heavy,resid),heavy_bound[0],heavy_bound[1],0.3)
+			proton_bound=read_lib_bound(cs_distribution,aa,proton)
+			proton_range=RangeResonance(-1,Atom(proton,resid),proton_bound[0],proton_bound[1],0.03)
+			return NoeStrip.generate_strip_family_2D(crosspeaks,1,proton_range,heavy_range)
+
+def _strips_by_aa(aa,resid,aa_lib,crosspeaks,existing_resonances,cs_distribution):
+	strips={}
+	for heavy in aa_lib.heavy_atoms():
+		if heavy=='C' or heavy[0] in 'SO': continue
+		if heavy[0]=='C':
+			if len(aa_lib.proton_partners(heavy))==0: continue
+			if len(aa_lib.proton_partners(heavy)) in [1,3]:
+				strips[aa_lib.proton_partners(heavy)[0]]=_create_strip(aa,resid,heavy,aa_lib.proton_partners(heavy)[0],existing_resonances,crosspeaks,cs_distribution)
+			elif len(aa_lib.proton_partners(heavy))==2:
+				strips[aa_lib.proton_partners(heavy)[0]]=_create_strip(aa,resid,heavy,aa_lib.proton_partners(heavy)[0],existing_resonances,crosspeaks,cs_distribution)
+				strips[aa_lib.proton_partners(heavy)[1]]=_create_strip(aa,resid,heavy,aa_lib.proton_partners(heavy)[1],existing_resonances,crosspeaks,cs_distribution)
+		elif heavy[0]=='N':
+			if len(aa_lib.proton_partners(heavy))==0: continue
+			if len(aa_lib.proton_partners(heavy))==3:
+				strips[aa_lib.proton_partners(heavy)[0]]=_create_strip(aa,resid,heavy,aa_lib.proton_partners(heavy)[0],existing_resonances,crosspeaks,cs_distribution)
+			else:
+				for proton in aa_lib.proton_partners(heavy):
+					strips[proton]=_create_strip(aa,resid,heavy,proton,existing_resonances,crosspeaks,cs_distribution)
+	return strips
+
+def get_strips( resid,seq,cs_distribution,existing_resonances,crosspeaks,aa_lib):
+	aa=seq[resid-1]
+	strips=_strips_by_aa(aa,resid,aa_lib,crosspeaks,existing_resonances,cs_distribution)
+	return strips
+
+
+

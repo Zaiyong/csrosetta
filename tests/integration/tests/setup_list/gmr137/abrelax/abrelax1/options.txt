@@ -1,0 +1,6 @@
+flexible_residues|3
+rdc|nmr_data/peg.rdc
+cs|nmr_data/gmr137.tab
+fasta|fragments/gmr137.fasta
+frags|['fragments/frags.score.3mers.new', 'fragments/frags.score.9mers.new.gz']
+native|native/native.pdb

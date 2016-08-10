@@ -1,0 +1,2 @@
+$HOME/rosetta_src/mini/bin/r_noe_assign.default.linuxgccrelease @../flags_cyana_test $CM_COMMANDLINE -mute_warning core.io.pdb -mute_warning core.io.database -mute_warning core.pack -noesy:out:cst noe_auto_assign.cst -noesy:out:min_seq_sep 5 >& cyana.log 
+$HOME/rosetta_src/mini/bin/r_noe_assign.default.linuxgccrelease @../flags_cyana_test $CM_COMMANDLINE -mute_warning core.io.pdb -mute_warning core.io.database -mute_warning core.pack -noesy:out:cst noe_auto_assign.cst.filter -noesy:out:min_seq_sep 2 >>& cyana.log 

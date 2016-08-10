@@ -1,0 +1,8 @@
+
+
+name:=$CM_TARGET            # protein name, used for output file names
+cyanalib
+#read $libdir/lib/cyana.lib
+#/home/kostas/prog/cyana-3.0/lib/cyana.lib
+
+read seq target.seq       # read protein sequence

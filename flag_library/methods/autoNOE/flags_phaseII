@@ -1,0 +1,7 @@
+-noesy_weights:cycle 7
+-noesy:use_local_distviol
+-local_distviol:range 0.9
+
+-noesy:network:reswise_high 4
+-noesy:network:reswise_min 0.5
+-noesy:network:atomwise_min 0.4

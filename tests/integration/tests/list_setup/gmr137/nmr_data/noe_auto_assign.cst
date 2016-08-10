@@ -1,0 +1,906 @@
+AmbiguousNMRDistance 2HG 1 H 12 BOUNDED     1.5  6.2269 4.15331                 automatic NOE Peak 52 resort_c-ali 
+AmbiguousNMRDistance 1HG 1 H 12 BOUNDED     1.5  6.2421 4.15331                 automatic NOE Peak 53 resort_c-ali 
+AmbiguousNMRDistance 1HG 1 QG2 12 BOUNDED     1.5 5.47691 4.15331                automatic NOE Peak 337 resort_c-ali 
+AmbiguousNMRDistance 2HG 1 H 12 BOUNDED     1.5  5.7064 4.15331                    automatic NOE Peak 135 resort_n 
+AmbiguousNMRDistance HA 1 2HB 56 BOUNDED     1.5 5.52499 4.15331                 automatic NOE Peak 23 resort_c-ali 
+AmbiguousNMRDistance 1HB 1 H 56 BOUNDED     1.5 6.19828 4.15331                 automatic NOE Peak 38 resort_c-ali 
+AmbiguousNMRDistance 1HB 1 HA 56 BOUNDED     1.5 5.25193 4.15331                 automatic NOE Peak 39 resort_c-ali 
+AmbiguousNMRDistance 2HB 1 2HB 56 BOUNDED     1.5 6.05326 4.15331                 automatic NOE Peak 40 resort_c-ali 
+AmbiguousNMRDistance 1HB 1 2HB 56 BOUNDED     1.5 5.58319 4.15331                 automatic NOE Peak 41 resort_c-ali 
+AmbiguousNMRDistance HA 2 HA 11 BOUNDED     1.5 4.61935 4.15331                 automatic NOE Peak 64 resort_c-ali 
+AmbiguousNMRDistance HA 2 QG2 11 BOUNDED     1.5 5.47275 4.15331                 automatic NOE Peak 65 resort_c-ali 
+AmbiguousNMRDistance HA 2 HA 11 BOUNDED     1.5 4.50105 4.15331                automatic NOE Peak 299 resort_c-ali 
+AmbiguousNMRDistance 1HD2 2 QG2 11 BOUNDED     1.5 5.99927 4.15331                automatic NOE Peak 312 resort_c-ali 
+AmbiguousNMRDistance 2HD2 2 QG2 11 BOUNDED     1.5 5.93192 4.15331                automatic NOE Peak 313 resort_c-ali 
+AmbiguousNMRDistance 1HD2 2 QG2 11 BOUNDED     1.5 5.90941 4.15331                     automatic NOE Peak 35 resort_n 
+AmbiguousNMRDistance 2HD2 2 QG2 11 BOUNDED     1.5 6.16093 4.15331                     automatic NOE Peak 36 resort_n 
+AmbiguousNMRDistance HA 2 H 12 BOUNDED     1.5 5.27221 4.15331                    automatic NOE Peak 137 resort_n 
+AmbiguousNMRDistance H 2 2HB 56 BOUNDED     1.5 6.39334 4.15331               automatic NOE Peak 1426 resort_c-ali 
+AmbiguousNMRDistance H 2 2HB 56 BOUNDED     1.5 5.39405 4.15331                     automatic NOE Peak 26 resort_n 
+AmbiguousNMRDistance QB 2 H 57 BOUNDED     1.5    6.35 4.15331                 automatic NOE Peak 72 resort_c-ali 
+AmbiguousNMRDistance H 2 H 57 BOUNDED     1.5  5.4437 4.15331                     automatic NOE Peak 27 resort_n 
+AmbiguousNMRDistance H 2 H 57 BOUNDED     1.5 5.43371 4.15331                    automatic NOE Peak 679 resort_n 
+AmbiguousNMRDistance QB 2 H 57 BOUNDED     1.5 5.45011 4.15331                    automatic NOE Peak 689 resort_n 
+AmbiguousNMRDistance 2HB 3 QB 10 BOUNDED     1.5 5.71155 4.15331                 automatic NOE Peak 99 resort_c-ali 
+AmbiguousNMRDistance 1HB 3 QB 10 BOUNDED     1.5 6.80641 4.15331                automatic NOE Peak 100 resort_c-ali 
+AmbiguousNMRDistance H 3 QB 10 BOUNDED     1.5 5.35387 4.15331                     automatic NOE Peak 46 resort_n 
+AmbiguousNMRDistance H 3 H 10 BOUNDED     1.5   4.945 4.15331                    automatic NOE Peak 119 resort_n 
+AmbiguousNMRDistance H 3 HA 11 BOUNDED     1.5 5.34269 4.15331                automatic NOE Peak 300 resort_c-ali 
+AmbiguousNMRDistance H 3 HA 11 BOUNDED     1.5 4.97597 4.15331                     automatic NOE Peak 47 resort_n 
+AmbiguousNMRDistance HA 3 H 57 BOUNDED     1.5 5.19817 4.15331                 automatic NOE Peak 82 resort_c-ali 
+AmbiguousNMRDistance QD1 3 H 57 BOUNDED     1.5 14.3304 4.15331                automatic NOE Peak 102 resort_c-ali 
+AmbiguousNMRDistance HA 3 H 57 BOUNDED     1.5 5.10113 4.15331                    automatic NOE Peak 680 resort_n 
+AmbiguousNMRDistance QD1 3 H 57 BOUNDED     1.5 5.09082 4.15331                    automatic NOE Peak 682 resort_n 
+AmbiguousNMRDistance HA 3 H 58 BOUNDED     1.5 5.52315 4.15331                    automatic NOE Peak 691 resort_n 
+AmbiguousNMRDistance QG2 4 HA 9 BOUNDED     1.5 4.95635 4.15331                automatic NOE Peak 234 resort_c-ali 
+AmbiguousNMRDistance QG2 4 H 10 BOUNDED     1.5 5.79924 4.15331                    automatic NOE Peak 120 resort_n 
+AmbiguousNMRDistance HB 4 HA 59 BOUNDED     1.5 4.74294 4.15331                automatic NOE Peak 134 resort_c-ali 
+AmbiguousNMRDistance HB 4 HA 59 BOUNDED     1.5 4.72008 4.15331               automatic NOE Peak 1468 resort_c-ali 
+AmbiguousNMRDistance QG2 4 HA 59 BOUNDED     1.5 6.10962 4.15331               automatic NOE Peak 1469 resort_c-ali 
+AmbiguousNMRDistance HB 4 QB 59 BOUNDED     1.5 4.72212 4.15331               automatic NOE Peak 1475 resort_c-ali 
+AmbiguousNMRDistance H 4 HA 59 BOUNDED     1.5 4.22086 4.15331                     automatic NOE Peak 61 resort_n 
+AmbiguousNMRDistance H 4 H 60 BOUNDED     1.5 5.11925 4.15331                     automatic NOE Peak 62 resort_n 
+AmbiguousNMRDistance HB 5 QB 10 BOUNDED     1.5 5.24029 4.15331                automatic NOE Peak 154 resort_c-ali 
+AmbiguousNMRDistance QQG 5 QB 10 BOUNDED     1.5 4.13673 4.15331                automatic NOE Peak 160 resort_c-ali 
+AmbiguousNMRDistance H 5 QB 10 BOUNDED     1.5 5.33019 4.15331                     automatic NOE Peak 72 resort_n 
+AmbiguousNMRDistance QQG 5 HA 20 BOUNDED     1.5 5.03151 4.15331               automatic NOE Peak 1358 resort_c-ali 
+AmbiguousNMRDistance 1HD2 6 2HB 62 BOUNDED     1.5 6.52788 4.15331               automatic NOE Peak 1546 resort_c-ali 
+AmbiguousNMRDistance 1HD2 6 1HB 62 BOUNDED     1.5 7.29884 4.15331               automatic NOE Peak 1547 resort_c-ali 
+AmbiguousNMRDistance 2HD2 6 2HB 62 BOUNDED     1.5 6.96665 4.15331               automatic NOE Peak 1548 resort_c-ali 
+AmbiguousNMRDistance 2HD2 6 1HB 62 BOUNDED     1.5 7.68176 4.15331               automatic NOE Peak 1549 resort_c-ali 
+AmbiguousNMRDistance 1HD2 6 1HB 62 BOUNDED     1.5 6.38541 4.15331                     automatic NOE Peak 91 resort_n 
+AmbiguousNMRDistance QG2 12 1HB 18 BOUNDED     1.5 5.07975 4.15331                automatic NOE Peak 345 resort_c-ali 
+AmbiguousNMRDistance HB 12 H 24 BOUNDED     1.5 5.72312 4.15331               automatic NOE Peak 1665 resort_c-ali 
+AmbiguousNMRDistance 1HB 13 1HG 22 BOUNDED     1.5 3.02233 4.15331                automatic NOE Peak 357 resort_c-ali 
+AmbiguousNMRDistance QD2 18 HA 23 BOUNDED     1.5 4.41075 4.15331                automatic NOE Peak 457 resort_c-ali 
+AmbiguousNMRDistance H 18 QG2 53 BOUNDED     1.5 5.13584 4.15331               automatic NOE Peak 1337 resort_c-ali 
+AmbiguousNMRDistance H 18 QG2 53 BOUNDED     1.5 4.84646 4.15331                    automatic NOE Peak 200 resort_n 
+AmbiguousNMRDistance H 18 HB 54 BOUNDED     1.5 6.00816 4.15331               automatic NOE Peak 1350 resort_c-ali 
+AmbiguousNMRDistance H 18 H 54 BOUNDED     1.5 4.51188 4.15331                    automatic NOE Peak 201 resort_n 
+AmbiguousNMRDistance H 18 H 54 BOUNDED     1.5 4.63649 4.15331                    automatic NOE Peak 641 resort_n 
+AmbiguousNMRDistance 1HB 18 H 55 BOUNDED     1.5 5.59224 4.15331               automatic NOE Peak 1399 resort_c-ali 
+AmbiguousNMRDistance 1HB 18 2HG 55 BOUNDED     1.5 3.74148 4.15331               automatic NOE Peak 1405 resort_c-ali 
+AmbiguousNMRDistance 1HB 18 H 56 BOUNDED     1.5 6.13537 4.15331               automatic NOE Peak 1410 resort_c-ali 
+AmbiguousNMRDistance HA 19 QG2 53 BOUNDED     1.5 5.38202 4.15331                automatic NOE Peak 468 resort_c-ali 
+AmbiguousNMRDistance HA 19 HA 53 BOUNDED     1.5 4.13705 4.15331               automatic NOE Peak 1321 resort_c-ali 
+AmbiguousNMRDistance 2HB 19 HA 53 BOUNDED     1.5 5.83526 4.15331               automatic NOE Peak 1322 resort_c-ali 
+AmbiguousNMRDistance HA 19 QG2 53 BOUNDED     1.5 5.15908 4.15331               automatic NOE Peak 1338 resort_c-ali 
+AmbiguousNMRDistance H 19 QG2 53 BOUNDED     1.5 6.13096 4.15331                    automatic NOE Peak 222 resort_n 
+AmbiguousNMRDistance HA 19 H 54 BOUNDED     1.5 4.99963 4.15331                automatic NOE Peak 469 resort_c-ali 
+AmbiguousNMRDistance H 19 H 54 BOUNDED     1.5 6.26537 4.15331                    automatic NOE Peak 223 resort_n 
+AmbiguousNMRDistance HA 19 H 54 BOUNDED     1.5   4.666 4.15331                    automatic NOE Peak 642 resort_n 
+AmbiguousNMRDistance QG2 20 QG1 35 BOUNDED     1.5 4.38803 4.15331                automatic NOE Peak 524 resort_c-ali 
+AmbiguousNMRDistance QG2 20 QG1 35 BOUNDED     1.5 4.37038 4.15331                automatic NOE Peak 893 resort_c-ali 
+AmbiguousNMRDistance QG2 20 QG2 35 BOUNDED     1.5 4.50931 4.15331                automatic NOE Peak 902 resort_c-ali 
+AmbiguousNMRDistance HB 20 2HB 49 BOUNDED     1.5 5.49648 4.15331                automatic NOE Peak 503 resort_c-ali 
+AmbiguousNMRDistance HB 20 QD 49 BOUNDED     1.5 5.81498 4.15331                automatic NOE Peak 507 resort_c-ali 
+AmbiguousNMRDistance QG2 20 HA 49 BOUNDED     1.5 5.43412 4.15331                automatic NOE Peak 525 resort_c-ali 
+AmbiguousNMRDistance H 20 HA 49 BOUNDED     1.5 5.90818 4.15331               automatic NOE Peak 1248 resort_c-ali 
+AmbiguousNMRDistance QG2 20 HA 49 BOUNDED     1.5 5.34659 4.15331               automatic NOE Peak 1251 resort_c-ali 
+AmbiguousNMRDistance QG2 20 2HB 49 BOUNDED     1.5 6.20714 4.15331               automatic NOE Peak 1265 resort_c-ali 
+AmbiguousNMRDistance QG2 20 1HB 49 BOUNDED     1.5 6.13306 4.15331               automatic NOE Peak 1266 resort_c-ali 
+AmbiguousNMRDistance QG2 20 QD 49 BOUNDED     1.5 5.06432 4.15331                 automatic NOE Peak 25 resort_c-aro 
+AmbiguousNMRDistance QG2 20 QE 49 BOUNDED     1.5 5.29048 4.15331                 automatic NOE Peak 40 resort_c-aro 
+AmbiguousNMRDistance QG2 20 H 49 BOUNDED     1.5 6.68439 4.15331                    automatic NOE Peak 587 resort_n 
+AmbiguousNMRDistance QG1 20 QG2 52 BOUNDED     1.5  4.0934 4.15331                automatic NOE Peak 515 resort_c-ali 
+AmbiguousNMRDistance H 20 HB 52 BOUNDED     1.5 6.34837 4.15331               automatic NOE Peak 1306 resort_c-ali 
+AmbiguousNMRDistance HB 20 HB 52 BOUNDED     1.5 6.04629 4.15331               automatic NOE Peak 1307 resort_c-ali 
+AmbiguousNMRDistance H 20 HA 53 BOUNDED     1.5 6.00278 4.15331               automatic NOE Peak 1324 resort_c-ali 
+AmbiguousNMRDistance HA 21 QD 49 BOUNDED     1.5 5.60257 4.15331                 automatic NOE Peak 26 resort_c-aro 
+AmbiguousNMRDistance H 21 QD 49 BOUNDED     1.5 5.79679 4.15331                    automatic NOE Peak 269 resort_n 
+AmbiguousNMRDistance QD 28 2HB 40 BOUNDED     1.5 4.44497 4.15331               automatic NOE Peak 1668 resort_c-ali 
+AmbiguousNMRDistance QG 28 2HB 40 BOUNDED     1.5 5.26096 4.15331               automatic NOE Peak 1672 resort_c-ali 
+AmbiguousNMRDistance QG2 36 HB 43 BOUNDED     1.5 5.23521 4.15331                automatic NOE Peak 931 resort_c-ali 
+AmbiguousNMRDistance QG2 36 HB 43 BOUNDED     1.5 6.65021 4.15331               automatic NOE Peak 1084 resort_c-ali 
+AmbiguousNMRDistance QG2 36 QG1 43 BOUNDED     1.5  3.8254 4.15331               automatic NOE Peak 1090 resort_c-ali 
+AmbiguousNMRDistance QG2 36 QG2 43 BOUNDED     1.5 4.27919 4.15331               automatic NOE Peak 1095 resort_c-ali 
+AmbiguousNMRDistance H 37 QE 49 BOUNDED     1.5 6.19148 4.15331                    automatic NOE Peak 461 resort_n 
+AmbiguousNMRDistance QG1 37 QE 62 BOUNDED     1.5 4.60716 4.15331                automatic NOE Peak 955 resort_c-ali 
+AmbiguousNMRDistance 2HB 38 QG2 43 BOUNDED     1.5 6.03985 4.15331                automatic NOE Peak 983 resort_c-ali 
+AmbiguousNMRDistance 1HB 38 QG2 43 BOUNDED     1.5  5.9495 4.15331                automatic NOE Peak 984 resort_c-ali 
+AmbiguousNMRConstraint BOUNDED     1.5 4.33922 4.15331               automatic NOE Peak 1096 resort_c-ali 
+AmbiguousNMRDistance 1HB 38 QG2 43 BOUNDED     1.5     5.5   1                                           VC 0.131 
+AmbiguousNMRDistance 1HG 38 QG2 43 BOUNDED     1.5     5.5   1                                           VC 0.869 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5   5.736 4.15331                    automatic NOE Peak 539 resort_n 
+AmbiguousNMRDistance 1HB 38 H 44 BOUNDED     1.5     5.5   1                                           VC 0.243 
+AmbiguousNMRDistance 1HG 38 H 44 BOUNDED     1.5     5.5   1                                           VC 0.757 
+End_AmbiguousNMRConstraint
+AmbiguousNMRDistance 1HG 38 2HB 56 BOUNDED     1.5 6.09262 4.15331               automatic NOE Peak 1430 resort_c-ali 
+AmbiguousNMRDistance HA 39 H 59 BOUNDED     1.5 6.64011 4.15331               automatic NOE Peak 1002 resort_c-ali 
+AmbiguousNMRDistance 1HB 40 2HB 58 BOUNDED     1.5 3.80758 4.15331               automatic NOE Peak 1044 resort_c-ali 
+AmbiguousNMRDistance HA 40 H 59 BOUNDED     1.5 6.04676 4.15331               automatic NOE Peak 1028 resort_c-ali 
+AmbiguousNMRDistance H 40 QB 59 BOUNDED     1.5 5.33804 4.15331               automatic NOE Peak 1477 resort_c-ali 
+AmbiguousNMRDistance HA 40 QB 59 BOUNDED     1.5 4.64562 4.15331               automatic NOE Peak 1478 resort_c-ali 
+AmbiguousNMRDistance H 40 H 59 BOUNDED     1.5 5.30228 4.15331                    automatic NOE Peak 494 resort_n 
+AmbiguousNMRDistance H 40 H 59 BOUNDED     1.5 5.08309 4.15331                    automatic NOE Peak 710 resort_n 
+AmbiguousNMRDistance 2HD2 40 H 59 BOUNDED     1.5 6.18809 4.15331                    automatic NOE Peak 712 resort_n 
+AmbiguousNMRDistance 2HB 44 QE 49 BOUNDED     1.5 5.06554 4.15331               automatic NOE Peak 1116 resort_c-ali 
+AmbiguousNMRDistance HG 44 HA 49 BOUNDED     1.5 6.21355 4.15331               automatic NOE Peak 1127 resort_c-ali 
+AmbiguousNMRDistance HG 44 QD 49 BOUNDED     1.5  5.6558 4.15331               automatic NOE Peak 1128 resort_c-ali 
+AmbiguousNMRDistance QQD 44 QE 49 BOUNDED     1.5  6.9002 4.15331               automatic NOE Peak 1137 resort_c-ali 
+AmbiguousNMRDistance HG 44 QG2 52 BOUNDED     1.5 4.19661 4.15331               automatic NOE Peak 1131 resort_c-ali 
+AmbiguousNMRConstraint BOUNDED     1.5 5.68048 4.15331                  automatic NOE Peak 4 resort_c-ali 
+AmbiguousNMRDistance QG1 29 QD 62 BOUNDED     1.5     5.5   1                                             VC 0.9 
+AmbiguousNMRDistance QG1 29 QD 64 BOUNDED     1.5     5.5   1                                           VC 0.082 
+AmbiguousNMRDistance QG1 29 QE 65 BOUNDED     1.5     5.5   1                                          VC 0.0178 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.12038 4.15331                 automatic NOE Peak 36 resort_c-ali 
+AmbiguousNMRDistance 1HB 1 HA 34 BOUNDED     1.5     5.5   1                                           VC 0.029 
+AmbiguousNMRDistance 1HB 1 HA 55 BOUNDED     1.5     5.5   1                                           VC 0.971 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 7.49382 4.15331                 automatic NOE Peak 37 resort_c-ali 
+AmbiguousNMRDistance 2HB 1 H 56 BOUNDED     1.5     5.5   1                                            VC 0.94 
+AmbiguousNMRDistance 2HB 1 H 58 BOUNDED     1.5     5.5   1                                          VC 0.0595 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.82744 4.15331                 automatic NOE Peak 54 resort_c-ali 
+AmbiguousNMRDistance 1HG 1 HB 12 BOUNDED     1.5     5.5   1                                           VC 0.824 
+AmbiguousNMRDistance 1HG 1 2HB 18 BOUNDED     1.5     5.5   1                                           VC 0.176 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.04215 4.15331                 automatic NOE Peak 55 resort_c-ali 
+AmbiguousNMRDistance 2HG 1 HA 17 BOUNDED     1.5     5.5   1                                            VC 0.33 
+AmbiguousNMRDistance 2HG 1 HA 55 BOUNDED     1.5     5.5   1                                           VC 0.639 
+AmbiguousNMRDistance HA 17 2HB 45 BOUNDED     1.5     5.5   1                                          VC 0.0314 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.12568 4.15331                 automatic NOE Peak 56 resort_c-ali 
+AmbiguousNMRDistance 1HG 1 HA 17 BOUNDED     1.5     5.5   1                                           VC 0.166 
+AmbiguousNMRDistance 1HG 1 HA 55 BOUNDED     1.5     5.5   1                                           VC 0.834 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  5.5117 4.15331                 automatic NOE Peak 66 resort_c-ali 
+AmbiguousNMRDistance HA 2 H 11 BOUNDED     1.5     5.5   1                                          VC 0.0507 
+AmbiguousNMRDistance HA 2 H 12 BOUNDED     1.5     5.5   1                                           VC 0.949 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.75867 4.15331                automatic NOE Peak 101 resort_c-ali 
+AmbiguousNMRDistance QD1 3 HA 50 BOUNDED     1.5     5.5   1                                           VC 0.195 
+AmbiguousNMRDistance QD1 3 HA 56 BOUNDED     1.5     5.5   1                                           VC 0.805 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 7.18753 4.15331                automatic NOE Peak 103 resort_c-ali 
+AmbiguousNMRDistance QD1 3 H 56 BOUNDED     1.5     5.5   1                                           VC 0.552 
+AmbiguousNMRDistance QD1 3 H 58 BOUNDED     1.5     5.5   1                                           VC 0.448 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 8.42797 4.15331                automatic NOE Peak 113 resort_c-ali 
+AmbiguousNMRDistance QD2 3 HA 50 BOUNDED     1.5     5.5   1                                           VC 0.236 
+AmbiguousNMRDistance QD2 3 HA 56 BOUNDED     1.5     5.5   1                                           VC 0.764 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.71448 4.15331                automatic NOE Peak 114 resort_c-ali 
+AmbiguousNMRDistance QD2 3 H 56 BOUNDED     1.5     5.5   1                                           VC 0.174 
+AmbiguousNMRDistance QD2 3 H 58 BOUNDED     1.5     5.5   1                                           VC 0.826 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.85029 4.15331                automatic NOE Peak 135 resort_c-ali 
+AmbiguousNMRDistance HB 4 1HB 23 BOUNDED     1.5     5.5   1                                          VC 0.0261 
+AmbiguousNMRDistance HB 4 QB 59 BOUNDED     1.5     5.5   1                                           VC 0.974 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.34149 4.15331                automatic NOE Peak 144 resort_c-ali 
+AmbiguousNMRDistance QG2 4 1HB 23 BOUNDED     1.5     5.5   1                                          VC 0.0565 
+AmbiguousNMRDistance QG2 4 QB 59 BOUNDED     1.5     5.5   1                                           VC 0.943 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.14128 4.15331                automatic NOE Peak 262 resort_c-ali 
+AmbiguousNMRDistance HA 4 2HD 9 BOUNDED     1.5     5.5   1                                           VC 0.367 
+AmbiguousNMRDistance 2HD 9 HA 48 BOUNDED     1.5     5.5   1                                           VC 0.633 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 3.79945 4.15331                automatic NOE Peak 294 resort_c-ali 
+AmbiguousNMRDistance QQG 5 QB 10 BOUNDED     1.5     5.5   1                                            VC 0.73 
+AmbiguousNMRDistance QB 10 QG2 12 BOUNDED     1.5     5.5   1                                          VC 0.0108 
+AmbiguousNMRDistance QB 10 QG1 54 BOUNDED     1.5     5.5   1                                           VC 0.258 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.25314 4.15331                automatic NOE Peak 327 resort_c-ali 
+AmbiguousNMRDistance 1HG 1 HB 12 BOUNDED     1.5     5.5   1                                           VC 0.965 
+AmbiguousNMRDistance HB 12 2HB 22 BOUNDED     1.5     5.5   1                                          VC 0.0153 
+AmbiguousNMRDistance HB 12 1HG 45 BOUNDED     1.5     5.5   1                                          VC 0.0196 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.37834 4.15331                automatic NOE Peak 336 resort_c-ali 
+AmbiguousNMRDistance 2HG 1 QG2 12 BOUNDED     1.5     5.5   1                                           VC 0.609 
+AmbiguousNMRDistance QG2 12 2HB 45 BOUNDED     1.5     5.5   1                                           VC 0.391 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.04833 4.15331                automatic NOE Peak 450 resort_c-ali 
+AmbiguousNMRDistance QD1 18 HA 23 BOUNDED     1.5     5.5   1                                           VC 0.973 
+AmbiguousNMRDistance HA 23 QD2 39 BOUNDED     1.5     5.5   1                                          VC 0.0269 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.25638 4.15331                automatic NOE Peak 467 resort_c-ali 
+AmbiguousNMRDistance HA 19 HA 50 BOUNDED     1.5     5.5   1                                          VC 0.0162 
+AmbiguousNMRDistance HA 19 HA 53 BOUNDED     1.5     5.5   1                                           VC 0.944 
+AmbiguousNMRDistance HA 19 HA 56 BOUNDED     1.5     5.5   1                                          VC 0.0397 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.31892 4.15331                automatic NOE Peak 488 resort_c-ali 
+AmbiguousNMRDistance 2HB 19 H 51 BOUNDED     1.5     5.5   1                                           VC 0.163 
+AmbiguousNMRDistance 2HB 19 H 52 BOUNDED     1.5     5.5   1                                           VC 0.837 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.64751 4.15331                automatic NOE Peak 489 resort_c-ali 
+AmbiguousNMRDistance 1HB 19 H 51 BOUNDED     1.5     5.5   1                                           VC 0.407 
+AmbiguousNMRDistance 1HB 19 H 52 BOUNDED     1.5     5.5   1                                           VC 0.593 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.58584 4.15331                automatic NOE Peak 490 resort_c-ali 
+AmbiguousNMRDistance 2HB 19 HA 50 BOUNDED     1.5     5.5   1                                           VC 0.296 
+AmbiguousNMRDistance 2HB 19 HA 53 BOUNDED     1.5     5.5   1                                           VC 0.296 
+AmbiguousNMRDistance 2HB 19 HA 56 BOUNDED     1.5     5.5   1                                           VC 0.408 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.61272 4.15331                automatic NOE Peak 491 resort_c-ali 
+AmbiguousNMRDistance 1HB 19 HA 50 BOUNDED     1.5     5.5   1                                           VC 0.233 
+AmbiguousNMRDistance 1HB 19 HA 51 BOUNDED     1.5     5.5   1                                          VC 0.0294 
+AmbiguousNMRDistance 1HB 19 HA 53 BOUNDED     1.5     5.5   1                                           VC 0.384 
+AmbiguousNMRDistance 1HB 19 HA 56 BOUNDED     1.5     5.5   1                                           VC 0.354 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.34157 4.15331                automatic NOE Peak 513 resort_c-ali 
+AmbiguousNMRDistance QG1 20 H 51 BOUNDED     1.5     5.5   1                                           VC 0.253 
+AmbiguousNMRDistance QG1 20 H 52 BOUNDED     1.5     5.5   1                                           VC 0.747 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.41152 4.15331                automatic NOE Peak 514 resort_c-ali 
+AmbiguousNMRDistance QG1 20 HA 22 BOUNDED     1.5     5.5   1                                          VC 0.0259 
+AmbiguousNMRDistance QG1 20 HA 33 BOUNDED     1.5     5.5   1                                          VC 0.0105 
+AmbiguousNMRDistance QG1 20 HB 52 BOUNDED     1.5     5.5   1                                           VC 0.964 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.11386 4.15331                automatic NOE Peak 516 resort_c-ali 
+AmbiguousNMRDistance QG1 20 HA 50 BOUNDED     1.5     5.5   1                                           VC 0.673 
+AmbiguousNMRDistance QG1 20 HA 56 BOUNDED     1.5     5.5   1                                           VC 0.327 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.90853 4.15331                automatic NOE Peak 526 resort_c-ali 
+AmbiguousNMRDistance QG2 20 QD 34 BOUNDED     1.5     5.5   1                                          VC 0.0148 
+AmbiguousNMRDistance QG2 20 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.985 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.30503 4.15331                automatic NOE Peak 586 resort_c-ali 
+AmbiguousNMRDistance QG2 12 HA 23 BOUNDED     1.5     5.5   1                                           VC 0.039 
+AmbiguousNMRDistance QD2 18 HA 23 BOUNDED     1.5     5.5   1                                           VC 0.961 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.05163 4.15331                automatic NOE Peak 596 resort_c-ali 
+AmbiguousNMRDistance QG2 12 2HB 23 BOUNDED     1.5     5.5   1                                           VC 0.576 
+AmbiguousNMRDistance QD2 18 2HB 23 BOUNDED     1.5     5.5   1                                           VC 0.424 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.80362 4.15331                automatic NOE Peak 597 resort_c-ali 
+AmbiguousNMRDistance QG2 12 1HB 23 BOUNDED     1.5     5.5   1                                           VC 0.255 
+AmbiguousNMRDistance QD2 18 1HB 23 BOUNDED     1.5     5.5   1                                           VC 0.745 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.07049 4.15331                automatic NOE Peak 613 resort_c-ali 
+AmbiguousNMRDistance 1HB 3 QD1 39 BOUNDED     1.5     5.5   1                                           VC 0.214 
+AmbiguousNMRDistance 1HB 23 QD1 39 BOUNDED     1.5     5.5   1                                           VC 0.101 
+AmbiguousNMRDistance QG 28 QD1 39 BOUNDED     1.5     5.5   1                                           VC 0.256 
+AmbiguousNMRDistance QB 30 QD1 39 BOUNDED     1.5     5.5   1                                           VC 0.178 
+AmbiguousNMRDistance QD1 39 1HB 46 BOUNDED     1.5     5.5   1                                           VC 0.209 
+AmbiguousNMRDistance QD1 39 QB 59 BOUNDED     1.5     5.5   1                                          VC 0.0419 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.08727 4.15331                automatic NOE Peak 617 resort_c-ali 
+AmbiguousNMRDistance QQG 5 HG 23 BOUNDED     1.5     5.5   1                                          VC 0.0825 
+AmbiguousNMRDistance QG2 12 HG 23 BOUNDED     1.5     5.5   1                                           VC 0.351 
+AmbiguousNMRDistance QD2 18 HG 23 BOUNDED     1.5     5.5   1                                           VC 0.566 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.84881 4.15331                automatic NOE Peak 714 resort_c-ali 
+AmbiguousNMRDistance QD1 27 QE 62 BOUNDED     1.5     5.5   1                                           VC 0.418 
+AmbiguousNMRDistance QG2 29 QE 62 BOUNDED     1.5     5.5   1                                           VC 0.582 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.45286 4.15331                automatic NOE Peak 760 resort_c-ali 
+AmbiguousNMRDistance 1HD 9 HB 29 BOUNDED     1.5     5.5   1                                          VC 0.0913 
+AmbiguousNMRDistance 1HA 14 HB 29 BOUNDED     1.5     5.5   1                                           VC 0.285 
+AmbiguousNMRDistance HA 24 HB 29 BOUNDED     1.5     5.5   1                                           VC 0.624 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.28623 4.15331                automatic NOE Peak 772 resort_c-ali 
+AmbiguousNMRDistance QD2 23 QG1 29 BOUNDED     1.5     5.5   1                                          VC 0.0824 
+AmbiguousNMRDistance QD2 24 QG1 29 BOUNDED     1.5     5.5   1                                           VC 0.393 
+AmbiguousNMRDistance QG1 29 QD1 63 BOUNDED     1.5     5.5   1                                           VC 0.274 
+AmbiguousNMRDistance QG1 29 QD2 63 BOUNDED     1.5     5.5   1                                            VC 0.25 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.45018 4.15331                automatic NOE Peak 779 resort_c-ali 
+AmbiguousNMRDistance QD1 27 HZ 62 BOUNDED     1.5     5.5   1                                           VC 0.281 
+AmbiguousNMRDistance QG2 29 1HE2 31 BOUNDED     1.5     5.5   1                                          VC 0.0438 
+AmbiguousNMRDistance QG2 29 HZ 62 BOUNDED     1.5     5.5   1                                           VC 0.657 
+AmbiguousNMRDistance QG2 29 QE 64 BOUNDED     1.5     5.5   1                                           VC 0.011 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.46326 4.15331                automatic NOE Peak 834 resort_c-ali 
+AmbiguousNMRDistance 2HB 24 QB 32 BOUNDED     1.5     5.5   1                                           VC 0.961 
+AmbiguousNMRDistance 2HB 28 QB 32 BOUNDED     1.5     5.5   1                                          VC 0.0386 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.08309 4.15331                automatic NOE Peak 835 resort_c-ali 
+AmbiguousNMRDistance QD2 23 QB 32 BOUNDED     1.5     5.5   1                                          VC 0.0282 
+AmbiguousNMRDistance QD2 24 QB 32 BOUNDED     1.5     5.5   1                                           VC 0.872 
+AmbiguousNMRDistance QB 32 QG2 35 BOUNDED     1.5     5.5   1                                          VC 0.0994 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.74931 4.15331                automatic NOE Peak 914 resort_c-ali 
+AmbiguousNMRDistance 1HD2 2 QG2 35 BOUNDED     1.5     5.5   1                                           VC 0.125 
+AmbiguousNMRDistance QG2 35 QE 62 BOUNDED     1.5     5.5   1                                           VC 0.875 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 3.80441 4.15331                automatic NOE Peak 932 resort_c-ali 
+AmbiguousNMRDistance QG2 36 QD2 39 BOUNDED     1.5     5.5   1                                          VC 0.0232 
+AmbiguousNMRDistance QG2 36 QG1 43 BOUNDED     1.5     5.5   1                                           VC 0.941 
+AmbiguousNMRDistance QG2 36 QQD 44 BOUNDED     1.5     5.5   1                                           VC 0.012 
+AmbiguousNMRDistance QG2 36 HG 44 BOUNDED     1.5     5.5   1                                          VC 0.0242 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  5.4251 4.15331                automatic NOE Peak 954 resort_c-ali 
+AmbiguousNMRDistance QD 34 QG1 37 BOUNDED     1.5     5.5   1                                          VC 0.0271 
+AmbiguousNMRDistance QG1 37 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.188 
+AmbiguousNMRDistance QG1 37 QD 62 BOUNDED     1.5     5.5   1                                           VC 0.778 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.37181 4.15331                automatic NOE Peak 968 resort_c-ali 
+AmbiguousNMRDistance HA 38 HA 43 BOUNDED     1.5     5.5   1                                           VC 0.957 
+AmbiguousNMRDistance HA 38 HA 47 BOUNDED     1.5     5.5   1                                          VC 0.0429 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.59979 4.15331                automatic NOE Peak 979 resort_c-ali 
+AmbiguousNMRDistance 2HB 38 HA 43 BOUNDED     1.5     5.5   1                                           VC 0.909 
+AmbiguousNMRDistance 2HB 38 HA 47 BOUNDED     1.5     5.5   1                                          VC 0.0908 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.35033 4.15331                automatic NOE Peak 980 resort_c-ali 
+AmbiguousNMRDistance 1HB 38 HA 43 BOUNDED     1.5     5.5   1                                             VC 0.9 
+AmbiguousNMRDistance 1HB 38 HA 47 BOUNDED     1.5     5.5   1                                             VC 0.1 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.37225 4.15331               automatic NOE Peak 1003 resort_c-ali 
+AmbiguousNMRDistance 1HB 3 HA 39 BOUNDED     1.5     5.5   1                                           VC 0.179 
+AmbiguousNMRDistance 1HB 23 HA 39 BOUNDED     1.5     5.5   1                                          VC 0.0248 
+AmbiguousNMRDistance QG 28 HA 39 BOUNDED     1.5     5.5   1                                           VC 0.302 
+AmbiguousNMRDistance QB 30 HA 39 BOUNDED     1.5     5.5   1                                           VC 0.177 
+AmbiguousNMRDistance HA 39 1HB 46 BOUNDED     1.5     5.5   1                                           VC 0.206 
+AmbiguousNMRDistance HA 39 QB 59 BOUNDED     1.5     5.5   1                                           VC 0.111 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.71122 4.15331               automatic NOE Peak 1029 resort_c-ali 
+AmbiguousNMRDistance QG 28 HA 40 BOUNDED     1.5     5.5   1                                          VC 0.0945 
+AmbiguousNMRDistance QB 30 HA 40 BOUNDED     1.5     5.5   1                                          VC 0.0348 
+AmbiguousNMRDistance HA 40 1HB 46 BOUNDED     1.5     5.5   1                                           VC 0.045 
+AmbiguousNMRDistance HA 40 QB 59 BOUNDED     1.5     5.5   1                                           VC 0.821 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.92386 4.15331               automatic NOE Peak 1042 resort_c-ali 
+AmbiguousNMRDistance 1HB 3 2HB 40 BOUNDED     1.5     5.5   1                                          VC 0.0413 
+AmbiguousNMRDistance QG 28 2HB 40 BOUNDED     1.5     5.5   1                                           VC 0.778 
+AmbiguousNMRDistance QB 30 2HB 40 BOUNDED     1.5     5.5   1                                          VC 0.0648 
+AmbiguousNMRDistance 2HB 40 1HB 46 BOUNDED     1.5     5.5   1                                          VC 0.0805 
+AmbiguousNMRDistance 2HB 40 QB 59 BOUNDED     1.5     5.5   1                                          VC 0.0339 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  6.1217 4.15331               automatic NOE Peak 1043 resort_c-ali 
+AmbiguousNMRDistance 1HB 3 1HB 40 BOUNDED     1.5     5.5   1                                           VC 0.116 
+AmbiguousNMRDistance QG 28 1HB 40 BOUNDED     1.5     5.5   1                                           VC 0.378 
+AmbiguousNMRDistance QB 30 1HB 40 BOUNDED     1.5     5.5   1                                           VC 0.167 
+AmbiguousNMRDistance 1HB 40 1HB 46 BOUNDED     1.5     5.5   1                                           VC 0.212 
+AmbiguousNMRDistance 1HB 40 QB 59 BOUNDED     1.5     5.5   1                                           VC 0.119 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.23516 4.15331               automatic NOE Peak 1076 resort_c-ali 
+AmbiguousNMRDistance HA 37 HA 43 BOUNDED     1.5     5.5   1                                          VC 0.0931 
+AmbiguousNMRDistance HA 38 HA 43 BOUNDED     1.5     5.5   1                                           VC 0.864 
+AmbiguousNMRDistance HA 39 HA 43 BOUNDED     1.5     5.5   1                                          VC 0.0427 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.21367 4.15331               automatic NOE Peak 1114 resort_c-ali 
+AmbiguousNMRDistance 2HB 44 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.977 
+AmbiguousNMRDistance 2HB 44 QD 62 BOUNDED     1.5     5.5   1                                          VC 0.0175 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.14726 4.15331               automatic NOE Peak 1115 resort_c-ali 
+AmbiguousNMRDistance 1HB 44 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.977 
+AmbiguousNMRDistance 1HB 44 QD 62 BOUNDED     1.5     5.5   1                                          VC 0.0146 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.43347 4.15331               automatic NOE Peak 1117 resort_c-ali 
+AmbiguousNMRDistance H 25 1HB 44 BOUNDED     1.5     5.5   1                                          VC 0.0158 
+AmbiguousNMRDistance 1HB 44 QE 49 BOUNDED     1.5     5.5   1                                           VC 0.984 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.44194 4.15331               automatic NOE Peak 1129 resort_c-ali 
+AmbiguousNMRDistance H 25 HG 44 BOUNDED     1.5     5.5   1                                          VC 0.0511 
+AmbiguousNMRDistance HG 44 QE 49 BOUNDED     1.5     5.5   1                                           VC 0.949 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.47184 4.15331               automatic NOE Peak 1249 resort_c-ali 
+AmbiguousNMRDistance HB 20 HA 49 BOUNDED     1.5     5.5   1                                           VC 0.716 
+AmbiguousNMRDistance 1HB 22 HA 49 BOUNDED     1.5     5.5   1                                           VC 0.272 
+AmbiguousNMRDistance 1HB 45 HA 49 BOUNDED     1.5     5.5   1                                          VC 0.0126 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.89207 4.15331               automatic NOE Peak 1250 resort_c-ali 
+AmbiguousNMRDistance QD1 3 HA 49 BOUNDED     1.5     5.5   1                                           VC 0.123 
+AmbiguousNMRDistance QG1 20 HA 49 BOUNDED     1.5     5.5   1                                            VC 0.62 
+AmbiguousNMRDistance HA 49 QG1 54 BOUNDED     1.5     5.5   1                                           VC 0.256 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  5.5359 4.15331               automatic NOE Peak 1252 resort_c-ali 
+AmbiguousNMRDistance QD1 23 HA 49 BOUNDED     1.5     5.5   1                                          VC 0.0318 
+AmbiguousNMRDistance QG1 43 HA 49 BOUNDED     1.5     5.5   1                                          VC 0.0194 
+AmbiguousNMRDistance QQD 44 HA 49 BOUNDED     1.5     5.5   1                                          VC 0.0921 
+AmbiguousNMRDistance HG 44 HA 49 BOUNDED     1.5     5.5   1                                           VC 0.704 
+AmbiguousNMRDistance HA 49 QG2 54 BOUNDED     1.5     5.5   1                                           VC 0.153 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.71295 4.15331               automatic NOE Peak 1262 resort_c-ali 
+AmbiguousNMRDistance HB 20 1HB 49 BOUNDED     1.5     5.5   1                                            VC 0.83 
+AmbiguousNMRDistance 1HB 22 1HB 49 BOUNDED     1.5     5.5   1                                            VC 0.11 
+AmbiguousNMRDistance 1HB 45 1HB 49 BOUNDED     1.5     5.5   1                                          VC 0.0607 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.26932 4.15331               automatic NOE Peak 1263 resort_c-ali 
+AmbiguousNMRDistance QD1 3 2HB 49 BOUNDED     1.5     5.5   1                                          VC 0.0783 
+AmbiguousNMRDistance QG1 20 2HB 49 BOUNDED     1.5     5.5   1                                           VC 0.414 
+AmbiguousNMRDistance QG2 35 2HB 49 BOUNDED     1.5     5.5   1                                          VC 0.0291 
+AmbiguousNMRDistance 2HB 49 QG1 54 BOUNDED     1.5     5.5   1                                            VC 0.47 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.24644 4.15331               automatic NOE Peak 1264 resort_c-ali 
+AmbiguousNMRDistance QD1 3 1HB 49 BOUNDED     1.5     5.5   1                                             VC 0.2 
+AmbiguousNMRDistance QG1 20 1HB 49 BOUNDED     1.5     5.5   1                                           VC 0.492 
+AmbiguousNMRDistance QG2 35 1HB 49 BOUNDED     1.5     5.5   1                                          VC 0.0563 
+AmbiguousNMRDistance 1HB 49 QG1 54 BOUNDED     1.5     5.5   1                                           VC 0.235 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.45281 4.15331               automatic NOE Peak 1308 resort_c-ali 
+AmbiguousNMRDistance QG1 20 HB 52 BOUNDED     1.5     5.5   1                                           VC 0.948 
+AmbiguousNMRDistance HB 52 QG1 54 BOUNDED     1.5     5.5   1                                           VC 0.052 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.80744 4.15331               automatic NOE Peak 1357 resort_c-ali 
+AmbiguousNMRDistance 1HB 18 HB 54 BOUNDED     1.5     5.5   1                                           VC 0.547 
+AmbiguousNMRDistance 1HB 23 HB 54 BOUNDED     1.5     5.5   1                                          VC 0.0267 
+AmbiguousNMRDistance QB 32 HB 54 BOUNDED     1.5     5.5   1                                           VC 0.375 
+AmbiguousNMRDistance HB 54 QB 59 BOUNDED     1.5     5.5   1                                          VC 0.0505 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.82319 4.15331               automatic NOE Peak 1360 resort_c-ali 
+AmbiguousNMRDistance 1HB 23 QG1 54 BOUNDED     1.5     5.5   1                                          VC 0.0504 
+AmbiguousNMRDistance QB 32 QG1 54 BOUNDED     1.5     5.5   1                                           VC 0.906 
+AmbiguousNMRDistance QG1 54 QB 59 BOUNDED     1.5     5.5   1                                          VC 0.0299 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.35801 4.15331               automatic NOE Peak 1366 resort_c-ali 
+AmbiguousNMRDistance 2HB 23 QG2 54 BOUNDED     1.5     5.5   1                                           VC 0.932 
+AmbiguousNMRDistance 1HB 31 QG2 54 BOUNDED     1.5     5.5   1                                          VC 0.0655 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.30502 4.15331               automatic NOE Peak 1367 resort_c-ali 
+AmbiguousNMRDistance 1HB 23 QG2 54 BOUNDED     1.5     5.5   1                                           VC 0.181 
+AmbiguousNMRDistance QB 32 QG2 54 BOUNDED     1.5     5.5   1                                           VC 0.584 
+AmbiguousNMRDistance QG2 54 QB 59 BOUNDED     1.5     5.5   1                                           VC 0.235 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.21687 4.15331               automatic NOE Peak 1412 resort_c-ali 
+AmbiguousNMRDistance 2HG 1 HA 56 BOUNDED     1.5     5.5   1                                           VC 0.322 
+AmbiguousNMRDistance 2HB 45 HA 56 BOUNDED     1.5     5.5   1                                            VC 0.14 
+AmbiguousNMRDistance 1HG 47 HA 56 BOUNDED     1.5     5.5   1                                           VC 0.538 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.13879 4.15331               automatic NOE Peak 1413 resort_c-ali 
+AmbiguousNMRDistance 2HB 44 HA 50 BOUNDED     1.5     5.5   1                                          VC 0.0116 
+AmbiguousNMRDistance 1HB 1 HA 56 BOUNDED     1.5     5.5   1                                           VC 0.988 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.69163 4.15331               automatic NOE Peak 1416 resort_c-ali 
+AmbiguousNMRDistance QD2 3 HA 50 BOUNDED     1.5     5.5   1                                           VC 0.352 
+AmbiguousNMRDistance QD2 3 HA 56 BOUNDED     1.5     5.5   1                                           VC 0.648 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.85959 4.15331               automatic NOE Peak 1422 resort_c-ali 
+AmbiguousNMRDistance 2HB 1 2HB 56 BOUNDED     1.5     5.5   1                                           VC 0.983 
+AmbiguousNMRDistance 1HG 47 2HB 56 BOUNDED     1.5     5.5   1                                          VC 0.0147 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.02754 4.15331               automatic NOE Peak 1423 resort_c-ali 
+AmbiguousNMRDistance 2HB 1 1HB 56 BOUNDED     1.5     5.5   1                                           VC 0.801 
+AmbiguousNMRDistance 2HG 22 1HB 56 BOUNDED     1.5     5.5   1                                          VC 0.0261 
+AmbiguousNMRDistance 1HG 47 1HB 56 BOUNDED     1.5     5.5   1                                           VC 0.173 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.66847 4.15331               automatic NOE Peak 1424 resort_c-ali 
+AmbiguousNMRDistance 1HB 1 2HB 56 BOUNDED     1.5     5.5   1                                           VC 0.989 
+AmbiguousNMRDistance 2HB 56 2HB 66 BOUNDED     1.5     5.5   1                                          VC 0.0113 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.01451 4.15331               automatic NOE Peak 1425 resort_c-ali 
+AmbiguousNMRDistance 1HB 1 1HB 56 BOUNDED     1.5     5.5   1                                           VC 0.958 
+AmbiguousNMRDistance 1HB 56 2HB 66 BOUNDED     1.5     5.5   1                                          VC 0.0418 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.56623 4.15331               automatic NOE Peak 1427 resort_c-ali 
+AmbiguousNMRDistance H 2 1HB 56 BOUNDED     1.5     5.5   1                                            VC 0.98 
+AmbiguousNMRDistance H 37 1HB 56 BOUNDED     1.5     5.5   1                                          VC 0.0201 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.08751 4.15331               automatic NOE Peak 1453 resort_c-ali 
+AmbiguousNMRDistance QD2 3 2HB 58 BOUNDED     1.5     5.5   1                                           VC 0.525 
+AmbiguousNMRDistance QD2 18 2HB 58 BOUNDED     1.5     5.5   1                                           VC 0.126 
+AmbiguousNMRDistance QG1 35 2HB 58 BOUNDED     1.5     5.5   1                                           VC 0.184 
+AmbiguousNMRDistance QG2 37 2HB 58 BOUNDED     1.5     5.5   1                                           VC 0.166 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  6.0134 4.15331               automatic NOE Peak 1454 resort_c-ali 
+AmbiguousNMRDistance QD2 3 1HB 58 BOUNDED     1.5     5.5   1                                           VC 0.497 
+AmbiguousNMRDistance QD2 18 1HB 58 BOUNDED     1.5     5.5   1                                           VC 0.112 
+AmbiguousNMRDistance QG1 35 1HB 58 BOUNDED     1.5     5.5   1                                           VC 0.202 
+AmbiguousNMRDistance QG2 37 1HB 58 BOUNDED     1.5     5.5   1                                           VC 0.189 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.59571 4.15331               automatic NOE Peak 1455 resort_c-ali 
+AmbiguousNMRDistance QD1 18 2HB 58 BOUNDED     1.5     5.5   1                                            VC 0.56 
+AmbiguousNMRDistance QD1 23 2HB 58 BOUNDED     1.5     5.5   1                                          VC 0.0209 
+AmbiguousNMRDistance QD2 39 2HB 58 BOUNDED     1.5     5.5   1                                           VC 0.321 
+AmbiguousNMRDistance QG2 54 2HB 58 BOUNDED     1.5     5.5   1                                          VC 0.0979 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  4.5058 4.15331               automatic NOE Peak 1456 resort_c-ali 
+AmbiguousNMRDistance QD1 18 1HB 58 BOUNDED     1.5     5.5   1                                           VC 0.624 
+AmbiguousNMRDistance QD1 23 1HB 58 BOUNDED     1.5     5.5   1                                          VC 0.0195 
+AmbiguousNMRDistance QD2 39 1HB 58 BOUNDED     1.5     5.5   1                                           VC 0.278 
+AmbiguousNMRDistance QG2 54 1HB 58 BOUNDED     1.5     5.5   1                                          VC 0.0772 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.13896 4.15331               automatic NOE Peak 1494 resort_c-ali 
+AmbiguousNMRDistance HA 5 QG1 60 BOUNDED     1.5     5.5   1                                           VC 0.209 
+AmbiguousNMRDistance HA 35 QG1 60 BOUNDED     1.5     5.5   1                                           VC 0.779 
+AmbiguousNMRDistance HA 36 QG1 60 BOUNDED     1.5     5.5   1                                          VC 0.0123 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.82329 4.15331               automatic NOE Peak 1526 resort_c-ali 
+AmbiguousNMRDistance H 19 2HG 61 BOUNDED     1.5     5.5   1                                           VC 0.309 
+AmbiguousNMRDistance H 38 2HG 61 BOUNDED     1.5     5.5   1                                           VC 0.691 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.30548 4.15331               automatic NOE Peak 1527 resort_c-ali 
+AmbiguousNMRDistance H 19 1HG 61 BOUNDED     1.5     5.5   1                                           VC 0.113 
+AmbiguousNMRDistance H 38 1HG 61 BOUNDED     1.5     5.5   1                                           VC 0.887 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.74463 4.15331               automatic NOE Peak 1663 resort_c-ali 
+AmbiguousNMRDistance HB 12 1HB 23 BOUNDED     1.5     5.5   1                                           VC 0.407 
+AmbiguousNMRDistance HB 12 QB 30 BOUNDED     1.5     5.5   1                                           VC 0.593 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.33351 4.15331               automatic NOE Peak 1696 resort_c-ali 
+AmbiguousNMRDistance HB 20 H 53 BOUNDED     1.5     5.5   1                                           VC 0.338 
+AmbiguousNMRDistance H 4 1HB 22 BOUNDED     1.5     5.5   1                                           VC 0.662 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.71155 4.15331               automatic NOE Peak 1700 resort_c-ali 
+AmbiguousNMRDistance HB 20 HA 49 BOUNDED     1.5     5.5   1                                           VC 0.946 
+AmbiguousNMRDistance HB 20 HA 54 BOUNDED     1.5     5.5   1                                           VC 0.054 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.03461 4.15331                  automatic NOE Peak 3 resort_c-aro 
+AmbiguousNMRDistance QD1 18 HZ 62 BOUNDED     1.5     5.5   1                                           VC 0.346 
+AmbiguousNMRDistance QD1 23 HZ 62 BOUNDED     1.5     5.5   1                                           VC 0.639 
+AmbiguousNMRDistance QQD 44 HZ 62 BOUNDED     1.5     5.5   1                                          VC 0.0143 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.88609 4.15331                  automatic NOE Peak 4 resort_c-aro 
+AmbiguousNMRDistance 2HB 3 HZ 62 BOUNDED     1.5     5.5   1                                            VC 0.21 
+AmbiguousNMRDistance HG 23 HZ 62 BOUNDED     1.5     5.5   1                                           VC 0.207 
+AmbiguousNMRDistance HB 37 HZ 62 BOUNDED     1.5     5.5   1                                            VC 0.56 
+AmbiguousNMRDistance 1HB 44 HZ 62 BOUNDED     1.5     5.5   1                                          VC 0.0229 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.33442 4.15331                  automatic NOE Peak 5 resort_c-aro 
+AmbiguousNMRDistance QD1 24 HZ 62 BOUNDED     1.5     5.5   1                                          VC 0.0428 
+AmbiguousNMRDistance QD1 27 HZ 62 BOUNDED     1.5     5.5   1                                           VC 0.527 
+AmbiguousNMRDistance QG2 29 HZ 62 BOUNDED     1.5     5.5   1                                          VC 0.0786 
+AmbiguousNMRDistance QG1 37 HZ 62 BOUNDED     1.5     5.5   1                                           VC 0.351 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.73259 4.15331                  automatic NOE Peak 6 resort_c-aro 
+AmbiguousNMRDistance QD1 27 QE 62 BOUNDED     1.5     5.5   1                                           VC 0.403 
+AmbiguousNMRDistance QG2 29 QE 62 BOUNDED     1.5     5.5   1                                          VC 0.0848 
+AmbiguousNMRDistance QG1 37 QE 62 BOUNDED     1.5     5.5   1                                           VC 0.509 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.90912 4.15331                 automatic NOE Peak 24 resort_c-aro 
+AmbiguousNMRDistance HB 20 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.857 
+AmbiguousNMRDistance 1HB 22 QD 49 BOUNDED     1.5     5.5   1                                          VC 0.0451 
+AmbiguousNMRDistance HB 35 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.053 
+AmbiguousNMRDistance 1HB 45 QD 49 BOUNDED     1.5     5.5   1                                          VC 0.0415 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.89497 4.15331                 automatic NOE Peak 27 resort_c-aro 
+AmbiguousNMRDistance HG 3 QD 49 BOUNDED     1.5     5.5   1                                          VC 0.0241 
+AmbiguousNMRDistance QG2 21 QD 49 BOUNDED     1.5     5.5   1                                            VC 0.86 
+AmbiguousNMRDistance QG 46 QD 49 BOUNDED     1.5     5.5   1                                          VC 0.0712 
+AmbiguousNMRDistance QD 49 1HG 55 BOUNDED     1.5     5.5   1                                          VC 0.0445 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.39079 4.15331                 automatic NOE Peak 28 resort_c-aro 
+AmbiguousNMRDistance QD1 24 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.097 
+AmbiguousNMRDistance QG1 37 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.903 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.04617 4.15331                 automatic NOE Peak 30 resort_c-aro 
+AmbiguousNMRDistance QG1 43 QD 49 BOUNDED     1.5     5.5   1                                          VC 0.0309 
+AmbiguousNMRDistance QQD 44 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.379 
+AmbiguousNMRDistance HG 44 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.463 
+AmbiguousNMRDistance QD 49 QG2 54 BOUNDED     1.5     5.5   1                                           VC 0.127 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.44374 4.15331                 automatic NOE Peak 37 resort_c-aro 
+AmbiguousNMRDistance QD1 3 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.147 
+AmbiguousNMRDistance QG1 20 QD 49 BOUNDED     1.5     5.5   1                                            VC 0.17 
+AmbiguousNMRDistance QD2 24 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.012 
+AmbiguousNMRDistance QG2 35 QD 49 BOUNDED     1.5     5.5   1                                           VC 0.551 
+AmbiguousNMRDistance QD 49 QG1 54 BOUNDED     1.5     5.5   1                                            VC 0.12 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.31469 4.15331                 automatic NOE Peak 41 resort_c-aro 
+AmbiguousNMRDistance QD1 24 QE 49 BOUNDED     1.5     5.5   1                                           VC 0.441 
+AmbiguousNMRDistance QD1 27 QE 49 BOUNDED     1.5     5.5   1                                          VC 0.0364 
+AmbiguousNMRDistance QG1 37 QE 49 BOUNDED     1.5     5.5   1                                           VC 0.523 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.56622 4.15331                 automatic NOE Peak 42 resort_c-aro 
+AmbiguousNMRDistance 2HB 24 QE 49 BOUNDED     1.5     5.5   1                                            VC 0.18 
+AmbiguousNMRDistance 2HB 44 QE 49 BOUNDED     1.5     5.5   1                                           VC 0.786 
+AmbiguousNMRDistance QB 47 QE 49 BOUNDED     1.5     5.5   1                                          VC 0.0331 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.99855 4.15331                 automatic NOE Peak 44 resort_c-aro 
+AmbiguousNMRDistance QQD 44 QE 49 BOUNDED     1.5     5.5   1                                           VC 0.945 
+AmbiguousNMRDistance QE 49 QG2 54 BOUNDED     1.5     5.5   1                                          VC 0.0494 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.04186 4.15331                 automatic NOE Peak 50 resort_c-aro 
+AmbiguousNMRDistance QD1 3 QE 49 BOUNDED     1.5     5.5   1                                           VC 0.239 
+AmbiguousNMRDistance QD2 23 QE 49 BOUNDED     1.5     5.5   1                                           VC 0.076 
+AmbiguousNMRDistance QD2 24 QE 49 BOUNDED     1.5     5.5   1                                           VC 0.246 
+AmbiguousNMRDistance QG2 35 QE 49 BOUNDED     1.5     5.5   1                                           VC 0.216 
+AmbiguousNMRDistance QE 49 QG1 54 BOUNDED     1.5     5.5   1                                          VC 0.0992 
+AmbiguousNMRDistance QE 49 QG1 60 BOUNDED     1.5     5.5   1                                          VC 0.0783 
+AmbiguousNMRDistance QE 49 QD1 63 BOUNDED     1.5     5.5   1                                          VC 0.0235 
+AmbiguousNMRDistance QE 49 QD2 63 BOUNDED     1.5     5.5   1                                          VC 0.0221 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.32183 4.15331                 automatic NOE Peak 53 resort_c-aro 
+AmbiguousNMRDistance QD2 3 HZ 62 BOUNDED     1.5     5.5   1                                           VC 0.501 
+AmbiguousNMRDistance QG1 35 HZ 62 BOUNDED     1.5     5.5   1                                           VC 0.221 
+AmbiguousNMRDistance QG2 37 HZ 62 BOUNDED     1.5     5.5   1                                           VC 0.279 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.78366 4.15331                 automatic NOE Peak 56 resort_c-aro 
+AmbiguousNMRDistance QD1 27 QD 62 BOUNDED     1.5     5.5   1                                           VC 0.116 
+AmbiguousNMRDistance QG2 29 QD 62 BOUNDED     1.5     5.5   1                                          VC 0.0461 
+AmbiguousNMRDistance QG1 37 QD 62 BOUNDED     1.5     5.5   1                                           VC 0.838 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.55689 4.15331                 automatic NOE Peak 65 resort_c-aro 
+AmbiguousNMRDistance QD1 18 QE 62 BOUNDED     1.5     5.5   1                                           VC 0.321 
+AmbiguousNMRDistance QD1 23 QE 62 BOUNDED     1.5     5.5   1                                           VC 0.193 
+AmbiguousNMRDistance QD2 27 QE 62 BOUNDED     1.5     5.5   1                                           VC 0.336 
+AmbiguousNMRDistance QD2 39 QE 62 BOUNDED     1.5     5.5   1                                            VC 0.15 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.18416 4.15331                 automatic NOE Peak 66 resort_c-aro 
+AmbiguousNMRDistance QD2 3 QE 62 BOUNDED     1.5     5.5   1                                           VC 0.633 
+AmbiguousNMRDistance QG1 35 QE 62 BOUNDED     1.5     5.5   1                                           VC 0.137 
+AmbiguousNMRDistance QG2 37 QE 62 BOUNDED     1.5     5.5   1                                           VC 0.231 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.94052 4.15331                 automatic NOE Peak 80 resort_c-aro 
+AmbiguousNMRDistance HA 35 HZ 65 BOUNDED     1.5     5.5   1                                           VC 0.211 
+AmbiguousNMRDistance HA 36 HZ 65 BOUNDED     1.5     5.5   1                                           VC 0.789 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.42731 4.15331                      automatic NOE Peak 4 resort_n 
+AmbiguousNMRDistance HA 3 H 59 BOUNDED     1.5     5.5   1                                           VC 0.964 
+AmbiguousNMRDistance HA 8 H 59 BOUNDED     1.5     5.5   1                                          VC 0.0357 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.79099 4.15331                      automatic NOE Peak 5 resort_n 
+AmbiguousNMRDistance H 18 HA 50 BOUNDED     1.5     5.5   1                                          VC 0.0403 
+AmbiguousNMRDistance H 18 HA 53 BOUNDED     1.5     5.5   1                                           VC 0.867 
+AmbiguousNMRDistance H 18 HA 56 BOUNDED     1.5     5.5   1                                          VC 0.0925 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.08504 4.15331                      automatic NOE Peak 9 resort_n 
+AmbiguousNMRDistance H 36 2HB 63 BOUNDED     1.5     5.5   1                                            VC 0.26 
+AmbiguousNMRDistance H 36 HG 63 BOUNDED     1.5     5.5   1                                            VC 0.32 
+AmbiguousNMRDistance H 43 2HB 63 BOUNDED     1.5     5.5   1                                           VC 0.188 
+AmbiguousNMRDistance H 43 HG 63 BOUNDED     1.5     5.5   1                                           VC 0.231 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.76319 4.15331                     automatic NOE Peak 10 resort_n 
+AmbiguousNMRDistance H 36 HA 62 BOUNDED     1.5     5.5   1                                           VC 0.602 
+AmbiguousNMRDistance H 43 HA 62 BOUNDED     1.5     5.5   1                                           VC 0.398 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.21467 4.15331                     automatic NOE Peak 24 resort_n 
+AmbiguousNMRDistance H 2 H 56 BOUNDED     1.5     5.5   1                                           VC 0.771 
+AmbiguousNMRDistance H 2 H 58 BOUNDED     1.5     5.5   1                                           VC 0.223 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.67818 4.15331                     automatic NOE Peak 25 resort_n 
+AmbiguousNMRDistance H 2 HA 50 BOUNDED     1.5     5.5   1                                          VC 0.0605 
+AmbiguousNMRDistance H 2 HA 56 BOUNDED     1.5     5.5   1                                            VC 0.94 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.47681 4.15331                     automatic NOE Peak 45 resort_n 
+AmbiguousNMRDistance H 3 H 5 BOUNDED     1.5     5.5   1                                          VC 0.0495 
+AmbiguousNMRDistance H 3 H 10 BOUNDED     1.5     5.5   1                                           VC 0.951 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.08161 4.15331                     automatic NOE Peak 48 resort_n 
+AmbiguousNMRDistance H 3 QG2 11 BOUNDED     1.5     5.5   1                                           VC 0.969 
+AmbiguousNMRDistance H 3 1HB 24 BOUNDED     1.5     5.5   1                                          VC 0.0309 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  5.0959 4.15331                     automatic NOE Peak 49 resort_n 
+AmbiguousNMRDistance H 3 H 11 BOUNDED     1.5     5.5   1                                           VC 0.675 
+AmbiguousNMRDistance H 3 H 12 BOUNDED     1.5     5.5   1                                           VC 0.325 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  4.5296 4.15331                     automatic NOE Peak 74 resort_n 
+AmbiguousNMRDistance QD1 3 H 6 BOUNDED     1.5     5.5   1                                          VC 0.0669 
+AmbiguousNMRDistance H 6 QG2 35 BOUNDED     1.5     5.5   1                                           VC 0.267 
+AmbiguousNMRDistance H 6 QG1 54 BOUNDED     1.5     5.5   1                                          VC 0.0381 
+AmbiguousNMRDistance H 6 QG1 60 BOUNDED     1.5     5.5   1                                           VC 0.289 
+AmbiguousNMRDistance H 6 QD1 63 BOUNDED     1.5     5.5   1                                           VC 0.142 
+AmbiguousNMRDistance H 6 QD2 63 BOUNDED     1.5     5.5   1                                           VC 0.198 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.22873 4.15331                     automatic NOE Peak 78 resort_n 
+AmbiguousNMRDistance H 6 H 60 BOUNDED     1.5     5.5   1                                           VC 0.454 
+AmbiguousNMRDistance H 6 H 62 BOUNDED     1.5     5.5   1                                           VC 0.546 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.76938 4.15331                     automatic NOE Peak 89 resort_n 
+AmbiguousNMRDistance 1HD2 6 H 60 BOUNDED     1.5     5.5   1                                           VC 0.324 
+AmbiguousNMRDistance 1HD2 6 H 62 BOUNDED     1.5     5.5   1                                           VC 0.676 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.03572 4.15331                     automatic NOE Peak 90 resort_n 
+AmbiguousNMRDistance 2HD2 6 H 60 BOUNDED     1.5     5.5   1                                           VC 0.342 
+AmbiguousNMRDistance 2HD2 6 H 62 BOUNDED     1.5     5.5   1                                           VC 0.658 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.76613 4.15331                     automatic NOE Peak 92 resort_n 
+AmbiguousNMRDistance 1HD2 6 QD 34 BOUNDED     1.5     5.5   1                                           VC 0.112 
+AmbiguousNMRDistance 1HD2 6 QD 62 BOUNDED     1.5     5.5   1                                           VC 0.865 
+AmbiguousNMRDistance 1HD2 6 QD 64 BOUNDED     1.5     5.5   1                                          VC 0.0237 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.82958 4.15331                     automatic NOE Peak 93 resort_n 
+AmbiguousNMRDistance 2HD2 6 QD 34 BOUNDED     1.5     5.5   1                                           VC 0.154 
+AmbiguousNMRDistance 2HD2 6 QD 62 BOUNDED     1.5     5.5   1                                           VC 0.792 
+AmbiguousNMRDistance 2HD2 6 QD 64 BOUNDED     1.5     5.5   1                                          VC 0.0545 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.69172 4.15331                     automatic NOE Peak 94 resort_n 
+AmbiguousNMRDistance 1HD2 6 QG2 35 BOUNDED     1.5     5.5   1                                            VC 0.21 
+AmbiguousNMRDistance 1HD2 6 QG1 54 BOUNDED     1.5     5.5   1                                          VC 0.0153 
+AmbiguousNMRDistance 1HD2 6 QG1 60 BOUNDED     1.5     5.5   1                                           VC 0.264 
+AmbiguousNMRDistance 1HD2 6 QD1 63 BOUNDED     1.5     5.5   1                                           VC 0.247 
+AmbiguousNMRDistance 1HD2 6 QD2 63 BOUNDED     1.5     5.5   1                                           VC 0.264 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.15218 4.15331                     automatic NOE Peak 95 resort_n 
+AmbiguousNMRDistance 2HD2 6 QG2 35 BOUNDED     1.5     5.5   1                                           VC 0.256 
+AmbiguousNMRDistance 2HD2 6 QG1 54 BOUNDED     1.5     5.5   1                                           VC 0.023 
+AmbiguousNMRDistance 2HD2 6 QG1 60 BOUNDED     1.5     5.5   1                                           VC 0.315 
+AmbiguousNMRDistance 2HD2 6 QD1 63 BOUNDED     1.5     5.5   1                                           VC 0.187 
+AmbiguousNMRDistance 2HD2 6 QD2 63 BOUNDED     1.5     5.5   1                                           VC 0.219 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.61345 4.15331                    automatic NOE Peak 121 resort_n 
+AmbiguousNMRDistance QD1 3 H 10 BOUNDED     1.5     5.5   1                                          VC 0.0355 
+AmbiguousNMRDistance QQG 5 H 10 BOUNDED     1.5     5.5   1                                           VC 0.685 
+AmbiguousNMRDistance H 10 QG2 12 BOUNDED     1.5     5.5   1                                           VC 0.016 
+AmbiguousNMRDistance H 10 QG1 54 BOUNDED     1.5     5.5   1                                           VC 0.263 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.78644 4.15331                    automatic NOE Peak 136 resort_n 
+AmbiguousNMRDistance 1HG 1 H 12 BOUNDED     1.5     5.5   1                                           VC 0.934 
+AmbiguousNMRDistance H 12 1HG 45 BOUNDED     1.5     5.5   1                                          VC 0.0665 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  4.9448 4.15331                    automatic NOE Peak 202 resort_n 
+AmbiguousNMRDistance H 18 HB 54 BOUNDED     1.5     5.5   1                                           VC 0.977 
+AmbiguousNMRDistance H 18 2HB 55 BOUNDED     1.5     5.5   1                                          VC 0.0231 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.02522 4.15331                    automatic NOE Peak 221 resort_n 
+AmbiguousNMRDistance H 19 HA 40 BOUNDED     1.5     5.5   1                                          VC 0.0573 
+AmbiguousNMRDistance H 19 HA 53 BOUNDED     1.5     5.5   1                                           VC 0.854 
+AmbiguousNMRDistance H 19 HA 56 BOUNDED     1.5     5.5   1                                          VC 0.0882 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.07363 4.15331                    automatic NOE Peak 240 resort_n 
+AmbiguousNMRDistance 1HD2 19 HA 50 BOUNDED     1.5     5.5   1                                           VC 0.391 
+AmbiguousNMRDistance 1HD2 19 HA 53 BOUNDED     1.5     5.5   1                                           VC 0.142 
+AmbiguousNMRDistance 1HD2 19 HA 56 BOUNDED     1.5     5.5   1                                           VC 0.467 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.86166 4.15331                    automatic NOE Peak 241 resort_n 
+AmbiguousNMRDistance 2HD2 19 HA 50 BOUNDED     1.5     5.5   1                                           VC 0.375 
+AmbiguousNMRDistance 2HD2 19 HA 53 BOUNDED     1.5     5.5   1                                           VC 0.163 
+AmbiguousNMRDistance 2HD2 19 HA 56 BOUNDED     1.5     5.5   1                                           VC 0.462 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.34126 4.15331                    automatic NOE Peak 252 resort_n 
+AmbiguousNMRDistance H 20 HA 22 BOUNDED     1.5     5.5   1                                          VC 0.0711 
+AmbiguousNMRDistance H 20 HB 52 BOUNDED     1.5     5.5   1                                           VC 0.919 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.87542 4.15331                    automatic NOE Peak 253 resort_n 
+AmbiguousNMRDistance H 20 1HB 24 BOUNDED     1.5     5.5   1                                          VC 0.0577 
+AmbiguousNMRDistance H 20 QG2 52 BOUNDED     1.5     5.5   1                                           VC 0.942 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.17263 4.15331                    automatic NOE Peak 254 resort_n 
+AmbiguousNMRDistance H 20 HA 50 BOUNDED     1.5     5.5   1                                          VC 0.0295 
+AmbiguousNMRDistance H 20 HA 53 BOUNDED     1.5     5.5   1                                           VC 0.919 
+AmbiguousNMRDistance H 20 HA 56 BOUNDED     1.5     5.5   1                                          VC 0.0433 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.19513 4.15331                    automatic NOE Peak 270 resort_n 
+AmbiguousNMRDistance H 21 HA 50 BOUNDED     1.5     5.5   1                                           VC 0.808 
+AmbiguousNMRDistance H 21 HA 53 BOUNDED     1.5     5.5   1                                          VC 0.0481 
+AmbiguousNMRDistance H 21 HA 56 BOUNDED     1.5     5.5   1                                           VC 0.144 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.85155 4.15331                    automatic NOE Peak 285 resort_n 
+AmbiguousNMRDistance HB 12 H 23 BOUNDED     1.5     5.5   1                                          VC 0.0217 
+AmbiguousNMRDistance 2HB 18 H 23 BOUNDED     1.5     5.5   1                                           VC 0.966 
+AmbiguousNMRDistance H 23 1HG 33 BOUNDED     1.5     5.5   1                                          VC 0.0123 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.08578 4.15331                    automatic NOE Peak 286 resort_n 
+AmbiguousNMRDistance QG2 12 H 23 BOUNDED     1.5     5.5   1                                          VC 0.0691 
+AmbiguousNMRDistance QD2 18 H 23 BOUNDED     1.5     5.5   1                                           VC 0.931 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.35439 4.15331                    automatic NOE Peak 371 resort_n 
+AmbiguousNMRDistance 1HD 9 H 29 BOUNDED     1.5     5.5   1                                          VC 0.0967 
+AmbiguousNMRDistance 1HA 14 H 29 BOUNDED     1.5     5.5   1                                           VC 0.199 
+AmbiguousNMRDistance HA 24 H 29 BOUNDED     1.5     5.5   1                                           VC 0.705 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.68421 4.15331                    automatic NOE Peak 495 resort_n 
+AmbiguousNMRDistance QG 28 H 40 BOUNDED     1.5     5.5   1                                            VC 0.11 
+AmbiguousNMRDistance QB 30 H 40 BOUNDED     1.5     5.5   1                                          VC 0.0549 
+AmbiguousNMRDistance H 40 1HB 46 BOUNDED     1.5     5.5   1                                          VC 0.0631 
+AmbiguousNMRDistance H 40 QB 59 BOUNDED     1.5     5.5   1                                           VC 0.768 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.96512 4.15331                    automatic NOE Peak 504 resort_n 
+AmbiguousNMRDistance HA 18 1HD2 40 BOUNDED     1.5     5.5   1                                           VC 0.264 
+AmbiguousNMRDistance HA 34 1HD2 40 BOUNDED     1.5     5.5   1                                           VC 0.736 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.83598 4.15331                    automatic NOE Peak 505 resort_n 
+AmbiguousNMRDistance HA 18 2HD2 40 BOUNDED     1.5     5.5   1                                           VC 0.665 
+AmbiguousNMRDistance HA 34 2HD2 40 BOUNDED     1.5     5.5   1                                           VC 0.335 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.46449 4.15331                    automatic NOE Peak 506 resort_n 
+AmbiguousNMRDistance 1HB 3 1HD2 40 BOUNDED     1.5     5.5   1                                           VC 0.266 
+AmbiguousNMRDistance QG 28 1HD2 40 BOUNDED     1.5     5.5   1                                           VC 0.345 
+AmbiguousNMRDistance QB 30 1HD2 40 BOUNDED     1.5     5.5   1                                           VC 0.167 
+AmbiguousNMRDistance 1HD2 40 1HB 46 BOUNDED     1.5     5.5   1                                           VC 0.218 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  4.9753 4.15331                    automatic NOE Peak 507 resort_n 
+AmbiguousNMRDistance 1HB 3 2HD2 40 BOUNDED     1.5     5.5   1                                           VC 0.254 
+AmbiguousNMRDistance QG 28 2HD2 40 BOUNDED     1.5     5.5   1                                           VC 0.353 
+AmbiguousNMRDistance QB 30 2HD2 40 BOUNDED     1.5     5.5   1                                           VC 0.169 
+AmbiguousNMRDistance 2HD2 40 1HB 46 BOUNDED     1.5     5.5   1                                            VC 0.22 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.72134 4.15331                    automatic NOE Peak 514 resort_n 
+AmbiguousNMRDistance QG 28 H 41 BOUNDED     1.5     5.5   1                                           VC 0.234 
+AmbiguousNMRDistance QB 30 H 41 BOUNDED     1.5     5.5   1                                           VC 0.088 
+AmbiguousNMRDistance H 41 1HB 46 BOUNDED     1.5     5.5   1                                          VC 0.0963 
+AmbiguousNMRDistance H 41 QB 59 BOUNDED     1.5     5.5   1                                           VC 0.582 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.94886 4.15331                    automatic NOE Peak 536 resort_n 
+AmbiguousNMRDistance QD2 18 H 44 BOUNDED     1.5     5.5   1                                           VC 0.306 
+AmbiguousNMRDistance QG1 35 H 44 BOUNDED     1.5     5.5   1                                           VC 0.135 
+AmbiguousNMRDistance QG2 37 H 44 BOUNDED     1.5     5.5   1                                           VC 0.559 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.56544 4.15331                    automatic NOE Peak 537 resort_n 
+AmbiguousNMRDistance HA 37 H 44 BOUNDED     1.5     5.5   1                                           VC 0.363 
+AmbiguousNMRDistance HA 38 H 44 BOUNDED     1.5     5.5   1                                           VC 0.583 
+AmbiguousNMRDistance HA 39 H 44 BOUNDED     1.5     5.5   1                                          VC 0.0538 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.43367 4.15331                    automatic NOE Peak 586 resort_n 
+AmbiguousNMRDistance QD1 3 H 49 BOUNDED     1.5     5.5   1                                           VC 0.258 
+AmbiguousNMRDistance QG1 20 H 49 BOUNDED     1.5     5.5   1                                           VC 0.336 
+AmbiguousNMRDistance QD2 24 H 49 BOUNDED     1.5     5.5   1                                          VC 0.0144 
+AmbiguousNMRDistance QG2 35 H 49 BOUNDED     1.5     5.5   1                                           VC 0.106 
+AmbiguousNMRDistance H 49 QG1 54 BOUNDED     1.5     5.5   1                                           VC 0.258 
+AmbiguousNMRDistance H 49 QG1 60 BOUNDED     1.5     5.5   1                                          VC 0.0268 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.30971 4.15331                    automatic NOE Peak 588 resort_n 
+AmbiguousNMRDistance QG1 43 H 49 BOUNDED     1.5     5.5   1                                          VC 0.0345 
+AmbiguousNMRDistance QQD 44 H 49 BOUNDED     1.5     5.5   1                                           VC 0.359 
+AmbiguousNMRDistance HG 44 H 49 BOUNDED     1.5     5.5   1                                           VC 0.169 
+AmbiguousNMRDistance H 49 QG2 54 BOUNDED     1.5     5.5   1                                           VC 0.437 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.35457 4.15331                    automatic NOE Peak 623 resort_n 
+AmbiguousNMRDistance 2HB 19 H 52 BOUNDED     1.5     5.5   1                                            VC 0.96 
+AmbiguousNMRDistance 1HB 49 H 52 BOUNDED     1.5     5.5   1                                            VC 0.04 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.24406 4.15331                    automatic NOE Peak 625 resort_n 
+AmbiguousNMRDistance QG1 20 H 52 BOUNDED     1.5     5.5   1                                           VC 0.947 
+AmbiguousNMRDistance H 52 QG1 54 BOUNDED     1.5     5.5   1                                          VC 0.0529 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.13232 4.15331                    automatic NOE Peak 651 resort_n 
+AmbiguousNMRDistance 1HB 18 H 54 BOUNDED     1.5     5.5   1                                           VC 0.775 
+AmbiguousNMRDistance QB 32 H 54 BOUNDED     1.5     5.5   1                                           VC 0.134 
+AmbiguousNMRDistance QG2 36 H 54 BOUNDED     1.5     5.5   1                                          VC 0.0905 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.68048 4.15331                    automatic NOE Peak 664 resort_n 
+AmbiguousNMRDistance 2HG 1 H 56 BOUNDED     1.5     5.5   1                                           VC 0.463 
+AmbiguousNMRDistance 2HG 22 H 56 BOUNDED     1.5     5.5   1                                          VC 0.0631 
+AmbiguousNMRDistance 2HB 45 H 56 BOUNDED     1.5     5.5   1                                          VC 0.0335 
+AmbiguousNMRDistance 1HG 47 H 56 BOUNDED     1.5     5.5   1                                           VC 0.441 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.51322 4.15331                    automatic NOE Peak 665 resort_n 
+AmbiguousNMRDistance 1HB 1 H 56 BOUNDED     1.5     5.5   1                                           VC 0.982 
+AmbiguousNMRDistance H 56 2HB 66 BOUNDED     1.5     5.5   1                                           VC 0.011 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  6.2476 4.15331                    automatic NOE Peak 666 resort_n 
+AmbiguousNMRDistance QD1 3 H 56 BOUNDED     1.5     5.5   1                                           VC 0.906 
+AmbiguousNMRDistance QG1 54 H 56 BOUNDED     1.5     5.5   1                                          VC 0.0937 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  6.1287 4.15331                    automatic NOE Peak 677 resort_n 
+AmbiguousNMRDistance 1HB 1 H 57 BOUNDED     1.5     5.5   1                                           VC 0.921 
+AmbiguousNMRDistance 2HB 44 H 57 BOUNDED     1.5     5.5   1                                           VC 0.016 
+AmbiguousNMRDistance H 57 2HB 66 BOUNDED     1.5     5.5   1                                          VC 0.0627 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.47991 4.15331                    automatic NOE Peak 678 resort_n 
+AmbiguousNMRDistance 2HG 1 H 57 BOUNDED     1.5     5.5   1                                           VC 0.677 
+AmbiguousNMRDistance 2HG 22 H 57 BOUNDED     1.5     5.5   1                                          VC 0.0425 
+AmbiguousNMRDistance 2HB 45 H 57 BOUNDED     1.5     5.5   1                                          VC 0.0332 
+AmbiguousNMRDistance 1HG 47 H 57 BOUNDED     1.5     5.5   1                                           VC 0.248 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.17607 4.15331                    automatic NOE Peak 681 resort_n 
+AmbiguousNMRDistance 1HB 3 H 57 BOUNDED     1.5     5.5   1                                           VC 0.974 
+AmbiguousNMRDistance 1HB 46 H 57 BOUNDED     1.5     5.5   1                                          VC 0.0256 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.13051 4.15331                    automatic NOE Peak 692 resort_n 
+AmbiguousNMRDistance 2HB 3 H 58 BOUNDED     1.5     5.5   1                                           VC 0.848 
+AmbiguousNMRDistance HG 23 H 58 BOUNDED     1.5     5.5   1                                          VC 0.0728 
+AmbiguousNMRDistance QD 55 H 58 BOUNDED     1.5     5.5   1                                          VC 0.0791 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.25171 4.15331                    automatic NOE Peak 694 resort_n 
+AmbiguousNMRDistance QD1 3 H 58 BOUNDED     1.5     5.5   1                                           VC 0.913 
+AmbiguousNMRDistance QD2 23 H 58 BOUNDED     1.5     5.5   1                                          VC 0.0283 
+AmbiguousNMRDistance QG1 54 H 58 BOUNDED     1.5     5.5   1                                          VC 0.0301 
+AmbiguousNMRDistance H 58 QG1 60 BOUNDED     1.5     5.5   1                                          VC 0.0219 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.83662 4.15331                    automatic NOE Peak 695 resort_n 
+AmbiguousNMRDistance QD2 3 H 58 BOUNDED     1.5     5.5   1                                           VC 0.927 
+AmbiguousNMRDistance QG1 35 H 58 BOUNDED     1.5     5.5   1                                          VC 0.0405 
+AmbiguousNMRDistance QG2 37 H 58 BOUNDED     1.5     5.5   1                                          VC 0.0325 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.87407 4.15331                    automatic NOE Peak 708 resort_n 
+AmbiguousNMRDistance HA 38 H 59 BOUNDED     1.5     5.5   1                                          VC 0.0147 
+AmbiguousNMRDistance HA 39 H 59 BOUNDED     1.5     5.5   1                                           VC 0.985 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 4.85137 4.15331                    automatic NOE Peak 709 resort_n 
+AmbiguousNMRDistance QD1 18 H 59 BOUNDED     1.5     5.5   1                                           VC 0.227 
+AmbiguousNMRDistance QD1 23 H 59 BOUNDED     1.5     5.5   1                                            VC 0.15 
+AmbiguousNMRDistance QD1 39 H 59 BOUNDED     1.5     5.5   1                                          VC 0.0995 
+AmbiguousNMRDistance QD2 39 H 59 BOUNDED     1.5     5.5   1                                           VC 0.502 
+AmbiguousNMRDistance QG2 54 H 59 BOUNDED     1.5     5.5   1                                          VC 0.0217 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.39999 4.15331                    automatic NOE Peak 711 resort_n 
+AmbiguousNMRDistance H 35 H 59 BOUNDED     1.5     5.5   1                                          VC 0.0559 
+AmbiguousNMRDistance 1HD2 40 H 59 BOUNDED     1.5     5.5   1                                           VC 0.944 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5  4.2847 4.15331                    automatic NOE Peak 720 resort_n 
+AmbiguousNMRDistance 2HB 3 H 60 BOUNDED     1.5     5.5   1                                           VC 0.181 
+AmbiguousNMRDistance 2HB 3 H 62 BOUNDED     1.5     5.5   1                                          VC 0.0484 
+AmbiguousNMRDistance HG 23 H 62 BOUNDED     1.5     5.5   1                                           VC 0.031 
+AmbiguousNMRDistance HB 37 H 62 BOUNDED     1.5     5.5   1                                            VC 0.73 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.40523 4.15331                    automatic NOE Peak 721 resort_n 
+AmbiguousNMRDistance HB 4 H 60 BOUNDED     1.5     5.5   1                                           VC 0.986 
+AmbiguousNMRDistance HB 4 H 62 BOUNDED     1.5     5.5   1                                          VC 0.0137 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.25862 4.15331                    automatic NOE Peak 731 resort_n 
+AmbiguousNMRDistance H 6 H 60 BOUNDED     1.5     5.5   1                                           VC 0.205 
+AmbiguousNMRDistance H 6 H 62 BOUNDED     1.5     5.5   1                                           VC 0.795 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 5.51728 4.15331                    automatic NOE Peak 732 resort_n 
+AmbiguousNMRDistance 1HD2 6 H 60 BOUNDED     1.5     5.5   1                                          VC 0.0946 
+AmbiguousNMRDistance 1HD2 6 H 62 BOUNDED     1.5     5.5   1                                           VC 0.905 
+End_AmbiguousNMRConstraint
+AmbiguousNMRConstraint BOUNDED     1.5 6.07904 4.15331                    automatic NOE Peak 733 resort_n 
+AmbiguousNMRDistance 2HD2 6 H 60 BOUNDED     1.5     5.5   1                                          VC 0.0821 
+AmbiguousNMRDistance 2HD2 6 H 62 BOUNDED     1.5     5.5   1                                           VC 0.918 
+End_AmbiguousNMRConstraint
